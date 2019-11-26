@@ -9,3 +9,15 @@ if ($request['method'] === 'GET') {
   $response['body'] = 'Hello There!';
   send($response);
 }
+
+function get_produce_details($link, $produce_id) {
+  $sql = "
+    SELECT `name`, `selection`, `storage`, `nutrition`, `produceImg`
+    FROM `produce`
+    WHERE `id` = $produce_id
+  ";
+  $result = mysqli_query($link, $sql);
+  if (!mysqli_num_rows($result)) {throw new ApiError('Produce details not found', 404); }
+  $produce = mysqli_fetch_assoc($result);
+  return $produce;
+}
