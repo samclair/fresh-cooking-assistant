@@ -1,19 +1,13 @@
 import React from 'react';
 import Landing from './landing';
+import Placeholder from './placeholder';
+import Login from './login';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from 'react-router-dom';
-
-function Login(props) {
-  return <h2>This is a login Page</h2>;
-}
-
-function Placeholder(props) {
-  return <h2>This is a placeholder page</h2>;
-}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -46,19 +40,18 @@ export default class App extends React.Component {
             <li>
               <Link to="/placeholder">Placeholder</Link>
             </li>
-            <Switch>
-              <Route path="/">
-                <Landing text="Landing Page" />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/placeholder">
-                <Placeholder />
-              </Route>
-            </Switch>
-
           </ul>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/placeholder">
+              <Placeholder />
+            </Route>
+            <Route path="/">
+              <Landing text="Landing Page" />
+            </Route>
+          </Switch>
         </div>
       </Router>
     );
