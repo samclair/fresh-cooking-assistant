@@ -5,7 +5,7 @@ $link = get_db_link();
 if ($request['method'] === 'GET') {
   $season_id = ($request['query']['seasonId']);
   $season_id = intval($season_id);
-  if($season_id <= 0) { throw new ApiError('Valid Season ID required', 400); }
+  if($season_id <= 0 || $season_id > 4) { throw new ApiError('Valid Season ID required', 400); }
   $response['body'] = check_produce_in_season($link, $season_id);
   send($response);
 }
