@@ -6,6 +6,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack --mode=production",
+    "watch": "webpack --watch",
     "dev": "npm-run-all --silent --parallel dev:*",
     "dev:client": "webpack-dev-server",
     "dev:server": "php -S '0.0.0.0:9000' -t server/public -c php.ini",
@@ -33,7 +34,8 @@
   },
   "dependencies": {
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-dom": "16.12.0",
+    "react-router-dom": "5.1.2"
   },
   "husky": {
     "hooks": {
