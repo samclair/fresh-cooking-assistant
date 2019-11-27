@@ -7,16 +7,16 @@ export default function Seasons(props) {
       <h1>This is the Seasons Page</h1>
       <ul>
         <li>
-          <Link to={'season/fall'}>Fall</Link>
+          <Link to={'season/Spring'}>Spring</Link>
         </li>
         <li>
-          <Link to={'season/winter'}>Winter</Link>
+          <Link to={'season/Summer'}>Summer</Link>
         </li>
         <li>
-          <Link to={'season/summer'}>Summer</Link>
+          <Link to={'season/Fall'}>Fall</Link>
         </li>
         <li>
-          <Link to={'season/spring'}>Spring</Link>
+          <Link to={'season/Winter'}>Winter</Link>
         </li>
       </ul>
       <h3>Please select a season</h3>

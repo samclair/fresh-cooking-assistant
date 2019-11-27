@@ -6,7 +6,7 @@ class SeasonalPage extends React.Component {
     this.state = {
       produceList: []
     };
-    this.id = props.params.id;
+    this.id = props.match.params.id;
     this.getProduceList = this.getProduceList.bind(this);
   }
 
