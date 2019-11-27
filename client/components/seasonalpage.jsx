@@ -6,19 +6,19 @@ class SeasonalPage extends React.Component {
     this.state = {
       produceList: []
     };
-    this.id = props.match.params.id;
+    this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
   }
 
-  getProduceList(id) {
-    fetch(`/api/produce-in-season?seasonId=${id}`)
+  getProduceList(name) {
+    fetch(`/api/produce-in-season?seasonName=${name}`)
       .then(results => results.json())
       .then(produce => this.setState({ produceList: produce }))
       .catch(error => console.error(error.message));
   }
 
   componentDidMount() {
-    this.getProduceList(this.id);
+    this.getProduceList(this.name);
   }
 
   render() {
@@ -27,7 +27,7 @@ class SeasonalPage extends React.Component {
     } else {
       return (
         <div>
-          <h1>This is a {this.props.season} page</h1>
+          <h1>This is a {this.name} page</h1>
           <ul>
             {this.state.produceList.map(produce => <li key={produce.id}>{produce.name}</li>)}
           </ul>

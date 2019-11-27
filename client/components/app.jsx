@@ -33,7 +33,7 @@ export default class App extends React.Component {
         <div>
           <NavMenu />
           <Switch>
-            <Route path="/season/:id" component={SeasonalPage} />
+            <Route path="/season/:name" component={SeasonalPage} />
             <Route exact path="/login">
               <Login />
             </Route>
