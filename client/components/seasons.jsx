@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Seasons(props) {
+function Seasons(props) {
   return (
     <div>
       <h1>This is the Seasons Page</h1>
@@ -23,3 +23,4 @@ export default function Seasons(props) {
     </div>
   );
 }
+export default Seasons;

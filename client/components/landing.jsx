@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default function Landing(props) {
+function Landing(props) {
   return <h1>{props.text}</h1>;
 }
+
+export default Landing;

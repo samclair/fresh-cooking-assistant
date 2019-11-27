@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import ProduceDetails from './produce-details';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,3 +51,4 @@ export default class App extends React.Component {
     );
   }
 }
+export default App;
