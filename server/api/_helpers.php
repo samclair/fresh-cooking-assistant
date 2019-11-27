@@ -1,15 +1,8 @@
 <?php
 
-function check_in_season($seasonality_dates) {
-  $now = time();
-  foreach ($seasonality_dates as $start_end) {
-    $start_date = strtotime($start_end['startDate']);
-    $end_date = strtotime($start_end['endDate']);
-    if ($now >= $start_date && $now <= $end_date ) {
-      return true;
-    }
-  }
-  return false;
+function check_in_season($link, $seasons) {
+  $current_season = get_current_season($link);
+  return (in_array($current_season['id'], $seasons));
 }
 
 function get_current_season($link) {

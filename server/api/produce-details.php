@@ -8,8 +8,8 @@ if ($request['method'] === 'GET') {
   $produce_name = $request['query']['produceName'];
   $produce_id = get_produce_id($link, $produce_name);
   $produce_details = get_produce_details($link, $produce_id);
-  $seasonality_dates = get_produce_seasonality($link, $produce_id);
-  $is_in_season = check_in_season($seasonality_dates);
+  $seasons = get_produce_seasons($link, $produce_id);
+  $is_in_season = check_in_season($link, $seasons);
   $response['body'] = [
     details => $produce_details,
     isInSeason => $is_in_season
@@ -41,9 +41,9 @@ function get_produce_details($link, $produce_id) {
   return $produce;
 }
 
-function get_produce_seasonality($link, $produce_id) {
+function get_produce_seasons($link, $produce_id) {
   $sql = "
-    SELECT `startDate`, `endDate`
+    SELECT `seasons`.`id`
     FROM `seasons`
     JOIN `produceSeasons`
       ON `seasons`.`id` = `produceSeasons`.`seasonId`
@@ -51,6 +51,8 @@ function get_produce_seasonality($link, $produce_id) {
   ";
   $result = mysqli_query($link, $sql);
   if (!mysqli_num_rows($result)) {throw new ApiError('Seasonal data not found', 404); }
-  $seasonality_dates = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  return $seasonality_dates;
+  $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  $seasons = [];
+  foreach ($data as $season) { $seasons[] = $season['id']; }
+  return $seasons;
 }
