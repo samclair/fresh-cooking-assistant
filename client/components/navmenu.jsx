@@ -18,13 +18,13 @@ export default class NavMenu extends React.Component {
       <div>
         <p><span onClick={this.swapView}>{'<'}</span> Menu</p>
         <ul>
-          <li>
+          <li onClick={this.swapView}>
             <Link to="/">Landing</Link>
           </li>
-          <li>
+          <li onClick={this.swapView}>
             <Link to="/login">Login</Link>
           </li>
-          <li>
+          <li onClick={this.swapView}>
             <Link to="/seasons">Seasons</Link>
           </li>
         </ul >
