@@ -46,7 +46,7 @@ class ProduceDetails extends React.Component {
           <h2 className="yellow">Nutrition</h2>
           <div className="body-text">{nutrition}</div>
         </div>
-      </div >);
+      </div>);
   }
 }
 
