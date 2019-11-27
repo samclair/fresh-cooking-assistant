@@ -1,13 +1,9 @@
 import React from 'react';
 import Landing from './landing';
-import Placeholder from './placeholder';
+import Seasons from './seasons';
+import SeasonalPage from './seasonalpage';
 import Login from './login';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -38,15 +34,29 @@ export default class App extends React.Component {
               <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/placeholder">Placeholder</Link>
+              <Link to="/seasons">Seasons</Link>
             </li>
           </ul>
+        </div>
+        <div>
           <Switch>
-            <Route path="/login">
+            <Route path="/fall">
+              <SeasonalPage season="fall" />
+            </Route>
+            <Route path="/winter">
+              <SeasonalPage season="winter" />
+            </Route>
+            <Route path="/summer">
+              <SeasonalPage season="summer" />
+            </Route>
+            <Route path="/spring">
+              <SeasonalPage season="spring" />
+            </Route>
+            <Route exact path="/login">
               <Login />
             </Route>
-            <Route path="/placeholder">
-              <Placeholder />
+            <Route exact path="/seasons">
+              <Seasons />
             </Route>
             <Route path="/">
               <Landing text="Landing Page" />
