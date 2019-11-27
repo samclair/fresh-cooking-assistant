@@ -10,11 +10,11 @@ class ProduceDetails extends React.Component {
   }
 
   componentDidMount() {
-    // this.getProduceData();
+    this.getProduceData();
   }
 
   getProduceData() {
-    fetch(`/api/produce-details?produceId=${this.props.produceId}`)
+    fetch(`/api/produce-details?produceId=${this.props.key}`)
       .then(result => result.json())
       .then(produce => this.setState({ details: produce.details, isInSeason: produce.isInSeason }))
       .catch(error => console.error(error.message));
