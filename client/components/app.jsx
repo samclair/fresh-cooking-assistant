@@ -2,11 +2,11 @@ import React from 'react';
 import Landing from './landing';
 import Placeholder from './placeholder';
 import Login from './login';
+import NavMenu from './navmenu';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -30,17 +30,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Landing</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/placeholder">Placeholder</Link>
-            </li>
-          </ul>
+          <NavMenu />
           <Switch>
             <Route path="/login">
               <Login />
