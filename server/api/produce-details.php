@@ -1,11 +1,12 @@
 <?php
 
+include_once '_helpers.php';
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $produce_id = $request['query']['produceId'];
-  $produce_id = intval($produce_id);
-  if ($produce_id <= 0) {throw new ApiError('Valid Produce ID required', 400); }
+  if (!isset($request['query']['produceName'])) {throw new ApiError('Produce name required.', 400); }
+  $produce_name = $request['query']['produceName'];
+  $produce_id = get_produce_id($link, $produce_name);
   $produce_details = get_produce_details($link, $produce_id);
   $seasonality_dates = get_produce_seasonality($link, $produce_id);
   $is_in_season = check_in_season($seasonality_dates);
@@ -14,6 +15,18 @@ if ($request['method'] === 'GET') {
     isInSeason => $is_in_season
   ];
   send($response);
+}
+
+function get_produce_id($link, $produce_name) {
+  $sql = "
+    SELECT `id`
+    FROM `produce`
+    WHERE `name` = '$produce_name'
+    ";
+  $result = mysqli_query($link, $sql);
+  if (!mysqli_num_rows($result)) {throw new ApiError('Page not found.', 404); }
+  $data = mysqli_fetch_assoc($result);
+  return $data['id'];
 }
 
 function get_produce_details($link, $produce_id) {
@@ -40,16 +53,4 @@ function get_produce_seasonality($link, $produce_id) {
   if (!mysqli_num_rows($result)) {throw new ApiError('Seasonal data not found', 404); }
   $seasonality_dates = mysqli_fetch_all($result, MYSQLI_ASSOC);
   return $seasonality_dates;
-}
-
-function check_in_season($seasonality_dates) {
-  $now = time();
-  foreach ($seasonality_dates as $start_end) {
-    $start_date = strtotime($start_end['startDate']);
-    $end_date = strtotime($start_end['endDate']);
-    if ($now >= $start_date && $now <= $end_date ) {
-      return true;
-    }
-  }
-  return false;
 }
