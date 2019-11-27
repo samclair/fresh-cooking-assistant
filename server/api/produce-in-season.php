@@ -1,16 +1,29 @@
 <?php
 
+include_once '_helpers.php';
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $season_id = ($request['query']['seasonId']);
-  $season_id = intval($season_id);
-  if($season_id <= 0 || $season_id > 4) { throw new ApiError('Valid Season ID required', 400); }
-  $response['body'] = check_produce_in_season($link, $season_id);
+  if(!isset($request['query']['seasonName'])) { throw new ApiError('Season name required.', 400); }
+  $season_name = $request['query']['seasonName'];
+  $season_id = get_season_id($link, $season_name);
+  $response['body'] = get_produce_list($link, $season_id);
   send($response);
 }
 
-function check_produce_in_season($link, $season_id) {
+function get_season_id($link, $season_name) {
+  $sql = "
+    SELECT `id`
+    FROM `seasons`
+    WHERE `name` = '$season_name'
+  ";
+  $result = mysqli_query($link, $sql);
+  if (!mysqli_num_rows($result)) {throw new ApiError('Page not found.', 404); }
+  $data = mysqli_fetch_assoc($result);
+  return $data['id'];
+}
+
+function get_produce_list($link, $season_id) {
   $sql = "
     SELECT `produce`.`id`, `name`
     FROM `produce`
