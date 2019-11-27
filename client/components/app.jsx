@@ -3,7 +3,12 @@ import Landing from './landing';
 import Seasons from './seasons';
 import SeasonalPage from './seasonalpage';
 import Login from './login';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import NavMenu from './navmenu';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,19 +31,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Landing</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/seasons">Seasons</Link>
-            </li>
-          </ul>
-        </div>
-        <div>
+          <NavMenu />
           <Switch>
             <Route path="/fall">
               <SeasonalPage season="fall" />
@@ -65,9 +58,5 @@ export default class App extends React.Component {
         </div>
       </Router>
     );
-
-    // return this.state.isTesting
-    //   ? <h1>Testing connections...</h1>
-    //   : <h1>{this.state.message}</h1>;
   }
 }
