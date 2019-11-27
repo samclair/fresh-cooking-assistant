@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SeasonalPage extends React.Component {
   constructor(props) {
@@ -29,7 +30,15 @@ class SeasonalPage extends React.Component {
         <div>
           <h1>This is a {this.name} page</h1>
           <ul>
-            {this.state.produceList.map(produce => <li key={produce.id}>{produce.name}</li>)}
+            {this.state.produceList.map(produce => {
+              return (
+                <li key={produce.id}>
+                  <Link to={`/produce/${produce.name}`}>
+                    {produce.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       );

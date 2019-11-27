@@ -1,7 +1,7 @@
 import React from 'react';
 import Landing from './landing';
 import Seasons from './seasons';
-import SeasonalPage from './seasonalpage';
+import SeasonalPage from './seasonal-page';
 import Login from './login';
 import NavMenu from './navmenu';
 import {
@@ -9,8 +9,9 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import ProduceDetails from './produce-details';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,14 +34,15 @@ export default class App extends React.Component {
         <div>
           <NavMenu />
           <Switch>
-            <Route path="/season/:name" component={SeasonalPage} />
+            <Route exact path="/season/:name" component={SeasonalPage} />
+            <Route exact path="/produce/:name" component={ProduceDetails} />
             <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/seasons">
               <Seasons />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Landing text="Landing Page" />
             </Route>
           </Switch>
@@ -49,3 +51,4 @@ export default class App extends React.Component {
     );
   }
 }
+export default App;
