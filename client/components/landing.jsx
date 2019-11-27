@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -9,14 +10,22 @@ class Landing extends React.Component {
   getCurrentSeason() {
     fetch('/api/seasons')
       .then(res => res.json())
-      .then(({ currentSeason }) => this.setState({ currentSeason }));
+      .then(data => {
+        this.setState({ currentSeason: data.currentSeason.name });
+      })
+      .catch(err => console.error(err));
+  }
+
+  componentDidMount() {
+    this.getCurrentSeason();
   }
 
   render() {
     return (
       <div>
         <h1>Landing Page</h1>
-        <h2>It is currently {this.state.currentSeason}</h2>
+        <h3>It is currently {this.state.currentSeason}</h3>
+        <Link to={`season/${this.state.currentSeason}`}>Check out the seasonal produce!</Link>
       </div>
     );
   }
