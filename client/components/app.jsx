@@ -1,6 +1,7 @@
 import React from 'react';
 import Landing from './landing';
-import Placeholder from './placeholder';
+import Seasons from './seasons';
+import SeasonalPage from './seasonalpage';
 import Login from './login';
 import NavMenu from './navmenu';
 import {
@@ -32,11 +33,23 @@ export default class App extends React.Component {
         <div>
           <NavMenu />
           <Switch>
-            <Route path="/login">
+            <Route path="/fall">
+              <SeasonalPage season="fall" />
+            </Route>
+            <Route path="/winter">
+              <SeasonalPage season="winter" />
+            </Route>
+            <Route path="/summer">
+              <SeasonalPage season="summer" />
+            </Route>
+            <Route path="/spring">
+              <SeasonalPage season="spring" />
+            </Route>
+            <Route exact path="/login">
               <Login />
             </Route>
-            <Route path="/placeholder">
-              <Placeholder />
+            <Route exact path="/seasons">
+              <Seasons />
             </Route>
             <Route path="/">
               <Landing text="Landing Page" />
@@ -45,9 +58,5 @@ export default class App extends React.Component {
         </div>
       </Router>
     );
-
-    // return this.state.isTesting
-    //   ? <h1>Testing connections...</h1>
-    //   : <h1>{this.state.message}</h1>;
   }
 }

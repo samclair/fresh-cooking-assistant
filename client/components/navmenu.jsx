@@ -25,7 +25,7 @@ export default class NavMenu extends React.Component {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/placeholder">Placeholder</Link>
+            <Link to="/seasons">Seasons</Link>
           </li>
         </ul >
       </div>;
