@@ -28,7 +28,12 @@ class Seasons extends React.Component {
     return (
       <div>
         <h1>This is the Seasons Page</h1>
-        <ul>
+        <div className="header-container seasons-page-header">
+          <div className="primary-label season-badge px-1">
+            Fruits and Veggies cost less when {'they\'re'} in season!
+          </div>
+        </div>
+        <ul style={{ display: 'block' }}>
           {
             this.state.seasonList.map(season => {
               return (
