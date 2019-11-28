@@ -24,11 +24,11 @@ class SeasonalPage extends React.Component {
     const randomIndices = [];
     while (randomIndices.length < 3) {
       const randomIndex = Math.floor(Math.random() * this.state.produceList.length);
-      if (!randomIndices.includes(randomIndex)) {
-        randomIndices.push(randomIndex);
-      }
+      if (!randomIndices.includes(randomIndex)) { randomIndices.push(randomIndex); }
     }
-    const featuredProduce = this.state.produceList.filter((produce, index) => randomIndices.includes(index));
+    const featuredProduce = this.state.produceList.filter(
+      (produce, index) => randomIndices.includes(index)
+    );
     this.setState({ featuredProduce });
   }
 
@@ -57,7 +57,7 @@ class SeasonalPage extends React.Component {
     }
     return (
       <div>
-        <h1>This is a {this.name} page</h1>
+        <h1>{this.name} Seasonal Produce</h1>
         {featuredElems}
         <ul>{produceElems}</ul>
       </div>
