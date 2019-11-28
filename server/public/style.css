@@ -12,22 +12,50 @@
     object-fit: cover;
     width: 100%;
     height: 250px;
-    margin-bottom: 15px;
   }
 
-  .container{
-    margin: 0px 15px;
+  .seasons-page-header{
+    background-image: url('assets/images/farmers-market.jpg');
+    background-position: center;
+    background-size: cover;
+    height:250px;
   }
+
+  .season-badge{
+    font-family: 'Rubik', sans-serif;
+    width: 320px;
+    text-align: center;
+    margin-top: 150px;
+    font-size: 20px;
+  }
+}
+h1{
+  font-family: 'Rubik', sans-serif;
+  font-size: 40px;
+}
+
+h2{
+  font-family: 'Rubik', sans-serif;
+  font-size: 28px;
+}
+
+ul{
+  list-style-type:none;
 }
 
 body{
   font-family: 'Montserrat',sans-serif;
   box-sizing: border-box;
-  margin:0;
 }
 
-.primary-label{
-  background-color: #65D885;
+.seasons-list{
+  text-align: center;
+  display: block;
+  padding: 0;
+}
+
+.primary-label, .navbar{
+  background-color: #13A75F;
   color: white;
 }
 
@@ -35,23 +63,10 @@ body{
   font-family: 'Old Standard TT:700', serif;
 }
 
-h1{
-  font-family: 'Rubik:500', sans-serif;
-  font-size: 40px;
-  margin: 15px 0px;
-}
-
-h2{
-  font-family: 'Rubik:500', sans-serif;
-  font-size: 28px;
-  margin: 10px 0px;
-}
-
 .body-text{
   color: #515151;
   font-size: 24px;
   line-height: 29px;
-  padding-bottom: 15px;
 }
 
 .link{
@@ -60,14 +75,13 @@ h2{
 
 .badge{
   display: inline-block;
-  padding: 0px 20px;
-  margin: 7px 0px;
+
 }
 
 .yellow{
-  color: #E9C472;
+  color: #FAA916;
 }
 
 .green{
-  color: #65D885;
+  color: #13A75F;
 }
