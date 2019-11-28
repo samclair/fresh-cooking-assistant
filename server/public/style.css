@@ -17,25 +17,25 @@
   .seasons-page-header{
     background-image: url('assets/images/farmers-market.jpg');
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     height:250px;
   }
 
   .season-badge{
-    font-family: 'Rubik:500', sans-serif;
-    width: 350px;
+    font-family: 'Rubik', sans-serif;
+    width: 320px;
     text-align: center;
     margin-top: 150px;
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 h1{
-  font-family: 'Rubik:500', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 40px;
 }
 
 h2{
-  font-family: 'Rubik:500', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 28px;
 }
 
