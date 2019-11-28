@@ -25,7 +25,7 @@ function get_season_id($link, $season_name) {
 
 function get_produce_list($link, $season_id) {
   $sql = "
-    SELECT `produce`.`id`, `name`
+    SELECT `produce`.`id`, `name`, `produceImg`
     FROM `produce`
     JOIN `produceSeasons`
       ON `produce`.`id` = `produceSeasons`.`produceId`
