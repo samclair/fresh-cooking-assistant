@@ -5,7 +5,8 @@ class SeasonalPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      produceList: []
+      produceList: [],
+      featuredProduce: []
     };
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
@@ -14,8 +15,21 @@ class SeasonalPage extends React.Component {
   getProduceList(name) {
     fetch(`/api/produce-in-season?seasonName=${name}`)
       .then(results => results.json())
-      .then(produce => this.setState({ produceList: produce }))
+      .then(produce => this.setState({ produceList: produce }, this.getFeaturedProduce))
       .catch(error => console.error(error.message));
+  }
+
+  getFeaturedProduce() {
+    if (!this.state.produceList.length) { return; }
+    const randomIndices = [];
+    while (randomIndices.length < 3) {
+      const randomIndex = Math.floor(Math.random() * this.state.produceList.length);
+      if (!randomIndices.includes(randomIndex)) {
+        randomIndices.push(randomIndex);
+      }
+    }
+    const featuredProduce = this.state.produceList.filter((produce, index) => randomIndices.includes(index));
+    this.setState({ featuredProduce });
   }
 
   componentDidMount() {
@@ -23,26 +37,31 @@ class SeasonalPage extends React.Component {
   }
 
   render() {
+    let produceElems;
+    let featuredElems;
     if (!this.state.produceList.length) {
-      return <h1>This is a Seasonal page</h1>;
+      produceElems = [];
+      featuredElems = [];
     } else {
-      return (
-        <div>
-          <h1>This is a {this.name} page</h1>
-          <ul>
-            {this.state.produceList.map(produce => {
-              return (
-                <li key={produce.id}>
-                  <Link to={`/produce/${produce.name}`}>
-                    {produce.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+      produceElems = this.state.produceList.map(produce => (
+        <li key={produce.id}>
+          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        </li>
+      ));
+      featuredElems = this.state.featuredProduce.map(produce => (
+        <div key={produce.id}>
+          <img src={produce.produceImg} alt={produce.name}/>
+          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
         </div>
-      );
+      ));
     }
+    return (
+      <div>
+        <h1>This is a {this.name} page</h1>
+        {featuredElems}
+        <ul>{produceElems}</ul>
+      </div>
+    );
   }
 }
 
