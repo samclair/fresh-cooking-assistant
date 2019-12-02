@@ -12,24 +12,18 @@ class SeasonalPage extends React.Component {
     this.getProduceList = this.getProduceList.bind(this);
   }
 
-  getProduceList(name) {
-    fetch(`/api/produce-in-season?seasonName=${name}`)
+  getProduceList() {
+    fetch(`/api/produce-in-season?seasonName=${this.name}`)
       .then(results => results.json())
       .then(produce => this.setState({ produceList: produce }, this.getFeaturedProduce))
       .catch(error => console.error(error.message));
   }
 
   getFeaturedProduce() {
-    if (!this.state.produceList.length) { return; }
-    const randomIndices = [];
-    while (randomIndices.length < 3) {
-      const randomIndex = Math.floor(Math.random() * this.state.produceList.length);
-      if (!randomIndices.includes(randomIndex)) { randomIndices.push(randomIndex); }
-    }
-    const featuredProduce = this.state.produceList.filter(
-      (produce, index) => randomIndices.includes(index)
-    );
-    this.setState({ featuredProduce });
+    fetch(`/api/random-produce?seasonName=${this.name}&randCount=2`)
+      .then(results => results.json())
+      .then(featuredProduce => this.setState({ featuredProduce }))
+      .catch(error => console.error(error.message));
   }
 
   componentDidMount() {
@@ -50,7 +44,7 @@ class SeasonalPage extends React.Component {
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
         <div key={produce.id}>
-          <img src={'/' + produce.produceImg} alt={produce.name} />
+          <img src={produce.produceImg} alt={produce.name} />
           <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
         </div>
       ));
