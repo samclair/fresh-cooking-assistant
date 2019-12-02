@@ -6,7 +6,8 @@ class SeasonalPage extends React.Component {
     super(props);
     this.state = {
       produceList: [],
-      featuredProduce: []
+      featuredProduce: [],
+      isCurrentSeason: false
     };
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
@@ -15,7 +16,10 @@ class SeasonalPage extends React.Component {
   getProduceList() {
     fetch(`/api/produce-in-season?seasonName=${this.name}`)
       .then(results => results.json())
-      .then(produce => this.setState({ produceList: produce }, this.getFeaturedProduce))
+      .then(data => {
+        const { produceList, isCurrentSeason } = data;
+        this.setState({ produceList, isCurrentSeason }, this.getFeaturedProduce);
+      })
       .catch(error => console.error(error.message));
   }
 
