@@ -15,24 +15,18 @@ class SeasonalPage extends React.Component {
 
   }
 
-  getProduceList(name) {
-    fetch(`/api/produce-in-season?seasonName=${name}`)
+  getProduceList() {
+    fetch(`/api/produce-in-season?seasonName=${this.name}`)
       .then(results => results.json())
       .then(produce => this.setState({ produceList: produce }, this.getFeaturedProduce))
       .catch(error => console.error(error.message));
   }
 
   getFeaturedProduce() {
-    if (!this.state.produceList.length) { return; }
-    const randomIndices = [];
-    while (randomIndices.length < 3) {
-      const randomIndex = Math.floor(Math.random() * this.state.produceList.length);
-      if (!randomIndices.includes(randomIndex)) { randomIndices.push(randomIndex); }
-    }
-    const featuredProduce = this.state.produceList.filter(
-      (produce, index) => randomIndices.includes(index)
-    );
-    this.setState({ featuredProduce });
+    fetch(`/api/random-produce?seasonName=${this.name}&randCount=2`)
+      .then(results => results.json())
+      .then(featuredProduce => this.setState({ featuredProduce }))
+      .catch(error => console.error(error.message));
   }
 
   componentDidMount() {
@@ -55,11 +49,10 @@ class SeasonalPage extends React.Component {
         <div className='d-flex flex-column col-4' key={produce.id}>
           <Link to={`/produce/${produce.name}`}>
             <img className='featured-produce-image'
-              src={'/' + produce.produceImg}
+              src={produce.produceImg}
               alt={produce.name} />
             <p className='body-text link'>{produce.name}</p>
           </Link>
-
         </div>
       ));
     }
