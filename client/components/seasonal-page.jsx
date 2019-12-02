@@ -23,7 +23,7 @@ class SeasonalPage extends React.Component {
     fetch(`/api/random-produce?seasonName=${this.name}&randCount=2`)
       .then(results => results.json())
       .then(featuredProduce => this.setState({ featuredProduce }))
-      .catch(error => console.error(error.essage));
+      .catch(error => console.error(error.message));
   }
 
   componentDidMount() {
