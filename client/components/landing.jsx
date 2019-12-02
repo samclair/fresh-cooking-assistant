@@ -21,10 +21,12 @@ class Landing extends React.Component {
   }
 
   render() {
+    if (!this.state.currentSeason) return null;
     return (
       <div className='text-right'>
         <div className="header-image landing-header"></div>
-        <Link className='link green' to={`season/${this.state.currentSeason}`}>Produce for {this.state.currentSeason} {'>'}</Link>
+
+        <Link className='link green' to={`season/${this.state.currentSeason}`}><h2>{this.state.currentSeason.toLowerCase()} produce {'>'}</h2></Link>
       </div>
     );
   }
