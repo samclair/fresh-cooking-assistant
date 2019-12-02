@@ -8,8 +8,11 @@ class SeasonalPage extends React.Component {
       produceList: [],
       featuredProduce: []
     };
+    this.headerImageClass = '';
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
+    this.headerImageClass = `${this.name.toLowerCase()}-header`;
+
   }
 
   getProduceList() {
@@ -38,21 +41,31 @@ class SeasonalPage extends React.Component {
       featuredElems = [];
     } else {
       produceElems = this.state.produceList.map(produce => (
-        <li key={produce.id}>
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <li className='mb-2' key={produce.id}>
+          <Link className='body-text link' to={`/produce/${produce.name}`}>{produce.name}</Link>
         </li>
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
-        <div key={produce.id}>
-          <img src={produce.produceImg} alt={produce.name} />
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <div className='d-flex flex-column col-4' key={produce.id}>
+          <Link to={`/produce/${produce.name}`}>
+            <img className='featured-produce-image'
+              src={produce.produceImg}
+              alt={produce.name} />
+            <p className='body-text link'>{produce.name}</p>
+          </Link>
         </div>
       ));
     }
     return (
       <div>
-        <h1>{this.name} Seasonal Produce</h1>
-        {featuredElems}
+        <div className={this.headerImageClass}></div>
+        <div className='green text-justify'>Placeholder for badge</div>
+        <div className="container">
+          <h1 className='green text-center'>{this.name} Produce</h1>
+          <div className="row mb-2">
+            {featuredElems}
+          </div>
+        </div>
         <ul>{produceElems}</ul>
       </div>
     );
