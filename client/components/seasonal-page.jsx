@@ -50,7 +50,7 @@ class SeasonalPage extends React.Component {
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
         <div key={produce.id}>
-          <img src={produce.produceImg} alt={produce.name}/>
+          <img src={'/' + produce.produceImg} alt={produce.name} />
           <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
         </div>
       ));
