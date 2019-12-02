@@ -37,13 +37,10 @@
    .landing-header{
     background-image: url('assets/images/landing-header.jpeg');
   }
-  .inline-block{
-    display: inline-block;
-  }
   .featured-produce-image{
     height:150px;
     width: 100%;
-    object-fit: scale-down;
+    object-fit: cover;
   }
 
   .season-badge{
