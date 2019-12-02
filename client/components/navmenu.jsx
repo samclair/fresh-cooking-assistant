@@ -25,15 +25,18 @@ class NavMenu extends React.Component {
         </nav>
         <div className='page-overlay' onClick={this.swapView}></div>
         <div className="menu-overlay">
-          <p className='menu-header mt-2'><span onClick={this.swapView}>{'<'}</span> <h2 className = 'green'>MENU</h2></p>
+          <div className='menu-header my-2'>
+            <i onClick={this.swapView} className = 'fas fa-arrow-circle-left fa-lg green' ></i>
+            <h2 className = 'green'>MENU</h2>
+          </div>
           <ul className = 'body-text'>
             <li onClick={this.swapView} className='mb-3'>
-              <Link to="/" className='body-text'>Landing</Link>
+              <h2><Link to="/" className='body-text'>Landing</Link></h2>
             </li>
             {this.state.menuOptions.map((navLink, index) => {
               return (
                 <li key={index} className= 'mb-3'onClick={this.swapView}>
-                  <Link to={`/${navLink.toLowerCase()}`} className='body-text'>{navLink}</Link>
+                  <h2><Link to={`/${navLink.toLowerCase()}`} className='body-text'>{navLink}</Link></h2>
                 </li>
               );
             }
