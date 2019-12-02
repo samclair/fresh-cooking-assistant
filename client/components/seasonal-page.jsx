@@ -65,17 +65,18 @@ class SeasonalPage extends React.Component {
       featuredElems = [];
     } else {
       produceElems = this.state.produceList.map(produce => (
-        <li key={produce.id}>
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <li className='mb-2' key={produce.id}>
+          <Link className='body-text link' to={`/produce/${produce.name}`}>{produce.name}</Link>
         </li>
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
         <div className='d-flex flex-column col-4' key={produce.id}>
           <Link to={`/produce/${produce.name}`}>
-            <img className='fixed-image-size'
+            <img className='featured-produce-image'
               src={'/' + produce.produceImg}
               alt={produce.name} />
-            {produce.name}</Link>
+            <p className='body-text link'>{produce.name}</p>
+          </Link>
 
         </div>
       ));

@@ -40,10 +40,10 @@
   .inline-block{
     display: inline-block;
   }
-  .fixed-image-size{
-    height:109px;
+  .featured-produce-image{
+    height:150px;
     width: 100%;
-    object-fit: contain;
+    object-fit: scale-down;
   }
 
   .season-badge{
