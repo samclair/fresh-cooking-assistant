@@ -22,10 +22,9 @@ class Landing extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Landing Page</h1>
-        <h3>It is currently {this.state.currentSeason}</h3>
-        <Link to={`season/${this.state.currentSeason}`}>Check out the seasonal produce!</Link>
+      <div className='text-right'>
+        <div className="header-image landing-header"></div>
+        <Link className='link green' to={`season/${this.state.currentSeason}`}>Produce for {this.state.currentSeason} {'>'}</Link>
       </div>
     );
   }

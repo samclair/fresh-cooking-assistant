@@ -14,11 +14,16 @@
     height: 250px;
   }
 
-  .seasons-page-header{
-    background-image: url('assets/images/farmers-market.jpg');
+  .seasons-page-header, .landing-header{
     background-position: center;
     background-size: cover;
     height:250px;
+  }
+  .seasons-page-header{
+    background-image: url('assets/images/farmers-market.jpg');
+  }
+   .landing-header{
+    background-image: url('assets/images/landing-header.jpeg');
   }
 
   .season-badge{
