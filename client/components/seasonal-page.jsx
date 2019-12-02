@@ -8,6 +8,7 @@ class SeasonalPage extends React.Component {
       produceList: [],
       featuredProduce: []
     };
+    this.headerImageClass = '';
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
   }
@@ -34,6 +35,26 @@ class SeasonalPage extends React.Component {
 
   componentDidMount() {
     this.getProduceList(this.name);
+    this.findHeaderImage();
+  }
+
+  findHeaderImage() {
+    switch (this.name.toLowerCase()) {
+      case 'summer':
+        this.headerImageClass = 'summer-header';
+        break;
+      case 'winter':
+        this.headerImageClass = 'winter-header';
+        break;
+      case 'spring':
+        this.headerImageClass = 'spring-header';
+        break;
+      case 'fall':
+        this.headerImageClass = 'fall-header';
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -57,6 +78,7 @@ class SeasonalPage extends React.Component {
     }
     return (
       <div>
+        <div className={this.headerImageClass}></div>
         <h1>{this.name} Seasonal Produce</h1>
         {featuredElems}
         <ul>{produceElems}</ul>

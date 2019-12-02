@@ -14,10 +14,22 @@
     height: 250px;
   }
 
-  .seasons-page-header, .landing-header{
+  .seasons-page-header, .landing-header, .spring-header, .fall-header, .summer-header, .winter-header{
     background-position: center;
     background-size: cover;
     height:250px;
+  }
+  .fall-header{
+    background-image: url('assets/images/fall-produce.jpg');
+  }
+  .summer-header{
+    background-image: url('assets/images/summer-produce.jpg');
+  }
+  .spring-header{
+    background-image: url('assets/images/spring-produce.jpg');
+  }
+  .winter-header{
+    background-image: url('assets/images/winter-produce.jpg');
   }
   .seasons-page-header{
     background-image: url('assets/images/farmers-market.jpg');
