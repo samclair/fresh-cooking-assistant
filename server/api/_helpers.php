@@ -24,7 +24,7 @@ function get_current_season($link) {
 
 function get_produce_list($link, $season_id) {
   $sql = "
-    SELECT `produce`.`id`, `name`, `produceImg`
+    SELECT DISTINCT `produce`.`id`, `name`, `produceImg`
     FROM `produce`
     JOIN `produceSeasons`
       ON `produce`.`id` = `produceSeasons`.`produceId`
