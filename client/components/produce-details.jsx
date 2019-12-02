@@ -31,7 +31,7 @@ class ProduceDetails extends React.Component {
     return (
       <div>
         <div className="header-container">
-          <img src={produceImg} alt={this.name} className="header-img" />
+          <img src={'/' + produceImg} alt={this.name} className="header-img" />
           {isInSeasonBadge}
           {/* <div className="badge primary-label"><h2>Add to Cart</h2></div> */}
           <h1 className="green">{this.name}</h1>

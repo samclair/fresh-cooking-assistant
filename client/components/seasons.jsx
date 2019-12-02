@@ -36,8 +36,8 @@ class Seasons extends React.Component {
           {
             this.state.seasonList.map(season => {
               return (
-                <li key = {season.id}>
-                  <Link to= {`season/${season.name}`}>
+                <li key={season.id}>
+                  <Link to={`season/${season.name}`}>
                     <h1 className='green link'>{season.name.toUpperCase()}</h1>
                   </Link>
                 </li>
