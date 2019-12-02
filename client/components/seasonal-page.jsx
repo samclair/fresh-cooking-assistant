@@ -11,6 +11,8 @@ class SeasonalPage extends React.Component {
     this.headerImageClass = '';
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
+    this.headerImageClass = `${this.name.toLowerCase()}-header`;
+
   }
 
   getProduceList(name) {
@@ -35,26 +37,6 @@ class SeasonalPage extends React.Component {
 
   componentDidMount() {
     this.getProduceList(this.name);
-    this.findHeaderImage();
-  }
-
-  findHeaderImage() {
-    switch (this.name.toLowerCase()) {
-      case 'summer':
-        this.headerImageClass = 'summer-header';
-        break;
-      case 'winter':
-        this.headerImageClass = 'winter-header';
-        break;
-      case 'spring':
-        this.headerImageClass = 'spring-header';
-        break;
-      case 'fall':
-        this.headerImageClass = 'fall-header';
-        break;
-      default:
-        break;
-    }
   }
 
   render() {
