@@ -51,15 +51,6 @@
     font-size: 20px;
   }
 }
-h1{
-  font-family: 'Rubik', sans-serif;
-  font-size: 40px;
-}
-
-h2{
-  font-family: 'Rubik', sans-serif;
-  font-size: 28px;
-}
 
 ul{
   list-style-type:none;
@@ -68,6 +59,10 @@ ul{
 body{
   font-family: 'Montserrat',sans-serif;
   box-sizing: border-box;
+}
+
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
 }
 
 .seasons-list{

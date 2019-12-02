@@ -38,7 +38,7 @@ class Seasons extends React.Component {
               return (
                 <li key={season.id}>
                   <Link to={`season/${season.name}`}>
-                    <h1 className='green link'>{season.name.toUpperCase()}</h1>
+                    <h1 className='green link font-rubik'>{season.name.toUpperCase()}</h1>
                   </Link>
                 </li>
               );

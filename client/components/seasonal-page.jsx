@@ -42,10 +42,12 @@ class SeasonalPage extends React.Component {
     let featuredElems;
     let isInSeasonBadge = null;
     if (this.state.isCurrentSeason) {
-      isInSeasonBadge = <div className="badge primary-label p-2 d-flex align-items-center">
-        <i className="fas fa-2x fa-exclamation mx-2"/>
-        <span className='h2 m-0'>In season now</span>
-      </div>;
+      isInSeasonBadge = (
+        <div className="badge primary-label p-2 d-flex align-items-center font-rubik">
+          <i className="fas fa-2x fa-exclamation mx-2"/>
+          <span className='h2 m-0'>In season now</span>
+        </div>
+      );
     }
     if (!this.state.produceList.length) {
       produceElems = [];
@@ -73,10 +75,8 @@ class SeasonalPage extends React.Component {
           <div className='text-center mb-4'>{isInSeasonBadge}</div>
         </div>
         <div className="container">
-          <h1 className='green text-center my-2'>{this.name} Produce</h1>
-          <div className="row my-2">
-            {featuredElems}
-          </div>
+          <h1 className='green text-center my-2 font-rubik'>{this.name} Produce</h1>
+          <div className="row my-2">{featuredElems}</div>
           <hr/>
         </div>
         <ul>{produceElems}</ul>

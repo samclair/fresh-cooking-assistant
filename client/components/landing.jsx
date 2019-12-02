@@ -25,8 +25,9 @@ class Landing extends React.Component {
     return (
       <div className='text-right'>
         <div className="header-image landing-header"></div>
-
-        <Link className='link green' to={`season/${this.state.currentSeason}`}><h2>{this.state.currentSeason.toLowerCase()} produce {'>'}</h2></Link>
+        <Link className='link green' to={`season/${this.state.currentSeason}`}>
+          <h2 className='font-rubik'>{this.state.currentSeason.toLowerCase()} produce {'>'}</h2>
+        </Link>
       </div>
     );
   }
