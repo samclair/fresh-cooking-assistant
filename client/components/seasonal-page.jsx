@@ -40,17 +40,26 @@ class SeasonalPage extends React.Component {
   render() {
     let produceElems;
     let featuredElems;
+    let isInSeasonBadge = null;
+    if (this.state.isCurrentSeason) {
+      isInSeasonBadge = (
+        <div className="badge primary-label p-2 d-flex align-items-center font-rubik">
+          <i className="fas fa-2x fa-exclamation mx-2"/>
+          <span className='h2 m-0'>In season now</span>
+        </div>
+      );
+    }
     if (!this.state.produceList.length) {
       produceElems = [];
       featuredElems = [];
     } else {
       produceElems = this.state.produceList.map(produce => (
         <li className='mb-2' key={produce.id}>
-          <Link className='body-text link' to={`/produce/${produce.name}`}>{produce.name}</Link>
+          <Link className='body-text link' to={`/produce/${produce.name}`}>- {produce.name}</Link>
         </li>
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
-        <div className='d-flex flex-column col-4' key={produce.id}>
+        <div className='d-flex flex-column col-6' key={produce.id}>
           <Link to={`/produce/${produce.name}`}>
             <img className='featured-produce-image'
               src={produce.produceImg}
@@ -62,13 +71,13 @@ class SeasonalPage extends React.Component {
     }
     return (
       <div>
-        <div className={this.headerImageClass}></div>
-        <div className='green text-justify'>Placeholder for badge</div>
+        <div className={this.headerImageClass + ' d-flex justify-content-center align-items-end'}>
+          <div className='text-center mb-4'>{isInSeasonBadge}</div>
+        </div>
         <div className="container">
-          <h1 className='green text-center'>{this.name} Produce</h1>
-          <div className="row mb-2">
-            {featuredElems}
-          </div>
+          <h1 className='green text-center my-2 font-rubik'>{this.name} Produce</h1>
+          <div className="row my-2">{featuredElems}</div>
+          <hr/>
         </div>
         <ul>{produceElems}</ul>
       </div>
