@@ -37,6 +37,14 @@
    .landing-header{
     background-image: url('assets/images/landing-header.jpeg');
   }
+  .inline-block{
+    display: inline-block;
+  }
+  .fixed-image-size{
+    height:109px;
+    width: 100%;
+    object-fit: contain;
+  }
 
   .season-badge{
     font-family: 'Rubik', sans-serif;

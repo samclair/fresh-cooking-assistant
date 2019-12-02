@@ -70,17 +70,26 @@ class SeasonalPage extends React.Component {
         </li>
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
-        <div key={produce.id}>
-          <img src={'/' + produce.produceImg} alt={produce.name} />
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <div className='d-flex flex-column col-4' key={produce.id}>
+          <Link to={`/produce/${produce.name}`}>
+            <img className='fixed-image-size'
+              src={'/' + produce.produceImg}
+              alt={produce.name} />
+            {produce.name}</Link>
+
         </div>
       ));
     }
     return (
       <div>
         <div className={this.headerImageClass}></div>
-        <h1>{this.name} Seasonal Produce</h1>
-        {featuredElems}
+        <div className='green text-justify'>Placeholder for badge</div>
+        <div className="container">
+          <h1 className='green text-center'>{this.name} Produce</h1>
+          <div className="row mb-2">
+            {featuredElems}
+          </div>
+        </div>
         <ul>{produceElems}</ul>
       </div>
     );
