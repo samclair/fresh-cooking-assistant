@@ -14,22 +14,35 @@ class NavMenu extends React.Component {
 
   render() {
 
-    const display =
+    const openMenu = (
       <div>
-        <p><span onClick={this.swapView}>{'<'}</span> Menu</p>
-        <ul>
-          <li onClick={this.swapView}>
-            <Link to="/">Landing</Link>
-          </li>
-          <li onClick={this.swapView}>
-            <Link to="/login">Login</Link>
-          </li>
-          <li onClick={this.swapView}>
-            <Link to="/seasons">Seasons</Link>
-          </li>
-        </ul >
-      </div>;
-    return this.state.display ? display : <i onClick={this.swapView} className="fas fa-bars"></i>;
+        <nav className="navbar mb-2 navbar-fixed-top">
+          <i onClick={this.swapView} className="fas fa-bars fa-lg py-2"></i>
+        </nav>
+        <div className='page-overlay' onClick={this.swapView}></div>
+        <div className="menu-overlay">
+          <p><span onClick={this.swapView}>{'<'}</span> Menu</p>
+          <ul>
+            <li onClick={this.swapView}>
+              <Link to="/">Landing</Link>
+            </li>
+            <li onClick={this.swapView}>
+              <Link to="/login">Login</Link>
+            </li>
+            <li onClick={this.swapView}>
+              <Link to="/seasons">Seasons</Link>
+            </li>
+          </ul >
+        </div>
+      </div>
+    );
+
+    const closedMenu = (
+      <nav className="navbar mb-2 navbar-fixed-top">
+        <i onClick={this.swapView} className="fas fa-bars fa-lg py-2"></i>
+      </nav>
+    );
+    return this.state.display ? openMenu : closedMenu;
   }
 }
 export default NavMenu;
