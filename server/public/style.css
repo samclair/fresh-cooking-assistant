@@ -49,7 +49,7 @@ body{
   box-sizing: border-box;
 }
 
-.seasons-list{
+.seasons-list, .menu-header{
   text-align: center;
   display: block;
   padding: 0;
