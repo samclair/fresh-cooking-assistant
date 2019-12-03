@@ -27,18 +27,20 @@ class Seasons extends React.Component {
   render() {
     return (
       <div>
-        <div className="header-container seasons-page-header">
-          <div className="primary-label season-badge px-1">
-            Fruits and Veggies cost less when {'they\'re'} in season!
+        <div className="seasons-header d-flex justify-content-center align-items-end">
+          <div className="primary-label text-center font-rubik py-2 m-4">
+            Fruits and Veggies cost less when they are in season!
           </div>
         </div>
-        <ul className='seasons-list mt-3'>
+        <ul className='seasons-list text-center mt-3 p-0'>
           {
             this.state.seasonList.map(season => {
               return (
-                <li key={season.id}>
+                <li key={season.id} className='my-4'>
                   <Link to={`season/${season.name}`}>
-                    <h1 className='green link font-rubik'>{season.name.toUpperCase()}</h1>
+                    <h1 className='green link font-rubik'>
+                      <u>{season.name.toUpperCase()}</u>
+                    </h1>
                   </Link>
                 </li>
               );
