@@ -3,7 +3,7 @@ import Landing from './landing';
 import Seasons from './seasons';
 import SeasonalPage from './seasonal-page';
 import Login from './login';
-import NavMenu from './navmenu';
+import NavMenu from './nav-menu';
 import {
   BrowserRouter as Router,
   Switch,

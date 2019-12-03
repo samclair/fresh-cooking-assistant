@@ -25,13 +25,15 @@ class ProduceDetails extends React.Component {
     const { selection, storage, nutrition, produceImg } = this.state.details;
     let isInSeasonBadge = null;
     if (this.state.isInSeason) {
-      isInSeasonBadge = <div className="badge primary-label"><h2>In season now!</h2></div>;
+      isInSeasonBadge = <div className="badge primary-label">
+        <h2 className='font-rubik'>In season now!</h2>
+      </div>;
     }
 
     return (
       <div>
         <div className="header-container">
-          <img src={'/' + produceImg} alt={this.name} className="header-img" />
+          <img src={produceImg} alt={this.name} className="header-img" />
           {isInSeasonBadge}
           {/* <div className="badge primary-label"><h2>Add to Cart</h2></div> */}
           <h1 className="green">{this.name}</h1>

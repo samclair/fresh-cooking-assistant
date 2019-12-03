@@ -8,6 +8,7 @@ class NavMenu extends React.Component {
       display: false,
       menuOptions: ['Login', 'Seasons']
     };
+
     this.swapView = this.swapView.bind(this);
   }
 
@@ -16,7 +17,6 @@ class NavMenu extends React.Component {
   }
 
   render() {
-
     const openMenu = (
       <div>
         <nav className="navbar mb-2">

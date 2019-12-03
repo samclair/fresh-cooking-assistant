@@ -6,30 +6,31 @@ class SeasonalPage extends React.Component {
     super(props);
     this.state = {
       produceList: [],
-      featuredProduce: []
+      featuredProduce: [],
+      isCurrentSeason: false
     };
+    this.headerImageClass = '';
     this.name = props.match.params.name;
     this.getProduceList = this.getProduceList.bind(this);
+    this.headerImageClass = `${this.name.toLowerCase()}-header`;
+
   }
 
-  getProduceList(name) {
-    fetch(`/api/produce-in-season?seasonName=${name}`)
+  getProduceList() {
+    fetch(`/api/produce-in-season?seasonName=${this.name}`)
       .then(results => results.json())
-      .then(produce => this.setState({ produceList: produce }, this.getFeaturedProduce))
+      .then(data => {
+        const { produceList, isCurrentSeason } = data;
+        this.setState({ produceList, isCurrentSeason }, this.getFeaturedProduce);
+      })
       .catch(error => console.error(error.message));
   }
 
   getFeaturedProduce() {
-    if (!this.state.produceList.length) { return; }
-    const randomIndices = [];
-    while (randomIndices.length < 3) {
-      const randomIndex = Math.floor(Math.random() * this.state.produceList.length);
-      if (!randomIndices.includes(randomIndex)) { randomIndices.push(randomIndex); }
-    }
-    const featuredProduce = this.state.produceList.filter(
-      (produce, index) => randomIndices.includes(index)
-    );
-    this.setState({ featuredProduce });
+    fetch(`/api/random-produce?seasonName=${this.name}&randCount=2`)
+      .then(results => results.json())
+      .then(featuredProduce => this.setState({ featuredProduce }))
+      .catch(error => console.error(error.message));
   }
 
   componentDidMount() {
@@ -39,26 +40,45 @@ class SeasonalPage extends React.Component {
   render() {
     let produceElems;
     let featuredElems;
+    let isInSeasonBadge = null;
+    if (this.state.isCurrentSeason) {
+      isInSeasonBadge = (
+        <div className="badge primary-label p-2 d-flex align-items-center font-rubik">
+          <i className="fas fa-2x fa-exclamation mx-2"/>
+          <span className='h2 m-0'>In season now</span>
+        </div>
+      );
+    }
     if (!this.state.produceList.length) {
       produceElems = [];
       featuredElems = [];
     } else {
       produceElems = this.state.produceList.map(produce => (
-        <li key={produce.id}>
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <li className='mb-2' key={produce.id}>
+          <Link className='body-text link' to={`/produce/${produce.name}`}>- {produce.name}</Link>
         </li>
       ));
       featuredElems = this.state.featuredProduce.map(produce => (
-        <div key={produce.id}>
-          <img src={produce.produceImg} alt={produce.name}/>
-          <Link to={`/produce/${produce.name}`}>{produce.name}</Link>
+        <div className='d-flex flex-column col-6' key={produce.id}>
+          <Link to={`/produce/${produce.name}`}>
+            <img className='featured-produce-image'
+              src={produce.produceImg}
+              alt={produce.name} />
+            <p className='body-text link'>{produce.name}</p>
+          </Link>
         </div>
       ));
     }
     return (
       <div>
-        <h1>{this.name} Seasonal Produce</h1>
-        {featuredElems}
+        <div className={this.headerImageClass + ' d-flex justify-content-center align-items-end'}>
+          <div className='text-center mb-4'>{isInSeasonBadge}</div>
+        </div>
+        <div className="container">
+          <h1 className='green text-center my-2 font-rubik'>{this.name} Produce</h1>
+          <div className="row my-2">{featuredElems}</div>
+          <hr/>
+        </div>
         <ul>{produceElems}</ul>
       </div>
     );

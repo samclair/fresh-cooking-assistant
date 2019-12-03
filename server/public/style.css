@@ -14,11 +14,33 @@
     height: 250px;
   }
 
-  .seasons-page-header{
-    background-image: url('assets/images/farmers-market.jpg');
+  .seasons-page-header, .landing-header, .spring-header, .fall-header, .summer-header, .winter-header{
     background-position: center;
     background-size: cover;
     height:250px;
+  }
+  .fall-header{
+    background-image: url('assets/images/fall-produce.jpg');
+  }
+  .summer-header{
+    background-image: url('assets/images/summer-produce.jpg');
+  }
+  .spring-header{
+    background-image: url('assets/images/spring-produce.jpg');
+  }
+  .winter-header{
+    background-image: url('assets/images/winter-produce.jpg');
+  }
+  .seasons-page-header{
+    background-image: url('assets/images/farmers-market.jpg');
+  }
+   .landing-header{
+    background-image: url('assets/images/landing-header.jpeg');
+  }
+  .featured-produce-image{
+    height:150px;
+    width: 100%;
+    object-fit: cover;
   }
 
   .season-badge{
@@ -29,15 +51,6 @@
     font-size: 20px;
   }
 }
-h1{
-  font-family: 'Rubik', sans-serif;
-  font-size: 40px;
-}
-
-h2{
-  font-family: 'Rubik', sans-serif;
-  font-size: 28px;
-}
 
 ul{
   list-style-type:none;
@@ -47,6 +60,10 @@ ul{
 body{
   font-family: 'Montserrat',sans-serif;
   box-sizing: border-box;
+}
+
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
 }
 
 .seasons-list, .menu-header{
