@@ -23,10 +23,11 @@ class ProduceDetails extends React.Component {
 
   render() {
     const { selection, storage, nutrition, produceImg } = this.state.details;
+    const style = { backgroundImage: `url(${produceImg})` };
     let isInSeasonBadge;
     if (this.state.isInSeason) {
       isInSeasonBadge = (
-        <div className="primary-label p-2 d-flex align-items-center font-rubik">
+        <div className="primary-label d-flex align-items-center font-rubik p-2">
           <i className="fas fa-lg fa-exclamation mx-2"/>
           <span className='h2 m-0'>In season now</span>
         </div>
@@ -34,19 +35,17 @@ class ProduceDetails extends React.Component {
     }
     return (
       <div>
-        <div className="d-flex flex-column align-items-center">
-          <img src={produceImg} alt={this.name} className="header-img" />
-          {isInSeasonBadge}
-          {/* <div className="primary-label"><h2>Add to Cart</h2></div> */}
-          <h1 className="green">{this.name}</h1>
+        <div style={style} className="produce-header d-flex justify-content-center">
+          <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
+        <h1 className="green text-center my-4">{this.name}</h1>
         <div className="container">
-          <h2 className="yellow mt-4">Selection</h2>
-          <div>{selection}</div>
-          <h2 className="yellow mt-4">Storage</h2>
-          <div>{storage}</div>
-          <h2 className="yellow mt-4">Nutrition</h2>
-          <div>{nutrition}</div>
+          <h2 className="yellow">Selection</h2>
+          <div className='mb-4'>{selection}</div>
+          <h2 className="yellow">Storage</h2>
+          <div className='mb-4'>{storage}</div>
+          <h2 className="yellow">Nutrition</h2>
+          <div className='mb-4'>{nutrition}</div>
         </div>
       </div>);
   }
