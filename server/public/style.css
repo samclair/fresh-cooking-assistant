@@ -1,43 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Old+Standard+TT:400,700|Rubik:500,700&display=swap');
 
-@media screen and (max-width: 480px) {
+.header-img {
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
 
-  .header-img {
-    object-fit: cover;
-    width: 100%;
-    height: 250px;
-  }
+.seasons-header, .landing-header, .produce-header, .spring-header, .fall-header, .summer-header, .winter-header {
+  background-position: center;
+  background-size: cover;
+  height:250px;
+}
 
-  .seasons-header, .landing-header, .produce-header, .spring-header, .fall-header, .summer-header, .winter-header {
-    background-position: center;
-    background-size: cover;
-    height:250px;
-  }
+.fall-header {
+  background-image: url('assets/images/fall-produce.jpg');
+}
+.summer-header {
+  background-image: url('assets/images/summer-produce.jpg');
+}
+.spring-header {
+  background-image: url('assets/images/spring-produce.jpg');
+}
+.winter-header {
+  background-image: url('assets/images/winter-produce.jpg');
+}
+.seasons-header {
+  background-image: url('assets/images/farmers-market.jpg');
+}
+  .landing-header {
+  background-image: url('assets/images/landing-header.jpeg');
+}
 
-  .fall-header {
-    background-image: url('assets/images/fall-produce.jpg');
-  }
-  .summer-header {
-    background-image: url('assets/images/summer-produce.jpg');
-  }
-  .spring-header {
-    background-image: url('assets/images/spring-produce.jpg');
-  }
-  .winter-header {
-    background-image: url('assets/images/winter-produce.jpg');
-  }
-  .seasons-header {
-    background-image: url('assets/images/farmers-market.jpg');
-  }
-   .landing-header {
-    background-image: url('assets/images/landing-header.jpeg');
-  }
-
-  .featured-produce-image {
-    height:150px;
-    width: 100%;
-    object-fit: cover;
-  }
+.featured-produce-image {
+  height:150px;
+  width: 100%;
+  object-fit: cover;
 }
 
 body {
@@ -48,7 +45,8 @@ body {
 }
 
 a {
-  color: inherit;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 ul {
@@ -65,25 +63,23 @@ ul {
 }
 
 .menu-overlay {
-  top:0px;
-  width:65%;
-  height: 100%;
   z-index: 3;
   position: fixed;
+  width: 65%;
+  height: 100%;
+  top: 0;
   margin-left: 35%;
   background-color: white;
 }
 
 .page-overlay {
+  z-index: 2;
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   background-color: rgba(0,0,0,0.5);
-  z-index: 2;
   cursor: pointer;
 }
 
@@ -97,4 +93,8 @@ ul {
 
 .green {
   color: #13A75F;
+}
+
+.white {
+  color: #FFFFFF;
 }
