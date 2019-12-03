@@ -42,7 +42,7 @@ class SeasonalPage extends React.Component {
     if (this.state.isCurrentSeason) {
       isInSeasonBadge = (
         <div className="primary-label d-flex align-items-center font-rubik p-2">
-          <i className="fas fa-lg fa-exclamation mx-2"/>
+          <i className="fas fa-lg fa-exclamation mx-2" />
           <span className='h2 m-0'>In season now</span>
         </div>
       );
@@ -74,7 +74,7 @@ class SeasonalPage extends React.Component {
         <div className="container">
           <h1 className='green text-center font-rubik my-3'>{this.name} Produce</h1>
           <div className="row">{featuredElems}</div>
-          <hr className='primary-label'/>
+          <hr className='primary-label' />
         </div>
         <ul>{produceElems}</ul>
       </div>
