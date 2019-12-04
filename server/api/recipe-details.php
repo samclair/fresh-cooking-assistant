@@ -14,13 +14,24 @@ if($request['method']==='GET'){
 }
 
 function formatResponseBody($data){
+  $instructionList = [];
+  foreach ($data->instructions as $instruction){
+      array_push($instructionList,$instruction->display_text);
+    };
+  $ingredientList = [];
+  foreach ($data->sections[0]->components as $ingredient){
+    array_push($ingredientList,[
+      'measurement'=>$ingredient->raw_text,
+      'ingredient'=>$ingredient->ingredient->display_plural
+      ]);
+  }
   $response = [
+    'id' => $data->id,
     'image' => $data->thumbnail_url,
     'name' => $data->name,
-    'instructions' => $data->instructions,
-    'ingredients' => $data->sections,
     'servings' => $data->yields,
-    'id' => $data->id
+    'ingredients' => $ingredientList,
+    'instructions' => $instructionList
   ];
   return $response;
 };
