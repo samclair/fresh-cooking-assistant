@@ -22,7 +22,8 @@ function formatResponseBody($data){
   foreach ($data->sections[0]->components as $ingredient){
     array_push($ingredientList,[
       'measurement'=>$ingredient->raw_text,
-      'ingredient'=>$ingredient->ingredient->display_plural
+      'ingredient'=>$ingredient->ingredient->display_plural,
+      'isInDatabase' => ingredientIsInDatabase(ucwords($ingredient->ingredient->display_plural))
       ]);
   }
   $response = [
@@ -35,6 +36,16 @@ function formatResponseBody($data){
   ];
   return $response;
 };
+
+function ingredientIsInDatabase($ingredient){
+  $link = get_db_link();
+  $sql = "SELECT name
+  FROM `produce`
+  WHERE produce.name = '$ingredient'";
+  $result = mysqli_fetch_all(mysqli_query($link,$sql));
+  return $result ? $ingredient : false;
+}
+
 
 function getRecipeDetails($id, $api_key){
   $curl = curl_init();
