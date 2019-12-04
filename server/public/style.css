@@ -41,6 +41,9 @@
   overflow-x:auto;
   white-space: nowrap;
 }
+.featured-list::-webkit-scrollbar {
+  display: none;
+}
 
 .featured-recipe{
 display: inline-block;
