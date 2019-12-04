@@ -36,16 +36,16 @@
   width: 100%;
   object-fit: cover;
 }
-.featured-list{
+.seasonal-list{
   height:150px;
   overflow-x:auto;
   white-space: nowrap;
 }
-.featured-list::-webkit-scrollbar {
+.seasonal-list::-webkit-scrollbar {
   display: none;
 }
 
-.featured-recipe{
+.seasonal-recipe{
 display: inline-block;
 }
 

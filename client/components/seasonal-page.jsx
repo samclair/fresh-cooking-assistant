@@ -25,7 +25,7 @@ class SeasonalPage extends React.Component {
   }
 
   getFeaturedProduce() {
-    fetch(`/api/random-produce?seasonName=${this.name}&randCount=2`)
+    fetch(`/api/random-produce?seasonName=${this.name}&randCount=5`)
       .then(results => results.json())
       .then(featuredProduce => this.setState({ featuredProduce }))
       .catch(error => console.error(error.message));
