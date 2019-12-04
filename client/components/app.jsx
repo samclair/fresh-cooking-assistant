@@ -4,6 +4,8 @@ import Seasons from './seasons';
 import SeasonalPage from './seasonal-page';
 import Login from './login';
 import NavMenu from './nav-menu';
+import RecipePage from './recipe-page';
+import SeasonalRecipePage from './seasonal-recipe-page';
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,6 +38,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/season/:name" component={SeasonalPage} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
+            <Route exact path="/recipes/:id" component={RecipePage} />
+            <Route exact path="/recipes" component={SeasonalRecipePage} />
             <Route exact path="/login">
               <Login />
             </Route>
@@ -47,7 +51,7 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </Router >
     );
   }
 }

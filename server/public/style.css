@@ -36,6 +36,44 @@
   width: 100%;
   object-fit: cover;
 }
+.seasonal-list{
+  height:150px;
+  overflow-x:auto;
+  white-space: nowrap;
+}
+.seasonal-list::-webkit-scrollbar {
+  display: none;
+}
+
+.seasonal-recipe{
+display: inline-block;
+}
+
+.list1{
+background-color: greenyellow ;
+}
+.list2{
+background-color:cyan ;
+}
+.list3{
+background-color: firebrick;
+}
+.list4{
+background-color:tomato ;
+}
+.list5{
+  background-color: yellow;
+}
+
+.list1,.list2,.list3,.list4,.list5{
+  height: 150px;
+}
+
+
+
+
+
+
 
 body {
   font-family: 'Montserrat',sans-serif;
