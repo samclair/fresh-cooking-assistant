@@ -10,7 +10,7 @@ if ($request['method'] === 'GET') {
   $response['body'] = [];
   foreach ($results -> results as $recipe) {
     array_push($response['body'], [
-      'id' => $recipe -> canonical_id,
+      'id' => $recipe -> id,
       'name' => $recipe -> name,
       'thumbnail' => $recipe -> thumbnail_url
     ]);
