@@ -7,6 +7,7 @@ switch ($request['path']) {
   case '/api/random-produce':
   case '/api/produce-details':
   case '/api/produce-in-season':
+  case '/api/recipe-details':
     require_once "..${request['path']}.php";
   default:
     throw new ApiError("Cannot ${request['method']} ${request['path']}", 404);
