@@ -8,9 +8,22 @@ if($request['method']==='GET'){
     throw new ApiError("Recipe Id is required", 400);
   }
   $recipeData = getRecipeDetails ($request['query']['recipeId'],$tasty_api_key);
-  $response['body'] = $recipeData;
+  $responseBody = formatResponseBody($recipeData);
+  $response['body'] = $responseBody;
   send($response);
 }
+
+function formatResponseBody($data){
+  $response = [
+    'image' => $data->thumbnail_url,
+    'name' => $data->name,
+    'instructions' => $data->instructions,
+    'ingredients' => $data->sections,
+    'servings' => $data->yields,
+    'id' => $data->id
+  ];
+  return $response;
+};
 
 function getRecipeDetails($id, $api_key){
   $curl = curl_init();
