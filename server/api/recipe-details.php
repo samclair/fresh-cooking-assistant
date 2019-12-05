@@ -7,25 +7,25 @@ if($request['method']==='GET'){
   if(!isset($request['query']['recipeId'])){
     throw new ApiError("Recipe Id is required", 400);
   }
-  $recipeData = getRecipeDetails ($request['query']['recipeId'],$tasty_api_key);
-  $responseBody = formatResponseBody($recipeData);
-  $response['body'] = $responseBody;
+  $recipe_data = get_recipe_details ($request['query']['recipeId'],$tasty_api_key);
+  $response_body = format_response_body($recipe_data);
+  $response['body'] = $response_body;
   send($response);
 }
 
-function formatResponseBody($data){
-  $instructionList = [];
+function format_response_body($data){
+  $instruction_list = [];
   foreach ($data->instructions as $instruction){
-      array_push($instructionList,$instruction->display_text);
+      array_push($instruction_list,$instruction->display_text);
     };
-  $ingredientList = [];
+  $ingredient_list = [];
   foreach ($data->sections[0]->components as $ingredient){
-    $ingredientSingular = ucwords($ingredient->ingredient->display_singular);
-    $ingredientPlural = ucwords($ingredient->ingredient->display_plural);
-    array_push($ingredientList,[
+    $ingredient_singular = ucwords($ingredient->ingredient->display_singular);
+    $ingredient_plural = ucwords($ingredient->ingredient->display_plural);
+    array_push($ingredient_list,[
       'measurement'=>$ingredient->raw_text,
-      'ingredient'=>$ingredientSingular,
-      'isInDatabase' => ingredientIsInDatabase($ingredientSingular,$ingredientPlural)
+      'ingredient'=>$ingredient_singular,
+      'isInDatabase' => ingredient_is_in_database($ingredient_singular,$ingredient_plural)
       ]);
   }
   $response = [
@@ -33,24 +33,24 @@ function formatResponseBody($data){
     'image' => $data->thumbnail_url,
     'name' => $data->name,
     'servings' => $data->yields,
-    'ingredients' => $ingredientList,
-    'instructions' => $instructionList
+    'ingredients' => $ingredient_list,
+    'instructions' => $instruction_list
   ];
   return $response;
 };
 
-function ingredientIsInDatabase($ingredientSingular,$ingredientPlural){
+function ingredient_is_in_database($ingredient_singular,$ingredient_plural){
   $link = get_db_link();
   $sql = "SELECT name
   FROM `produce`
-  WHERE produce.name = '$ingredientSingluar'
-  OR produce.name = '$ingredientPlural'";
+  WHERE produce.name = '$ingredient_singular'
+  OR produce.name = '$ingredient_plural'";
   $result = mysqli_fetch_row(mysqli_query($link,$sql));
   return $result ? $result[0] : false;
 }
 
 
-function getRecipeDetails($id, $api_key){
+function get_recipe_details($id, $api_key){
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
