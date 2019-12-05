@@ -20,10 +20,12 @@ function formatResponseBody($data){
     };
   $ingredientList = [];
   foreach ($data->sections[0]->components as $ingredient){
+    $ingredientSingular = ucwords($ingredient->ingredient->display_singular);
+    $ingredientPlural = ucwords($ingredient->ingredient->display_plural);
     array_push($ingredientList,[
       'measurement'=>$ingredient->raw_text,
-      'ingredient'=>$ingredient->ingredient->display_plural,
-      'isInDatabase' => ingredientIsInDatabase(ucwords($ingredient->ingredient->display_plural))
+      'ingredient'=>$ingredientSingular,
+      'isInDatabase' => ingredientIsInDatabase($ingredientSingular,$ingredientPlural)
       ]);
   }
   $response = [
@@ -37,13 +39,14 @@ function formatResponseBody($data){
   return $response;
 };
 
-function ingredientIsInDatabase($ingredient){
+function ingredientIsInDatabase($ingredientSingular,$ingredientPlural){
   $link = get_db_link();
   $sql = "SELECT name
   FROM `produce`
-  WHERE produce.name = '$ingredient'";
-  $result = mysqli_fetch_all(mysqli_query($link,$sql));
-  return $result ? $ingredient : false;
+  WHERE produce.name = '$ingredientSingluar'
+  OR produce.name = '$ingredientPlural'";
+  $result = mysqli_fetch_row(mysqli_query($link,$sql));
+  return $result ? $result[0] : false;
 }
 
 
