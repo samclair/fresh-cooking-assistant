@@ -7,8 +7,6 @@ class SeasonalRecipePage extends React.Component {
     this.state = {
       seasonalRecipes: []
     };
-    this.recipes = [1, 2, 3, 4, 5, 6, 7];
-
   }
 
   getSeasonalRecipes() {
