@@ -30,7 +30,7 @@ class Landing extends React.Component {
         const recipeElems = selectedRecipes.map(recipe => {
           return (
             <Link key={recipe.id} to={`./recipes/${recipe.id}`} >
-              <div className='d-inline-block mx-2 col-6 h-100'>
+              <div className='d-inline-block mx-1 col-6 h-100'>
                 <img className='featured-produce-image' src={`${recipe.thumbnail}`} alt={`${recipe.name}`} />
               </div>
             </Link>
