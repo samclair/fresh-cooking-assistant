@@ -10,15 +10,23 @@ class ProduceDetails extends React.Component {
     this.name = props.match.params.name;
   }
 
-  componentDidMount() {
-    this.getProduceData(this.name);
-  }
-
   getProduceData(name) {
     fetch(`/api/produce-details?produceName=${name}`)
       .then(result => result.json())
       .then(produce => this.setState({ details: produce.details, isInSeason: produce.isInSeason }))
       .catch(error => console.error(error.message));
+  }
+
+  titleCaseName(name) {
+    const splitName = name.split(' ');
+    for (const word in splitName) {
+      splitName[word] = splitName[word][0].toUpperCase() + splitName[word].substring(1).toLowerCase();
+    }
+    return splitName.join(' ');
+  }
+
+  componentDidMount() {
+    this.getProduceData(this.name);
   }
 
   render() {
@@ -27,7 +35,7 @@ class ProduceDetails extends React.Component {
     let isInSeasonBadge;
     if (this.state.isInSeason) {
       isInSeasonBadge = (
-        <div className="primary-label d-flex align-items-center font-rubik p-2">
+        <div className="primary-label d-flex align-items-center font-rubik p-2 mb-4">
           <i className="fas fa-lg fa-exclamation mx-2"/>
           <span className='h2 m-0'>In season now</span>
         </div>
@@ -35,19 +43,20 @@ class ProduceDetails extends React.Component {
     }
     return (
       <div>
-        <div style={style} className="header d-flex justify-content-center">
-          <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
+        <div style={style} className="header d-flex align-items-end justify-content-center">
+          {isInSeasonBadge}
         </div>
-        <h1 className="green text-center my-4">{this.name}</h1>
         <div className="container">
+          <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
           <h2 className="yellow">Selection</h2>
-          <div className='mb-4'>{selection}</div>
+          <p className='mb-4'>{selection}</p>
           <h2 className="yellow">Storage</h2>
-          <div className='mb-4'>{storage}</div>
+          <p className='mb-4'>{storage}</p>
           <h2 className="yellow">Nutrition</h2>
-          <div className='mb-4'>{nutrition}</div>
+          <p className='mb-4'>{nutrition}</p>
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
