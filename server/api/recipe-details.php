@@ -4,10 +4,9 @@ require_once '_helpers.php';
 require_once '_api-keys.php';
 
 if($request['method']==='GET'){
-  if(!isset($request['query']['recipeId'])){
-    throw new ApiError("Recipe Id is required", 400);
-  }
-  $recipe_data = get_recipe_details ($request['query']['recipeId'],$tasty_api_key);
+  $recipe_id = $request['query']['recipeId'];
+  if(!isset($recipe_id)) { throw new ApiError("Recipe Id is required", 400); }
+  $recipe_data = get_recipe_details ($recipe_id, $tasty_api_key);
   $response_body = format_response_body($recipe_data);
   $response['body'] = $response_body;
   send($response);
@@ -20,13 +19,13 @@ function format_response_body($data){
     };
   $ingredient_list = [];
   foreach ($data->sections[0]->components as $ingredient){
-    $ingredient_singular = ucwords($ingredient->ingredient->display_singular);
-    $ingredient_plural = ucwords($ingredient->ingredient->display_plural);
-    array_push($ingredient_list,[
+    $ingredient_singular = $ingredient->ingredient->display_singular;
+    $ingredient_plural = $ingredient->ingredient->display_plural;
+    array_push($ingredient_list, [
       'measurement'=>$ingredient->raw_text,
       'ingredient'=>$ingredient_singular,
-      'isInDatabase' => ingredient_is_in_database($ingredient_singular,$ingredient_plural)
-      ]);
+      'isInDatabase' => ingredient_is_in_database($ingredient_singular, $ingredient_plural)
+    ]);
   }
   $response = [
     'id' => $data->id,
@@ -34,12 +33,13 @@ function format_response_body($data){
     'name' => $data->name,
     'servings' => $data->yields,
     'ingredients' => $ingredient_list,
-    'instructions' => $instruction_list
+    'instructions' => $instruction_list,
+    'isFavorite' => check_if_favorite_recipe($data -> id)
   ];
   return $response;
 };
 
-function ingredient_is_in_database($ingredient_singular,$ingredient_plural){
+function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   $link = get_db_link();
   $sql = "SELECT name
   FROM `produce`
@@ -52,27 +52,32 @@ function ingredient_is_in_database($ingredient_singular,$ingredient_plural){
 
 function get_recipe_details($id, $api_key){
   $curl = curl_init();
-
   curl_setopt_array($curl, array(
     CURLOPT_URL => "https://tasty.p.rapidapi.com/recipes/detail?id=$id",
     CURLOPT_HTTPGET => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 10,
-    CURLOPT_HTTPHEADER => array(
+    CURLOPT_HTTPHEADER => [
       "x-rapidapi-host: tasty.p.rapidapi.com",
       "x-rapidapi-key: $api_key"
-    ),
+    ],
   ));
-
   $response = curl_exec($curl);
   $err = curl_error($curl);
-
   curl_close($curl);
+  if ($err) { throw new ApiError("cURL Error #: $err"); }
+  return json_decode($response);
+}
 
-  if ($err) {
-    throw new ApiError("cURL Error #:" . $err);
-  } else {
-    error_log(gettype($response));
-    return json_decode($response);
-  }
+function check_if_favorite_recipe($recipe_id) {
+  $link = get_db_link();
+  $sql = "
+    SELECT `id`
+    FROM `favoriteReciptes`
+    WHERE `recipeId` = $recipe_id
+    AND `userId`
+  ";
+  $result = mysqli_query($link, $sql);
+  $isFavorite = (mysqli_num_rows($result) > 0);
+  return $isFavorite;
 }
