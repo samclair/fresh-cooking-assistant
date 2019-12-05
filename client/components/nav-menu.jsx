@@ -61,8 +61,8 @@ class NavMenu extends React.Component {
       </div>
     );
     const closedMenu = (
-      <div>
-        <nav className="navbar primary-label sticky-top">
+      <div className="sticky-top">
+        <nav className="navbar primary-label">
           <span className="navbar-brand title">
             <Link to="/" className='h2 white' style={{ fontSize: '22px' }}>FRESH!</Link>
           </span>
