@@ -11,7 +11,7 @@ class Seasons extends React.Component {
   }
 
   getAllSeasons() {
-    fetch('api/seasons')
+    fetch('/api/seasons')
       .then(result => result.json())
       .then(seasonList => this.setState({
         currentSeason: seasonList.currentSeason.name,
