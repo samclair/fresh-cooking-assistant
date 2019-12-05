@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Accordion from './accordion';
-// import Accordion from './accordion';
 
 class NavMenu extends React.Component {
   constructor(props) {
@@ -49,7 +48,7 @@ class NavMenu extends React.Component {
       <div>
         <nav className="navbar">
           <a className="navbar-brand title" style={{ color: 'white', fontSize: '22px' }}>FRESH!</a>
-          <i onClick={this.swapView} className="fas fa-bars fa-lg py-2" />
+          <i onClick={this.swapView} className="fas fa-bars fa-lg" />
         </nav>
         <div className='page-overlay' onClick={this.swapView} />
         <div className="menu-overlay">
@@ -62,12 +61,14 @@ class NavMenu extends React.Component {
       </div>
     );
     const closedMenu = (
-      <nav className="navbar sticky-top">
-        <span className="navbar-brand title">
-          <Link to="/" className='h2 white'>FRESH!</Link>
-        </span>
-        <i onClick={this.swapView} className="fas fa-bars fa-lg" />
-      </nav>
+      <div>
+        <nav className="navbar sticky-top">
+          <span className="navbar-brand title">
+            <Link to="/" className='h2 white' style={{ fontSize: '22px' }}>FRESH!</Link>
+          </span>
+          <i onClick={this.swapView} className="fas fa-bars fa-lg" />
+        </nav>
+      </div>
     );
     return this.state.display ? openMenu : closedMenu;
   }
