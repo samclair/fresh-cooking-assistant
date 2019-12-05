@@ -25,10 +25,11 @@ class Landing extends React.Component {
   }
 
   render() {
+    const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
     if (!this.state.currentSeason) { return null; }
     return (
       <div className='text-right'>
-        <div className="header-image landing-header mb-2" />
+        <div className="header mb-2" style={style}/>
         <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
           <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
         </Link>

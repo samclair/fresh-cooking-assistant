@@ -46,7 +46,7 @@ class NavMenu extends React.Component {
   render() {
     const openMenu = (
       <div>
-        <nav className="navbar">
+        <nav className="navbar primary-label">
           <a className="navbar-brand title" style={{ color: 'white', fontSize: '22px' }}>FRESH!</a>
           <i onClick={this.swapView} className="fas fa-bars fa-lg" />
         </nav>
@@ -62,7 +62,7 @@ class NavMenu extends React.Component {
     );
     const closedMenu = (
       <div>
-        <nav className="navbar sticky-top">
+        <nav className="navbar primary-label sticky-top">
           <span className="navbar-brand title">
             <Link to="/" className='h2 white' style={{ fontSize: '22px' }}>FRESH!</Link>
           </span>

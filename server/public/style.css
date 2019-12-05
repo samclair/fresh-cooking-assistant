@@ -1,80 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Old+Standard+TT:400,700|Rubik:500,700&display=swap');
 
-.header-img {
-  object-fit: cover;
-  width: 100%;
-  height: 250px;
-}
-
-.seasons-header, .landing-header, .produce-header, .spring-header, .fall-header, .summer-header, .winter-header {
-  background-position: center;
-  background-size: cover;
-  height:250px;
-}
-
-.fall-header {
-  background-image: url('assets/images/fall-produce.jpg');
-}
-.summer-header {
-  background-image: url('assets/images/summer-produce.jpg');
-}
-.spring-header {
-  background-image: url('assets/images/spring-produce.jpg');
-}
-.winter-header {
-  background-image: url('assets/images/winter-produce.jpg');
-}
-.seasons-header {
-  background-image: url('assets/images/farmers-market.jpg');
-}
-  .landing-header {
-  background-image: url('assets/images/landing-header.jpeg');
-}
-
-.featured-produce-image {
-  height:150px;
-  width: 100%;
-  object-fit: cover;
-}
-.seasonal-list{
-  height:150px;
-  overflow-x:auto;
-  white-space: nowrap;
-}
-.seasonal-list::-webkit-scrollbar {
-  display: none;
-}
-
-.seasonal-recipe{
-display: inline-block;
-}
-
-.list1{
-background-color: greenyellow ;
-}
-.list2{
-background-color:cyan ;
-}
-.list3{
-background-color: firebrick;
-}
-.list4{
-background-color:tomato ;
-}
-.list5{
-  background-color: yellow;
-}
-
-.list1,.list2,.list3,.list4,.list5{
-  height: 150px;
-}
-
-
-
-
-
-
-
 body {
   font-family: 'Montserrat',sans-serif;
   color: #515151;
@@ -89,15 +14,6 @@ a {
 
 ul {
   list-style-type: none;
-}
-
-.font-rubik {
-  font-family: 'Rubik', sans-serif;
-}
-
-.primary-label, .navbar {
-  background-color: #13A75F;
-  color: white;
 }
 
 .menu-overlay {
@@ -121,12 +37,43 @@ ul {
   cursor: pointer;
 }
 
+.featured-produce-image {
+  height:150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.header {
+  background-position: center;
+  background-size: cover;
+  height:250px;
+}
+
+.seasonal-list {
+  height:150px;
+  overflow-x:auto;
+  white-space: nowrap;
+}
+
+.seasonal-list::-webkit-scrollbar {
+  display: none;
+}
+
+.seasonal-recipe {
+  display: inline-block;
+}
+
 .title {
   font-family: 'Old Standard TT:700', serif;
 }
 
-.yellow {
-  color: #FAA916;
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
+}
+
+.primary-label {
+  background-color: #13A75F;
+  color: white;
 }
 
 .green {
@@ -135,4 +82,32 @@ ul {
 
 .white {
   color: #FFFFFF;
+}
+
+.yellow {
+  color: #FAA916;
+}
+
+.list1 {
+  background-color: greenyellow ;
+}
+
+.list2 {
+  background-color: cyan;
+}
+
+.list3 {
+  background-color: firebrick;
+}
+
+.list4 {
+  background-color: tomato;
+}
+
+.list5 {
+  background-color: yellow;
+}
+
+.list1,.list2,.list3,.list4,.list5 {
+  height: 150px;
 }

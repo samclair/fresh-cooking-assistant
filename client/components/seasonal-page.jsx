@@ -36,6 +36,7 @@ class SeasonalPage extends React.Component {
   }
 
   render() {
+    const style = { backgroundImage: `url(/assets/images/${this.name.toLowerCase()}-header.jpg)` };
     let produceElems;
     let featuredElems;
     let isInSeasonBadge;
@@ -68,7 +69,7 @@ class SeasonalPage extends React.Component {
     }
     return (
       <div>
-        <div className={`${this.name.toLowerCase()}-header d-flex justify-content-center`}>
+        <div className='header d-flex justify-content-center' style={style}>
           <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
         <div className="container">

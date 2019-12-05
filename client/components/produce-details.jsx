@@ -35,7 +35,7 @@ class ProduceDetails extends React.Component {
     }
     return (
       <div>
-        <div style={style} className="produce-header d-flex justify-content-center">
+        <div style={style} className="header d-flex justify-content-center">
           <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
         <h1 className="green text-center my-4">{this.name}</h1>

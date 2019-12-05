@@ -25,9 +25,10 @@ class Seasons extends React.Component {
   }
 
   render() {
+    const style = { backgroundImage: 'url(/assets/images/seasons-header.jpg)' };
     return (
       <div>
-        <div className="seasons-header d-flex justify-content-center align-items-end">
+        <div className="header d-flex justify-content-center align-items-end" style={style}>
           <div className="primary-label text-center font-rubik py-2 m-4">
             Fruits and Veggies cost less when they are in season!
           </div>
