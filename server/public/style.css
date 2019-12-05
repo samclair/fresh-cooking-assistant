@@ -16,6 +16,11 @@ ul {
   list-style-type: none;
 }
 
+.ingredient-list{
+  list-style-type: square;
+  list-style-position: outside;
+}
+
 .menu-overlay {
   z-index: 3;
   position: fixed;
