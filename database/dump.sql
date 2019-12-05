@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `favoriteRecipes`
+--
+
+DROP TABLE IF EXISTS `favoriteRecipes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favoriteRecipes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `recipeId` int(11) NOT NULL,
+  `name` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoriteRecipes`
+--
+
+LOCK TABLES `favoriteRecipes` WRITE;
+/*!40000 ALTER TABLE `favoriteRecipes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoriteRecipes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `produce`
 --
 
@@ -93,6 +119,31 @@ LOCK TABLES `seasons` WRITE;
 INSERT INTO `seasons` VALUES (1,'2020-03-20','2020-06-20','Spring'),(2,'2020-06-21','2020-09-21','Summer'),(3,'2019-09-23','2019-12-21','Fall'),(4,'2019-12-22','2020-03-19','Winter');
 /*!40000 ALTER TABLE `seasons` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'OldManjenkins420','2019-12-05 19:55:59'),(2,'APoliteUserName','2019-12-05 19:56:39');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -103,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 10:38:56
+-- Dump completed on 2019-12-05 15:01:28
