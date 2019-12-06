@@ -46,11 +46,13 @@ function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   $sql = "
     SELECT name
     FROM `produce`
-    WHERE produce.name = ?
+    WHERE
+      INSTR(?,`produce`.`name`)
+      OR produce.name = ?
       OR produce.name = ?
   ";
   $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_bind_param($stmt, 'ss', $ingredient_singular, $ingredient_plural);
+  mysqli_stmt_bind_param($stmt, 'sss', $ingredient_singular, $ingredient_singular, $ingredient_plural);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $data = mysqli_fetch_assoc($result);
