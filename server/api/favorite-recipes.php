@@ -5,7 +5,13 @@ require_once '_api-keys.php';
 
 $link = get_db_link();
 
-if($request['method'] === 'POST'){
+if($request['method'] === 'GET'){
+  $response['body'] = [
+    'favoriteRecipes' => get_all_favorites($link)
+  ];
+  send($response);
+}
+elseif($request['method'] === 'POST'){
   $body_is_valid = isset($request['body']['recipeId']) &&
     isset($request['body']['recipeName']) &&
     isset($request['body']['recipeImage']);
@@ -14,7 +20,7 @@ if($request['method'] === 'POST'){
   }
   $response['body'] = [
     'recipeId' => $request['body']['recipeId'],
-    'isFavorited' => add_favorite_recipe(
+    'isFavorite' => add_favorite_recipe(
       $link,
       $request['body']['recipeId'],
       $request['body']['recipeName'],
@@ -29,7 +35,7 @@ elseif($request['method'] === 'DELETE'){
   }
   $response['body'] = [
     'recipeId' => $request['body']['recipeId'],
-    'isFavorited' => unfavorite_recipe($link, $request['body']['recipeId'])
+    'isFavorite' => unfavorite_recipe($link, $request['body']['recipeId'])
   ];
   send($response);
 }
@@ -44,9 +50,18 @@ function add_favorite_recipe($link, $recipe_id, $name, $image){
 }
 
 function unfavorite_recipe($link,$recipe_id){
-  $sql = "DELETE * FROM `favoriteRecipe`
+  $sql = "DELETE *
+  FROM `favoriteRecipe`
   WHERE `favoriteRecipe`.`recipeId` = $recipe_id
   AND `favoriteRecipe`.`userId` = {$_SESSION['user_id']}";
   mysqli_query($link, $sql);
   return false;
 }
+
+function get_all_favorites($link){
+  $sql = "SELECT (`name`, `image`, `recipeId`)
+  FROM `favoriteRecipes`
+  WHERE `favoriteRecipe`.`userId` {$_SESSION['user_id']}";
+  $result = mysqli_query($link, $sql);
+  return mysqli_fetch_assoc($result);
+  }
