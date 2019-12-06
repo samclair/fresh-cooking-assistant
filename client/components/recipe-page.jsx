@@ -9,13 +9,14 @@ class RecipePage extends React.Component {
       isFavorite: false
     };
     this.id = props.match.params.id;
+    this.setFavorite = this.setFavorite.bind(this);
   }
 
   getDetails() {
     fetch(`/api/recipe-details?recipeId=${this.id}`)
       .then(res => res.json())
-      .then(({ details, isFavorite }) => {
-        this.setState({ details, isFavorite });
+      .then(({ recipe, isFavorite }) => {
+        this.setState({ recipe, isFavorite });
       })
       .catch(error => console.error(error.message));
   }
