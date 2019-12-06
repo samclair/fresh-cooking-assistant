@@ -12,6 +12,7 @@ if ($request['method'] === 'GET') {
 } elseif ($request['method'] === 'POST') {
   $username = $request['query']['username'];
   if (!isset($username)) { throw new ApiError('Username required', 400); }
+  if (get_user_id($link, $username)) { throw new ApiError('Username already taken', 409); }
   $user_id = add_new_user($link, $username);
   $_SESSION['user_id'] = $user_id;
   $response['body'] = $user_id;
