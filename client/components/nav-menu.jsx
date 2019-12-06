@@ -23,7 +23,7 @@ class NavMenu extends React.Component {
           <Link className='h2' onClick={this.swapView} to=''>Home</Link>
         </li>
         <li className='my-2'>
-          <Link className='h2' onClick={this.swapView} to='/login'>Login</Link>
+          <Link className='h2' onClick={this.swapView} to='/username'>Login</Link>
         </li>
         <li className='my-2'>
           <Link className='h2' onClick={this.swapView} to='/seasons'>Seasons</Link>
