@@ -57,7 +57,7 @@ function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   $result = mysqli_stmt_get_result($stmt);
   $data = mysqli_fetch_assoc($result);
   mysqli_stmt_close($stmt);
-  return $data ? $data[0] : false;
+  return $data ? $data['name'] : false;
 }
 
 
@@ -82,7 +82,7 @@ function get_recipe_details($id, $api_key){
 
 function check_if_favorite_recipe($recipe_id) {
   $link = get_db_link();
-  if (!isset($user_id)) { return; }
+  if (!isset($_SESSION['user_id'])) { return; }
   $user_id = $_SESSION['user_id'];
   $sql = "
     SELECT `id`
