@@ -7,8 +7,8 @@ if ($request['method'] === 'GET') {
   $seasons = get_seasons($link);
   $current_season = get_current_season($link);
   $response['body'] = [
-    seasons => $seasons,
-    currentSeason => $current_season
+    'seasons' => $seasons,
+    'currentSeason' => $current_season
   ];
   send($response);
 }

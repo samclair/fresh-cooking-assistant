@@ -11,13 +11,13 @@ function get_current_season($link) {
     FROM `seasons`
   ";
   $result = mysqli_query($link, $sql);
-  if (!mysqli_num_rows($result)) {throw new ApiError('Season data not found', 502); }
+  if (!mysqli_num_rows($result)) { throw new ApiError('Season data not found', 502); }
   $seasons = mysqli_fetch_all($result, MYSQLI_ASSOC);
   foreach ($seasons as $season) {
     $start_date = strtotime($season['startDate']);
     $end_date = strtotime($season['endDate']);
     if ($start_date <= time() && $end_date >= time()) {
-      return [ id => $season['id'], name => $season['name'] ];
+      return [ 'id' => $season['id'], 'name' => $season['name'] ];
     }
   }
 }
@@ -28,11 +28,15 @@ function get_produce_list($link, $season_id) {
     FROM `produce`
     JOIN `produceSeasons`
       ON `produce`.`id` = `produceSeasons`.`produceId`
-    WHERE `seasonId` = $season_id
+    WHERE `seasonId` = ?
     ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'd', $season_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) { $produce = []; }
   else { $produce = mysqli_fetch_all($result, MYSQLI_ASSOC); }
+  mysqli_stmt_close($stmt);
   return $produce;
 }
 
@@ -40,10 +44,17 @@ function get_season_id($link, $season_name) {
   $sql = "
     SELECT `id`
     FROM `seasons`
-    WHERE `name` = '$season_name'
+    WHERE `name` = ?
   ";
-  $result = mysqli_query($link, $sql);
-  if (!mysqli_num_rows($result)) {throw new ApiError('Page not found.', 404); }
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 's', $season_name);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if (!mysqli_num_rows($result)) {
+    mysqli_stmt_close($stmt);
+    throw new ApiError('Page not found.', 404);
+  }
   $data = mysqli_fetch_assoc($result);
+  mysqli_stmt_close($stmt);
   return $data['id'];
 }
