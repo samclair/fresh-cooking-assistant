@@ -1,12 +1,11 @@
 import React from 'react';
 
-class Login extends React.Component {
+class Username extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userName: '',
-      password: '',
-      response: null
+      password: ''
     };
     this.fieldChange = this.fieldChange.bind(this);
     this.getUser = this.getUser.bind(this);
@@ -28,10 +27,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const invalidUserName = this.state.response ? <h6 className='text-danger align-self-right mb-1'>Invalid Username or Password</h6> : <h6 className='mb-4'></h6>;
     const style = { backgroundColor: '#13A75F', height: '100vh' };
     return (
-      <div className="py-4 container" style={style}>
+      <div className="container pt-4 position-fixed" style={style}>
         <div className="pl-4 my-4">
           <h1 className='font-rubik white font-weight-bold'>FRESH!</h1>
           <h3 className='white'>your</h3>
@@ -46,20 +44,13 @@ class Login extends React.Component {
               name="userName"
               onChange={this.fieldChange}
               value={this.state.userName} />
-
-            <input type="password"
-              className='form-control w-75 mb-2 mt-3'
-              placeholder='Password'
-              name="password"
-              value={this.state.password}
-              onChange={this.fieldChange} />
-            {invalidUserName}
-            <button className='badge badge-warning white font-weight-bold shadow w-75'>Log-In</button>
+            <button className='badge badge-warning white font-weight-bold shadow w-75 mt-2'>Remember Me!</button>
           </div>
         </form>
+        <h6 className='text-center text-muted '>Enter a username to save recipes</h6>
       </div>
     );
   }
 }
 
-export default Login;
+export default Username;
