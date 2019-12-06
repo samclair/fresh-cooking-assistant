@@ -7,7 +7,7 @@ if ($request['method'] === 'GET') {
   $username = filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS);
   if (!isset($username)) { throw new ApiError('Username required', 400); }
   $user_id = get_user_id($link, $username);
-  $_SESSON['user_id'] = $user_id;
+  $_SESSION['user_id'] = $user_id;
   $response['body'] = $user_id;
   send($response);
 }
