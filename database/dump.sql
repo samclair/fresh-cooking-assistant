@@ -29,7 +29,7 @@ CREATE TABLE `favoriteRecipes` (
   `name` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `favoriteRecipes` (
 
 LOCK TABLES `favoriteRecipes` WRITE;
 /*!40000 ALTER TABLE `favoriteRecipes` DISABLE KEYS */;
-INSERT INTO `favoriteRecipes` VALUES (1,2,1641,'After School Loaded Apple Slices','https://img.buzzfeed.com/thumbnailer-prod-us-east-1/1c047d8c4e264959855aacc2605cfa86/afterschoolsnacks-final.jpg');
 /*!40000 ALTER TABLE `favoriteRecipes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +132,7 @@ CREATE TABLE `users` (
   `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +141,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'OldManjenkins420','2019-12-05 19:55:59'),(2,'APoliteUserName','2019-12-05 19:56:39');
+INSERT INTO `users` VALUES (1,'OldManjenkins420','2019-12-05 19:55:59');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -155,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:01:18
+-- Dump completed on 2019-12-06 15:19:39
