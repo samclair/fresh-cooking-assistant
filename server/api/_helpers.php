@@ -17,7 +17,7 @@ function get_current_season($link) {
     $start_date = strtotime($season['startDate']);
     $end_date = strtotime($season['endDate']);
     if ($start_date <= time() && $end_date >= time()) {
-      return [ id => $season['id'], name => $season['name'] ];
+      return [ 'id' => $season['id'], 'name' => $season['name'] ];
     }
   }
 }

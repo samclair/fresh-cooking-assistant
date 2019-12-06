@@ -73,6 +73,7 @@ function get_recipe_details($id, $api_key){
 
 function check_if_favorite_recipe($recipe_id) {
   $link = get_db_link();
+  if (!isset($user_id)) { return; }
   $user_id = $_SESSION['user_id'];
   $sql = "
     SELECT `id`

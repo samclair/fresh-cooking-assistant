@@ -11,8 +11,8 @@ if ($request['method'] === 'GET') {
   $seasons = get_produce_seasons($link, $produce_id);
   $is_in_season = check_in_season($link, $seasons);
   $response['body'] = [
-    details => $produce_details,
-    isInSeason => $is_in_season
+    'details' => $produce_details,
+    'isInSeason' => $is_in_season
   ];
   send($response);
 }

@@ -9,7 +9,7 @@ if ($request['method'] === 'GET') {
   $season_id = get_season_id($link, $season_name);
   $produce_list = get_produce_list($link, $season_id);
   $current_season = get_current_season($link)['id'];
-  $response['body'] = [ produceList => $produce_list ];
+  $response['body'] = [ 'produceList' => $produce_list ];
   if ($season_id === $current_season) { $response['body']['isCurrentSeason'] = true; }
   else { $response['body']['isCurrentSeason'] = false; }
   send($response);
