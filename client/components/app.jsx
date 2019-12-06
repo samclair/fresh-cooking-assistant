@@ -2,7 +2,7 @@ import React from 'react';
 import Landing from './landing';
 import Seasons from './seasons';
 import SeasonalPage from './seasonal-page';
-import Login from './login';
+import Login from './login-page';
 import NavMenu from './nav-menu';
 import RecipePage from './recipe-page';
 import SeasonalRecipePage from './seasonal-recipe-page';
@@ -20,14 +20,6 @@ class App extends React.Component {
       message: null,
       isTesting: true
     };
-  }
-
-  componentDidMount() {
-   // fetch('/api/health-check')
-     // .then(res => res.json())
-     // .then(data => this.setState({ message: data.message || data.error }))
-     // .catch(err => this.setState({ message: err.message }))
-     // .finally(() => this.setState({ isTesting: false }));
   }
 
   render() {
