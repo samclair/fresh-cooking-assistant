@@ -54,7 +54,7 @@ class Login extends React.Component {
               value={this.state.password}
               onChange={this.fieldChange} />
             {invalidUserName}
-            <button className='badge badge-warning white font-weight-bold shadow w-75.'>Log-In</button>
+            <button className='badge badge-warning white font-weight-bold shadow w-75'>Log-In</button>
           </div>
         </form>
       </div>

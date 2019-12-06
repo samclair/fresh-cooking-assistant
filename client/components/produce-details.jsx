@@ -35,7 +35,7 @@ class ProduceDetails extends React.Component {
     let isInSeasonBadge;
     if (this.state.isInSeason) {
       isInSeasonBadge = (
-        <div className="primary-label d-flex align-items-center font-rubik p-2">
+        <div className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
           <i className="fas fa-lg fa-exclamation mx-2" />
 
           <span className='h2 m-0'>In season now</span>
