@@ -59,9 +59,13 @@ function get_produce_seasons($link, $produce_id) {
   mysqli_stmt_bind_param($stmt, 'd', $produce_id);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  if (!mysqli_num_rows($result)) {throw new ApiError('Seasonal data not found', 404); }
+  if (!mysqli_num_rows($result)) {
+    mysqli_stmt_close($stmt);
+    throw new ApiError('Seasonal data not found', 404);
+  }
   $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
   $seasons = [];
   foreach ($data as $season) { $seasons[] = $season['id']; }
+  mysqli_stmt_close($stmt);
   return $seasons;
 }

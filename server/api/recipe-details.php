@@ -53,7 +53,9 @@ function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   mysqli_stmt_bind_param($stmt, 'ss', $ingredient_singular, $ingredient_plural);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  return $result ? $result[0] : false;
+  $data = mysqli_fetch_assoc($result);
+  mysqli_stmt_close($stmt);
+  return $data ? $data[0] : false;
 }
 
 
@@ -91,5 +93,6 @@ function check_if_favorite_recipe($recipe_id) {
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $isFavorite = (mysqli_num_rows($result) > 0);
+  mysqli_stmt_close($stmt);
   return $isFavorite;
 }
