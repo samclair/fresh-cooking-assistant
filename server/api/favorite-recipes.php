@@ -6,9 +6,7 @@ require_once '_api-keys.php';
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $response['body'] = [
-    'favoriteRecipes' => get_all_favorites($link)
-  ];
+  $response['body'] = get_all_favorites($link);
   send($response);
 } elseif ($request['method'] === 'POST') {
   $body_is_valid = isset($request['body']['recipeId']) &&
@@ -65,5 +63,5 @@ function get_all_favorites($link)
   FROM `favoriteRecipes`
   WHERE `favoriteRecipes`.`userId` = {$_SESSION['user_id']}";
   $result = mysqli_query($link, $sql);
-  return mysqli_fetch_assoc($result);
+  return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }

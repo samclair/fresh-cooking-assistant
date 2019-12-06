@@ -6,6 +6,7 @@ import Login from './login-page';
 import NavMenu from './nav-menu';
 import RecipePage from './recipe-page';
 import SeasonalRecipePage from './seasonal-recipe-page';
+import FavoriteRecipes from './favorite-recipe-page';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,6 +31,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/season/:name" component={SeasonalPage} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
+            <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />
             <Route exact path="/recipes" component={SeasonalRecipePage} />
             <Route exact path="/login">

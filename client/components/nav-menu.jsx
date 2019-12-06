@@ -11,7 +11,7 @@ class NavMenu extends React.Component {
 
     };
     this.navElements = null;
-    this.recipesSubnav = ['Seasonal', 'My Starred'];
+    this.recipesSubnav = ['Seasonal', 'Favorites'];
     this.swapView = this.swapView.bind(this);
 
   }
