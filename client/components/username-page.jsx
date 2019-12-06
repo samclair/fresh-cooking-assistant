@@ -6,7 +6,8 @@ class Username extends React.Component {
     super(props);
     this.state = {
       userName: '',
-      isSignedIn: false
+      isSignedIn: false,
+      isInDataBase: true
     };
     this.fieldChange = this.fieldChange.bind(this);
     this.getUser = this.getUser.bind(this);
@@ -17,14 +18,25 @@ class Username extends React.Component {
     e.preventDefault();
     fetch(`/api/log-in?username=${this.state.userName}`)
       .then(res => res.json())
-      .then(// redirect to landing page if successful
-      )
-      .catch(this.setState({ response: true }));
+      .then(response => {
+        this.setState({ isSignedIn: response, isInDataBase: response });
+      })
+      .catch(err => console.error(err));
   }
 
   createUser(e) {
     e.preventDefault();
-    fetch('api/log-in');
+    const reqs = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+
+    };
+    fetch(`api/log-in?username=${this.state.userName}`, reqs)
+      .then(this.setState({ isSignedIn: true }))
+      .catch(err => console.error(err))
+    ;
   }
 
   fieldChange(e) {
@@ -34,6 +46,10 @@ class Username extends React.Component {
   }
 
   render() {
+    let nameNotIn = null;
+    if (!this.state.isInDataBase) {
+      nameNotIn = <h6 className="text-danger text-center">{"That username doesn't exist"}</h6>;
+    }
     if (this.state.isSignedIn) return <Redirect to='/' />;
     const style = {
       backgroundColor: '#13A75F', height: '100vh'
@@ -62,7 +78,8 @@ class Username extends React.Component {
             <button className='badge badge-info white font-weight-bold shadow w-75 lightcoral'>Create an Account</button>
           </div>
         </form>
-        <h6 className='text-center text-muted '>Enter a username to save recipes</h6>
+        <h6 className='text-center text-muted '>Enter a unique username to save recipes</h6>
+        {nameNotIn}
       </div >
     );
   }
