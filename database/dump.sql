@@ -29,7 +29,7 @@ CREATE TABLE `favoriteRecipes` (
   `name` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `favoriteRecipes` (
 
 LOCK TABLES `favoriteRecipes` WRITE;
 /*!40000 ALTER TABLE `favoriteRecipes` DISABLE KEYS */;
+INSERT INTO `favoriteRecipes` VALUES (1,2,1641,'After School Loaded Apple Slices','https://img.buzzfeed.com/thumbnailer-prod-us-east-1/1c047d8c4e264959855aacc2605cfa86/afterschoolsnacks-final.jpg');
 /*!40000 ALTER TABLE `favoriteRecipes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 15:01:28
+-- Dump completed on 2019-12-05 16:01:18

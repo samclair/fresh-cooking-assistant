@@ -71,11 +71,12 @@ function get_recipe_details($id, $api_key){
 
 function check_if_favorite_recipe($recipe_id) {
   $link = get_db_link();
+  $user_id = $_SESSION['user_id'];
   $sql = "
     SELECT `id`
-    FROM `favoriteReciptes`
+    FROM `favoriteRecipes`
     WHERE `recipeId` = $recipe_id
-    AND `userId`
+    AND `userId` = '$user_id'
   ";
   $result = mysqli_query($link, $sql);
   $isFavorite = (mysqli_num_rows($result) > 0);
