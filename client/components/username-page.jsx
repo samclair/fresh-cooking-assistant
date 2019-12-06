@@ -31,12 +31,10 @@ class Username extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       }
-
     };
     fetch(`api/log-in?username=${this.state.userName}`, reqs)
       .then(this.setState({ isSignedIn: true }))
-      .catch(err => console.error(err))
-    ;
+      .catch(err => console.error(err));
   }
 
   fieldChange(e) {
