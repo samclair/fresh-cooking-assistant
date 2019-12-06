@@ -4,7 +4,6 @@ $link = get_db_link();
 
 if ($request['method'] === 'GET') {
   $username = $request['query']['username'];
-  $username = filter_var($username, FILTER_SANITIZE_SPECIAL_CHARS);
   if (!isset($username)) { throw new ApiError('Username required', 400); }
   $user_id = get_user_id($link, $username);
   $_SESSION['user_id'] = $user_id;
@@ -16,11 +15,18 @@ function get_user_id($link, $username) {
   $sql = "
     SELECT `id`
     FROM `users`
-    WHERE `name` = '$username'
+    WHERE `name` = ?
   ";
-  $result = mysqli_query($link, $sql);
-  if (!mysqli_num_rows($result)) { throw new ApiError('User data not found', 404); }
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 's', $username);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if (!mysqli_num_rows($result)) {
+    mysqli_stmt_close($stmt);
+    throw new ApiError('User data not found', 404);
+  }
   $user_data = mysqli_fetch_assoc($result);
   $user_id = $user_data['id'];
+  mysqli_stmt_close($stmt);
   return $user_id;
 }
