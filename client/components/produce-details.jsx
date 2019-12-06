@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ProduceDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       details: {},
-      isInSeason: false
+      isInSeason: false,
+      produceRecipes: []
     };
     this.name = props.match.params.name;
+    this.numOfRecipes = 5;
   }
 
   getProduceData(name) {
@@ -15,6 +18,22 @@ class ProduceDetails extends React.Component {
       .then(result => result.json())
       .then(produce => this.setState({ details: produce.details, isInSeason: produce.isInSeason }))
       .catch(error => console.error(error.message));
+  }
+
+  getProduceRecipes(name) {
+    fetch(`/api/recipe-list?tags=${name}`)
+      .then(result => result.json())
+      .then(produceRecipes => this.setState({ produceRecipes: this.getRandomRecipes(produceRecipes) }))
+      .catch(error => console.error(error.message));
+  }
+
+  getRandomRecipes(recipeList) {
+    const selectedRecipes = [];
+    for (let i = 0; i < this.numOfRecipes; i++) {
+      const randomIndex = Math.floor(Math.random() * recipeList.length);
+      selectedRecipes.push(recipeList.splice(randomIndex, 1)[0]);
+    }
+    return selectedRecipes;
   }
 
   titleCaseName(name) {
@@ -27,20 +46,31 @@ class ProduceDetails extends React.Component {
 
   componentDidMount() {
     this.getProduceData(this.name);
+    this.getProduceRecipes(this.name);
   }
 
   render() {
     const { selection, storage, nutrition, produceImg } = this.state.details;
     const style = { backgroundImage: `url(${produceImg})` };
     let isInSeasonBadge;
+    let recipeCarousel;
     if (this.state.isInSeason) {
       isInSeasonBadge = (
         <div className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
           <i className="fas fa-lg fa-exclamation mx-2" />
-
           <span className='h2 m-0'>In season now</span>
         </div>
       );
+    }
+    if (this.state.produceRecipes) {
+      recipeCarousel = this.state.produceRecipes.map(recipe => {
+        return (
+          <Link key={recipe.id} to={`/recipes/${recipe.id}`} >
+            <div className='d-inline-block mx-1 col-6 h-100'>
+              <img className='featured-produce-image' src={`${recipe.thumbnail}`} alt={`${recipe.name}`} />
+            </div>
+          </Link>);
+      });
     }
     return (
       <div>
@@ -55,6 +85,10 @@ class ProduceDetails extends React.Component {
           <p className='mb-4'>{storage}</p>
           <h2 className="yellow">Nutrition</h2>
           <p className='mb-4'>{nutrition}</p>
+          <h2 className="yellow">Recipes</h2>
+          <div className="seasonal-list mb-4">
+            {recipeCarousel}
+          </div>
         </div>
       </div>
     );
