@@ -59,7 +59,7 @@ function unfavorite_recipe($link,$recipe_id){
 }
 
 function get_all_favorites($link){
-  $sql = "SELECT (`name`, `image`, `recipeId`)
+  $sql = "SELECT `name`, `image`, `recipeId`
   FROM `favoriteRecipes`
   WHERE `favoriteRecipe`.`userId` {$_SESSION['user_id']}";
   $result = mysqli_query($link, $sql);
