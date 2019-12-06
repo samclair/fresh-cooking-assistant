@@ -23,7 +23,10 @@ function get_produce_id($link, $produce_name) {
     FROM `produce`
     WHERE `name` = '$produce_name'
     ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 's', $produce_name);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) {throw new ApiError('Page not found.', 404); }
   $data = mysqli_fetch_assoc($result);
   return $data['id'];
@@ -33,9 +36,12 @@ function get_produce_details($link, $produce_id) {
   $sql = "
     SELECT `name`, `selection`, `storage`, `nutrition`, `produceImg`
     FROM `produce`
-    WHERE `id` = $produce_id
+    WHERE `id` = ?
   ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'd', $produce_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) {throw new ApiError('Produce details not found', 404); }
   $produce = mysqli_fetch_assoc($result);
   return $produce;
@@ -49,7 +55,10 @@ function get_produce_seasons($link, $produce_id) {
       ON `seasons`.`id` = `produceSeasons`.`seasonId`
     WHERE `produceId` = $produce_id
   ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'd', $produce_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) {throw new ApiError('Seasonal data not found', 404); }
   $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
   $seasons = [];

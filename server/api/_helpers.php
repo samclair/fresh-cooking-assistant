@@ -28,9 +28,12 @@ function get_produce_list($link, $season_id) {
     FROM `produce`
     JOIN `produceSeasons`
       ON `produce`.`id` = `produceSeasons`.`produceId`
-    WHERE `seasonId` = $season_id
+    WHERE `seasonId` = ?
     ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'd', $season_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) { $produce = []; }
   else { $produce = mysqli_fetch_all($result, MYSQLI_ASSOC); }
   return $produce;
@@ -40,9 +43,12 @@ function get_season_id($link, $season_name) {
   $sql = "
     SELECT `id`
     FROM `seasons`
-    WHERE `name` = '$season_name'
+    WHERE `name` = ?
   ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 's', $season_name);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) {throw new ApiError('Page not found.', 404); }
   $data = mysqli_fetch_assoc($result);
   return $data['id'];

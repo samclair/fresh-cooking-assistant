@@ -43,11 +43,16 @@ function format_response_body($data){
 
 function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   $link = get_db_link();
-  $sql = "SELECT name
-  FROM `produce`
-  WHERE produce.name = '$ingredient_singular'
-  OR produce.name = '$ingredient_plural'";
-  $result = mysqli_fetch_row(mysqli_query($link,$sql));
+  $sql = "
+    SELECT name
+    FROM `produce`
+    WHERE produce.name = ?
+      OR produce.name = ?
+  ";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'ss', $ingredient_singular, $ingredient_plural);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   return $result ? $result[0] : false;
 }
 
@@ -78,10 +83,13 @@ function check_if_favorite_recipe($recipe_id) {
   $sql = "
     SELECT `id`
     FROM `favoriteRecipes`
-    WHERE `recipeId` = $recipe_id
-    AND `userId` = '$user_id'
+    WHERE `recipeId` = ?
+    AND `userId` = ?
   ";
-  $result = mysqli_query($link, $sql);
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'dd', $recipe_id, $user_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
   $isFavorite = (mysqli_num_rows($result) > 0);
   return $isFavorite;
 }
