@@ -21,7 +21,7 @@ function get_produce_id($link, $produce_name) {
   $sql = "
     SELECT `id`
     FROM `produce`
-    WHERE `name` = '$produce_name'
+    WHERE `name` = ?
     ";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 's', $produce_name);
@@ -53,7 +53,7 @@ function get_produce_seasons($link, $produce_id) {
     FROM `seasons`
     JOIN `produceSeasons`
       ON `seasons`.`id` = `produceSeasons`.`seasonId`
-    WHERE `produceId` = $produce_id
+    WHERE `produceId` = ?
   ";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 'd', $produce_id);
