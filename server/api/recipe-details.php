@@ -28,12 +28,14 @@ function format_response_body($data){
     ]);
   }
   $response = [
-    'id' => $data->id,
-    'image' => $data->thumbnail_url,
-    'name' => $data->name,
-    'servings' => $data->yields,
-    'ingredients' => $ingredient_list,
-    'instructions' => $instruction_list,
+    'details' => [
+      'id' => $data->id,
+      'image' => $data->thumbnail_url,
+      'name' => $data->name,
+      'servings' => $data->yields,
+      'ingredients' => $ingredient_list,
+      'instructions' => $instruction_list,
+    ],
     'isFavorite' => check_if_favorite_recipe($data -> id)
   ];
   return $response;
