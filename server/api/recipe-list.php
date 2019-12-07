@@ -4,7 +4,7 @@ require_once '_api-keys.php';
 require_once '_helpers.php';
 
 if ($request['method'] === 'GET') {
-  $tags = $request['query']['tags'];
+  $tags = str_replace(' ','+',$request['query']['tags']);
   if (!isset($tags)) { throw new ApiError("Search tag required", 400); }
   $results = get_recipe_list($tags, $tasty_api_key);
   $response['body'] = [];
