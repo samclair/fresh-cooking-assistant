@@ -57,8 +57,9 @@ class RecipePage extends React.Component {
       .then(({ isFavorite }) => {
         if (!this.state.isFavorite && !isFavorite) {
           this.setState({ isLoggedIn: false });
+        } else {
+          this.setState({ isFavorite });
         }
-        this.setState({ isFavorite });
       });
   }
 
