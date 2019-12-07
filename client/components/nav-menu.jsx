@@ -28,6 +28,9 @@ class NavMenu extends React.Component {
         <li className='my-2'>
           <Link className='h2' onClick={this.swapView} to='/seasons'>Seasons</Link>
         </li>
+        <li>
+          <Link className='h2' onClick={this.swapView} to='/list'>My List</Link>
+        </li>
         <li className='my-2'>
           <Accordion to='Recipes' close={this.swapView} subElems={this.recipesSubnav} />
         </li>

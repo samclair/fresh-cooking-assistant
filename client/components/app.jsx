@@ -8,6 +8,7 @@ import RecipePage from './recipe-page';
 import SeasonalRecipePage from './seasonal-recipe-page';
 import FavoriteRecipes from './favorite-recipe-page';
 import FourOhFour from './four-oh-four';
+import FreshList from './fresh-list';
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,6 +32,7 @@ class App extends React.Component {
           <NavMenu />
           <Switch>
             <Route exact path="/season/:name" component={SeasonalPage} />
+            <Route exact path="/list" component={FreshList} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />
