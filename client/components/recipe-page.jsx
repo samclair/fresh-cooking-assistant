@@ -1,12 +1,14 @@
 import React from 'react';
 import Ingredient from './ingredient';
+import { Redirect } from 'react-router-dom';
 
 class RecipePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       details: null,
-      isFavorite: false
+      isFavorite: false,
+      isLoggedIn: true
     };
     this.id = props.match.params.id;
     this.setFavorite = this.setFavorite.bind(this);
@@ -52,12 +54,20 @@ class RecipePage extends React.Component {
     }
     fetch('/api/favorite-recipes', reqs)
       .then(res => res.json())
-      .then(this.setState({ isFavorite: !this.state.isFavorite }))
-    ;
+      .then(({ isFavorite }) => {
+        if (!this.state.isFavorite && !isFavorite) {
+          this.setState({ isLoggedIn: false });
+        } else {
+          this.setState({ isFavorite });
+        }
+      });
   }
 
   render() {
     if (!this.state.details) return null;
+    if (!this.state.isLoggedIn) {
+      return <Redirect to='/username'></Redirect>;
+    }
     const favoriteStar = this.state.isFavorite ? <i className="fas fa-star mx-2"></i> : <i className="far fa-star mx-2"></i>;
     const { image, name, servings, ingredients, instructions } = this.state.details;
     const style = { backgroundImage: `url(${image})` };
