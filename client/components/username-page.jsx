@@ -6,8 +6,9 @@ class Username extends React.Component {
     super(props);
     this.state = {
       userName: '',
+      isError: false,
       isSignedIn: false,
-      isInDataBase: true
+      isInDataBase: false
     };
     this.fieldChange = this.fieldChange.bind(this);
     this.getUser = this.getUser.bind(this);
@@ -19,7 +20,11 @@ class Username extends React.Component {
     fetch(`/api/log-in?username=${this.state.userName}`)
       .then(res => res.json())
       .then(response => {
-        this.setState({ isSignedIn: response, isInDataBase: response });
+        if (!response) {
+          this.setState({ isInDataBase: false, isError: true });
+        } else {
+          this.setState({ isSignedIn: true, isInDataBase: true, isError: false });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -33,7 +38,14 @@ class Username extends React.Component {
       }
     };
     fetch(`api/log-in?username=${this.state.userName}`, reqs)
-      .then(this.setState({ isSignedIn: true }))
+      .then(res => res.json())
+      .then(response => {
+        if (response.error) {
+          this.setState({ isInDataBase: true, isError: true });
+        } else {
+          this.setState({ isSignedIn: true, isInDataBase: false, isError: false });
+        }
+      })
       .catch(err => console.error(err));
   }
 
@@ -44,14 +56,18 @@ class Username extends React.Component {
   }
 
   render() {
-    let nameNotIn = null;
-    if (!this.state.isInDataBase) {
-      nameNotIn = <h6 className="text-danger text-center">{"That username doesn't exist"}</h6>;
+    let errorMessage = null;
+    if (!this.state.isInDataBase && this.state.isError) {
+      errorMessage = <h5 className="text-danger font-weight-bold text-center">{"That username doesn't exist"}</h5>;
     }
-    if (this.state.isSignedIn) return <Redirect to='/' />;
+    if (this.state.isInDataBase && this.state.isError) {
+      errorMessage = <h5 className="text-danger font-weight-bold text-center">{'That username already exists'}</h5>;
+    }
+    if (this.state.isSignedIn && !this.state.isError) return <Redirect to='/' />;
     const style = {
       backgroundColor: '#13A75F', height: '100vh'
     };
+
     return (
       <div className="container pt-4 position-fixed" style={style} >
         <div className="pl-4 my-4">
@@ -76,8 +92,8 @@ class Username extends React.Component {
             <button className='badge badge-info white font-weight-bold shadow w-75 lightcoral'>Create an Account</button>
           </div>
         </form>
-        <h6 className='text-center text-muted '>Enter a unique username to save recipes</h6>
-        {nameNotIn}
+        <h6 className='text-center white'>Enter a unique username to save recipes</h6>
+        {errorMessage}
       </div >
     );
   }
