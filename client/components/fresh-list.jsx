@@ -1,5 +1,6 @@
 import React from 'react';
 import Ingredient from './ingredient';
+
 class FreshList extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +55,7 @@ class FreshList extends React.Component {
           </form>
         </div>
       </div>);
+
   }
 }
 
