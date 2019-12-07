@@ -22,7 +22,12 @@ class FavoriteRecipes extends React.Component {
   }
 
   render() {
-    if (!this.state.favoriteRecipes.length) return null;
+    if (!this.state.favoriteRecipes.length) {
+      return (
+        <div className="container">
+          <h1 className="green font-rubik my-4 text-center">{"You don't have any favorited recipes"}</h1>
+        </div>);
+    }
     const favoritedRecipes = this.state.favoriteRecipes.map((recipe, index) => {
       return (
         <div className='d-flex flex-column col-6' key={recipe.recipeId}>
