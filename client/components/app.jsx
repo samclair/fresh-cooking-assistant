@@ -7,6 +7,7 @@ import NavMenu from './nav-menu';
 import RecipePage from './recipe-page';
 import SeasonalRecipePage from './seasonal-recipe-page';
 import FavoriteRecipes from './favorite-recipe-page';
+import FourOhFour from './four-oh-four';
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,15 +35,10 @@ class App extends React.Component {
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />
             <Route exact path="/recipes" component={SeasonalRecipePage} />
-            <Route exact path="/username">
-              <Username />
-            </Route>
-            <Route exact path="/seasons">
-              <Seasons />
-            </Route>
-            <Route exact path="/">
-              <Landing text="Landing Page" />
-            </Route>
+            <Route exact path="/username" component={Username} />
+            <Route exact path="/seasons" component={Seasons} />
+            <Route exact path="/" component={Landing} />
+            <Route path='/*' component={FourOhFour} />
           </Switch>
         </div>
       </Router >

@@ -84,9 +84,9 @@ class RecipePage extends React.Component {
           <p className='text-center font-rubik mb-2'>{servings}</p>
           <p className="yellow font-weight-bold">Ingredients</p>
           <ul className='ingredient-list'>
-            {ingredients.map(item => {
+            {ingredients.map((item, index) => {
               return (
-                <Ingredient key={item.ingredient}
+                <Ingredient key={index}
                   measurement={item.measurement}
                   ingredient={item.ingredient}
                   isInDatabase={item.isInDatabase} />
