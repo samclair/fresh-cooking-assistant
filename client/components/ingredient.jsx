@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Ingredient({ measurement, ingredient, isInDatabase }) {
+function Ingredient({ measurement, isInDatabase }) {
   if (isInDatabase) {
     return (
       <li className="my-3">
-        <Link to={`/produce/${ingredient}`}><u>{measurement}</u></Link>
+        <Link to={`/produce/${isInDatabase.name}`}><u>{measurement}</u></Link>
       </li>
     );
   }

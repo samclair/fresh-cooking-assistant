@@ -58,7 +58,7 @@ function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
   $result = mysqli_stmt_get_result($stmt);
   $data = mysqli_fetch_assoc($result);
   mysqli_stmt_close($stmt);
-  return $data ? $data[0] : false;
+  return $data ? $data : false;
 }
 
 
