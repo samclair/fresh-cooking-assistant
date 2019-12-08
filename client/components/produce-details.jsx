@@ -15,13 +15,22 @@ class ProduceDetails extends React.Component {
     this.saveProduceItem = this.saveProduceItem.bind(this);
   }
 
-  saveProduceItem(event) {
+  saveProduceItem() {
     fetch('/api/fresh-list', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.details.name)
     }).then(response => response.json())
       .then(() => this.setState({ isSaved: true }));
+  }
+
+  deleteSavedProduceItem() {
+    fetch('/api/fresh-list', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.details.name)
+    }).then(response => response.json())
+      .then(() => this.setState({ isSaved: false }));
   }
 
   getProduceData(name) {
@@ -92,7 +101,7 @@ class ProduceDetails extends React.Component {
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
           <div
             className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
-            onClick={this.saveProduceItem}
+            onClick={this.isSaved ? this.saveProduceItem : this.deleteProduceItem}
           >
             {this.isSaved ? 'Saved!' : 'Add to Fresh! List'}
           </div>
