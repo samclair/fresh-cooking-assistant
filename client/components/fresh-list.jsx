@@ -30,7 +30,6 @@ class FreshList extends React.Component {
   }
 
   componentDidMount() {
-    // get list from backend
     // this.getUserList();
   }
 
@@ -38,11 +37,9 @@ class FreshList extends React.Component {
     fetch('/api/fresh-list')
       .then(res => res.json())
       .then(listItems => this.setState({ listItems }));
-    // do the thing
   }
 
   removeProduceItem(itemName) {
-    // send delete request with string
     const req = {
       method: 'DELETE',
       headers: {
@@ -63,7 +60,11 @@ class FreshList extends React.Component {
 
   removeAllProduce(e) {
     e.preventDefault();
-    // send delete request with no body
+    const req = {
+      method: 'DELETE'
+    };
+    fetch('/api/fresh-list', req)
+      .then(this.setState({ listItems: [] }));
   }
 
   render() {
