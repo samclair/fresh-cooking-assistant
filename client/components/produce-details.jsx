@@ -90,7 +90,10 @@ class ProduceDetails extends React.Component {
         </div>
         <div className="container">
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
-          <div className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
+          <div
+            className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
+            onClick={this.saveProduceItem}
+          >
             {this.isSaved ? 'Saved!' : 'Add to Fresh! List'}
           </div>
           <h2 className="yellow">Selection</h2>
