@@ -20,7 +20,7 @@ class ProduceDetails extends React.Component {
     fetch('/api/fresh-list', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.details.name)
+      body: JSON.stringify({ name: this.name })
     }).then(response => response.json())
       .then(() => this.setState({ isSaved: true }));
   }
@@ -29,7 +29,7 @@ class ProduceDetails extends React.Component {
     fetch('/api/fresh-list', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.details.name)
+      body: JSON.stringify({ name: this.name })
     }).then(response => response.json())
       .then(() => this.setState({ isSaved: false }));
   }
@@ -46,6 +46,15 @@ class ProduceDetails extends React.Component {
       .then(result => result.json())
       .then(produceRecipes => this.setState({ produceRecipes: this.getRandomRecipes(produceRecipes) }))
       .catch(error => console.error(error.message));
+  }
+
+  getProduceIsSaved(itemName) {
+    fetch('/api/fresh-list')
+      .then(res => res.json())
+      .then(savedList => {
+        const isSaved = savedList.find(({ name }) => name === itemName);
+        this.setState({ isSaved });
+      });
   }
 
   getRandomRecipes(recipeList) {
@@ -68,6 +77,7 @@ class ProduceDetails extends React.Component {
   componentDidMount() {
     this.getProduceData(this.name);
     this.getProduceRecipes(this.name);
+    this.getProduceIsSaved(this.name);
   }
 
   render() {
@@ -102,9 +112,9 @@ class ProduceDetails extends React.Component {
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
           <div
             className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
-            onClick={this.isSaved ? this.saveProduceItem : this.deleteProduceItem}
+            onClick={!this.state.isSaved ? this.saveProduceItem : this.deleteSavedProduceItem}
           >
-            {this.isSaved ? 'Saved!' : 'Add to Fresh! List'}
+            {this.state.isSaved ? 'Saved!' : 'Add to Fresh! List'}
           </div>
           <h2 className="yellow">Selection</h2>
           <p className='mb-4'>{selection}</p>

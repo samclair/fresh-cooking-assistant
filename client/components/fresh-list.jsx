@@ -24,7 +24,7 @@ class FreshList extends React.Component {
   }
 
   componentDidMount() {
-    // this.getUserList();
+    this.getUserList();
   }
 
   getUserList() {
@@ -62,7 +62,7 @@ class FreshList extends React.Component {
   }
 
   render() {
-    const items = this.state.listItems.map((item, index) => {
+    let items = this.state.listItems.map((item, index) => {
       return (
         <li key={index}>
           <ListItem name={item.name}
@@ -70,7 +70,9 @@ class FreshList extends React.Component {
             onClick={this.removeProduceItem} />
         </li>);
     });
-
+    if (!items.length) {
+      items = <h5 className="green text-center">{"You don't have any saved items"}</h5>;
+    }
     return (
       <div className="container">
         <h1 className="green font-rubik text-center my-4">Fresh List!</h1>
