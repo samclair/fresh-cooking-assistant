@@ -41,27 +41,6 @@ function format_response_body($data){
   return $response;
 };
 
-function ingredient_is_in_database($ingredient_singular, $ingredient_plural) {
-  $link = get_db_link();
-  $sql = "
-    SELECT name
-    FROM `produce`
-    WHERE
-      INSTR(?,`produce`.`name`)
-      OR INSTR(?,`produce`.`name`)
-      OR produce.name = ?
-      OR produce.name = ?
-  ";
-  $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_bind_param($stmt, 'ssss', $ingredient_singular, $ingredient_plural, $ingredient_singular, $ingredient_plural);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  $data = mysqli_fetch_assoc($result);
-  mysqli_stmt_close($stmt);
-  return $data ? $data : false;
-}
-
-
 function get_recipe_details($id, $api_key){
   $curl = curl_init();
   curl_setopt_array($curl, array(
