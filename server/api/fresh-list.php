@@ -25,6 +25,8 @@ if ($request['method'] === 'POST') {
 if ($request['method'] === 'DELETE') {
   if(isset($request['body']['name'])){
   delete_list_item($link, $request['body']['name']);
+  $response['body'] = $request['body']['name'];
+  send($response);
 }
   else{
   $response['body'] = delete_all_list_items($link);
@@ -33,7 +35,14 @@ if ($request['method'] === 'DELETE') {
 }
 
 if ($request['method'] === 'PATCH') {
-  edit_list_item($link, $request['body']);
+  if (!isset($request['body']['name'])) {
+    throw new ApiError('Missing item needed to modify', 400);
+  }
+  $response['body'] =[
+    'name' => $request['body']['name'],
+    'isComplete' => edit_list_item($link, $request['body']['name'])
+  ];
+  send($response);
 }
 
 function get_all_list_items($link){
@@ -81,14 +90,23 @@ function delete_all_list_items($link){
     DELETE FROM `favoriteProduceItems`
     WHERE `favoriteProduceItems`.`userId` = ?";
   $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_bind_param($stmt, 's', $_SESSION['user_id']);
+  mysqli_stmt_bind_param($stmt, 'd', $_SESSION['user_id']);
   mysqli_stmt_execute($stmt);
   mysqli_stmt_close($stmt);
-  return false;
+  return [];
 }
 
 function edit_list_item($link,$item){
-  return;
+  $sql = "
+    UPDATE `favoriteProduceItems`
+    SET isComplete = !isComplete
+    WHERE `name` = ?
+    AND `userId` = ?";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'sd', $_SESSION['user_id']);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+  return false;
 }
 
 function format_fresh_list_response($list_data){
