@@ -77,7 +77,14 @@ function delete_list_item($link,$item){
 }
 
 function delete_all_list_items($link){
-
+  $sql = "
+    DELETE FROM `favoriteProduceItems`
+    WHERE `favoriteProduceItems`.`userId` = ?";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 's', $_SESSION['user_id']);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+  return false;
 }
 
 function edit_list_item($link,$item){
