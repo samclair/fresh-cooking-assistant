@@ -36,7 +36,7 @@ if ($request['method'] === 'DELETE') {
 
 function get_all_list_items($link){
   $sql = "
-    SELECT `name`, `isComplete`
+    SELECT `name`
     FROM `favoriteProduceItems`
     WHERE `favoriteProduceItems`.`userId` = ?";
   $stmt = mysqli_prepare($link, $sql);
@@ -52,9 +52,9 @@ function add_list_item($link,$item){
   $sql = "
     INSERT INTO
     `favoriteProduceItems`
-      (`userId`,`name`,`isComplete`)
+      (`userId`,`name`)
     VALUES
-      (?, ?, false)";
+      (?, ?)";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 'ds', $_SESSION['user_id'],$item);
   mysqli_stmt_execute($stmt);
