@@ -5,15 +5,15 @@ import ListItem from './list-items';
 const dummyArray = [
   {
     details: {
-      name: 'Pzo Squad',
-      isCompleted: true
+      name: 'Pzo Squash',
+      isComplete: true
     },
     isInDatabase: false
   },
   {
     details: {
       name: 'Haney Melons',
-      isCompleted: false
+      isComplete: false
     },
     isInDatabase: true
   }
@@ -41,8 +41,24 @@ class FreshList extends React.Component {
     // do the thing
   }
 
-  removeProduceItem() {
+  removeProduceItem(itemName) {
     // send delete request with string
+    const req = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        name: itemName
+      }
+    };
+    fetch('/api/fresh-list', req)
+      .then(res => res.json())
+      .then(itemName => {
+        const listItems = this.state.listItems
+          .filter(item => item.details.name !== itemName);
+        this.setState({ listItems });
+      });
   }
 
   removeAllProduce(e) {

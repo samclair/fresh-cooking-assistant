@@ -2,18 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function ListItem({ details, isInDatabase, onClick }) {
-  const t = details.isComplete ? 's' : 'r';
-  if (isInDatabase) {
-    return (
-      <div>
-        <i className={`fa${t} fa-circle`}></i> <Link to={`/produce/${details.name}`}><u>{details.name}</u></Link>
-      </div>
-    );
-  }
+  const clicker = () => onClick(details.name);
+  const element = isInDatabase ? <Link to={`/produce/${details.name}`}><u>{details.name}</u></Link> : <span>{details.name}</span>;
   return (
-    <div>
-      <i className={`fa${t} fa-circle`}></i><span className="ml-2">{details.name}</span>
+    <div className="my-2">
+      <i onClick={clicker}
+        className={'far fa-circle mr-3'} />
+      {element}
     </div>
   );
 }
+
 export default ListItem;
