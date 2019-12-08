@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `favoriteProduceItem`
+-- Table structure for table `favoriteProduceItems`
 --
 
-DROP TABLE IF EXISTS `favoriteProduceItem`;
+DROP TABLE IF EXISTS `favoriteProduceItems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `favoriteProduceItem` (
+CREATE TABLE `favoriteProduceItems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `isComplete` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `favoriteProduceItem`
+-- Dumping data for table `favoriteProduceItems`
 --
 
-LOCK TABLES `favoriteProduceItem` WRITE;
-/*!40000 ALTER TABLE `favoriteProduceItem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favoriteProduceItem` ENABLE KEYS */;
+LOCK TABLES `favoriteProduceItems` WRITE;
+/*!40000 ALTER TABLE `favoriteProduceItems` DISABLE KEYS */;
+INSERT INTO `favoriteProduceItems` VALUES (2,2,'tomatoes','2019-12-08 02:08:32');
+/*!40000 ALTER TABLE `favoriteProduceItems` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -181,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-07 17:16:15
+-- Dump completed on 2019-12-07 18:14:22
