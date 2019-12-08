@@ -1,11 +1,29 @@
+
 import React from 'react';
-import Ingredient from './ingredient';
+import ListItem from './list-items';
+
+const dummyArray = [
+  {
+    details: {
+      name: 'Pzo Squad',
+      isCompleted: true
+    },
+    isInDatabase: false
+  },
+  {
+    details: {
+      name: 'Haney Melons',
+      isCompleted: false
+    },
+    isInDatabase: true
+  }
+];
 
 class FreshList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItems: []
+      listItems: dummyArray
     };
     this.removeAllProduce = this.removeAllProduce.bind(this);
     this.removeProduceItem = this.removeProduceItem.bind(this);
@@ -33,14 +51,13 @@ class FreshList extends React.Component {
   }
 
   render() {
-
     const items = this.state.listItems.map((item, index) => {
-
       return (
-        <div key={index}>
-          <i className='far fa-circle' />
-          <Ingredient measurement={item.measurement} isInDatabase={item.isInDatabase} />
-        </div>);
+        <li key={index}>
+          <ListItem details={item.details}
+            isInDatabase={item.isInDatabase}
+            onClick={this.removeProduceItem} />
+        </li>);
     });
 
     return (
@@ -55,7 +72,6 @@ class FreshList extends React.Component {
           </form>
         </div>
       </div>);
-
   }
 }
 
