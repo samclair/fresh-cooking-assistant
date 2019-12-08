@@ -34,17 +34,6 @@ if ($request['method'] === 'DELETE') {
   }
 }
 
-if ($request['method'] === 'PATCH') {
-  if (!isset($request['body']['name'])) {
-    throw new ApiError('Missing item needed to modify', 400);
-  }
-  $response['body'] =[
-    'name' => $request['body']['name'],
-    'isComplete' => edit_list_item($link, $request['body']['name'])
-  ];
-  send($response);
-}
-
 function get_all_list_items($link){
   $sql = "
     SELECT `name`, `isComplete`
@@ -96,25 +85,12 @@ function delete_all_list_items($link){
   return [];
 }
 
-function edit_list_item($link,$item){
-  $sql = "
-    UPDATE `favoriteProduceItems`
-    SET isComplete = !isComplete
-    WHERE `name` = ?
-    AND `userId` = ?";
-  $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_bind_param($stmt, 'sd', $_SESSION['user_id']);
-  mysqli_stmt_execute($stmt);
-  mysqli_stmt_close($stmt);
-  return false;
-}
-
 function format_fresh_list_response($list_data){
   $body = [];
   foreach($list_data as $value){
     $listItem = $value->name;
     array_push($body,[
-      'details'=>$value,
+      'details'=>$value->name,
       'isInDatabase'=>ingredient_is_in_database($listItem,$listItem)
       ]);
   }
