@@ -7,10 +7,31 @@ class ProduceDetails extends React.Component {
     this.state = {
       details: {},
       isInSeason: false,
-      produceRecipes: []
+      produceRecipes: [],
+      isSaved: false
     };
     this.name = props.match.params.name;
     this.numOfRecipes = 5;
+    this.saveProduceItem = this.saveProduceItem.bind(this);
+    this.deleteSavedProduceItem = this.deleteSavedProduceItem.bind(this);
+  }
+
+  saveProduceItem() {
+    fetch('/api/fresh-list', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.details.name)
+    }).then(response => response.json())
+      .then(() => this.setState({ isSaved: true }));
+  }
+
+  deleteSavedProduceItem() {
+    fetch('/api/fresh-list', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.details.name)
+    }).then(response => response.json())
+      .then(() => this.setState({ isSaved: false }));
   }
 
   getProduceData(name) {
@@ -56,7 +77,7 @@ class ProduceDetails extends React.Component {
     let recipeCarousel;
     if (this.state.isInSeason) {
       isInSeasonBadge = (
-        <div className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
+        <div className="primary-label d-flex align-items-center font-rubik mb-4 p-2">
           <i className="fas fa-lg fa-exclamation mx-2" />
           <span className='h2 m-0'>In season now</span>
         </div>
@@ -79,6 +100,12 @@ class ProduceDetails extends React.Component {
         </div>
         <div className="container">
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
+          <div
+            className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
+            onClick={this.isSaved ? this.saveProduceItem : this.deleteProduceItem}
+          >
+            {this.isSaved ? 'Saved!' : 'Add to Fresh! List'}
+          </div>
           <h2 className="yellow">Selection</h2>
           <p className='mb-4'>{selection}</p>
           <h2 className="yellow">Storage</h2>
