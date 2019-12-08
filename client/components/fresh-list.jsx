@@ -4,17 +4,11 @@ import ListItem from './list-items';
 
 const dummyArray = [
   {
-    details: {
-      name: 'Pzo Squash',
-      isComplete: true
-    },
+    name: 'Pzo Squash',
     isInDatabase: false
   },
   {
-    details: {
-      name: 'Haney Melons',
-      isComplete: false
-    },
+    name: 'Haney Melons',
     isInDatabase: true
   }
 ];
@@ -53,7 +47,7 @@ class FreshList extends React.Component {
       .then(res => res.json())
       .then(itemName => {
         const listItems = this.state.listItems
-          .filter(item => item.details.name !== itemName);
+          .filter(item => item.name !== itemName);
         this.setState({ listItems });
       });
   }
@@ -71,7 +65,7 @@ class FreshList extends React.Component {
     const items = this.state.listItems.map((item, index) => {
       return (
         <li key={index}>
-          <ListItem details={item.details}
+          <ListItem name={item.name}
             isInDatabase={item.isInDatabase}
             onClick={this.removeProduceItem} />
         </li>);

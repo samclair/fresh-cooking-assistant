@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function ListItem({ details, isInDatabase, onClick }) {
-  const clicker = () => onClick(details.name);
-  const element = isInDatabase ? <Link to={`/produce/${details.name}`}><u>{details.name}</u></Link> : <span>{details.name}</span>;
+function ListItem({ name, isInDatabase, onClick }) {
+  const clicker = () => onClick(name);
+  const element = isInDatabase ? <Link to={`/produce/${name}`}><u>{name}</u></Link> : <span>{name}</span>;
   return (
     <div className="my-2">
       <i onClick={clicker}
