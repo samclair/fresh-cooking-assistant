@@ -15,16 +15,16 @@ if($request['method'] === 'GET'){
 }
 
 if ($request['method'] === 'POST') {
-  if(!isset($request['body'])){
+  if(!isset($request['body']['name'])){
     throw new ApiError('One or more items needed to add',400);
   }
-  $response['body'] = add_list_item($link, $request['body']);
+  $response['body'] = add_list_item($link, $request['body']['name']);
   send($response);
 }
 
 if ($request['method'] === 'DELETE') {
-  if(isset($request['body'])){
-  delete_list_item($link, $request['body']);
+  if(isset($request['body']['name'])){
+  delete_list_item($link, $request['body']['name']);
 }
   else{
   $response['body'] = delete_all_list_items($link);
@@ -65,7 +65,15 @@ function add_list_item($link,$item){
 }
 
 function delete_list_item($link,$item){
-  return;
+  $sql = "
+    DELETE FROM `favoriteProduceItems`
+    WHERE `favoriteProduceItems`.`name` = ?
+    AND `favoriteProduceItems`.`userId` = ?";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'sd', $item, $_SESSION['user_id']);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+  return false;
 }
 
 function delete_all_list_items($link){
