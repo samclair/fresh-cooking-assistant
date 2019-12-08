@@ -1,5 +1,7 @@
 <?php
 
+require_once '_helpers.php';
+
 $link = get_db_link();
 
 if(!isset($_SESSION['user_id'])){
@@ -7,20 +9,31 @@ if(!isset($_SESSION['user_id'])){
   }
 
 if($request['method'] === 'GET'){
-  $response['body'] = get_all_list_items($link);
+  $list_data = get_all_list_items($link);
+  $response['body'] = format_fresh_list_response($list_data);
   send($response);
 }
 
 if ($request['method'] === 'POST') {
-  add_list_item();
+  if(!isset($request['body'])){
+    throw new ApiError('One or more items needed to add',400);
+  }
+  $response['body'] = add_list_item($link, $request['body']);
+  send($response);
 }
 
 if ($request['method'] === 'DELETE') {
-  delete_list_item();
+  if(isset($request['body'])){
+  delete_list_item($link, $request['body']);
+}
+  else{
+  $response['body'] = delete_all_list_items($link);
+  send($response);
+  }
 }
 
 if ($request['method'] === 'PATCH') {
-  edit_list_item();
+  edit_list_item($link, $request['body']);
 }
 
 function get_all_list_items($link){
@@ -37,14 +50,40 @@ function get_all_list_items($link){
   return $data;
 }
 
-function add_list_item(){
+function add_list_item($link,$item){
+  $sql = "
+    INSERT INTO
+    `favoriteProduceItems`
+      (`userId`,`name`,`isComplete`)
+    VALUES
+      (?, ?, false)";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_bind_param($stmt, 'ds', $_SESSION['user_id'],$item);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+  return true;
+}
+
+function delete_list_item($link,$item){
   return;
 }
 
-function delete_list_item(){
+function delete_all_list_items($link){
+
+}
+
+function edit_list_item($link,$item){
   return;
 }
 
-function edit_list_item(){
-  return;
+function format_fresh_list_response($list_data){
+  $body = [];
+  foreach($list_data as $value){
+    $listItem = $value->name;
+    array_push($body,[
+      'details'=>$value,
+      'isInDatabase'=>ingredient_is_in_database($listItem,$listItem)
+      ]);
+  }
+  return $body;
 }
