@@ -7,10 +7,21 @@ class ProduceDetails extends React.Component {
     this.state = {
       details: {},
       isInSeason: false,
-      produceRecipes: []
+      produceRecipes: [],
+      isSaved: false
     };
     this.name = props.match.params.name;
     this.numOfRecipes = 5;
+    this.saveProduceItem = this.saveProduceItem.bind(this);
+  }
+
+  saveProduceItem(event) {
+    fetch('/api/fresh-list', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.details.name)
+    }).then(response => response.json())
+      .then(() => this.setState({ isSaved: true }));
   }
 
   getProduceData(name) {
@@ -80,7 +91,7 @@ class ProduceDetails extends React.Component {
         <div className="container">
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
           <div className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
-            Add to Fresh! List
+            {this.isSaved ? 'Saved!' : 'Add to Fresh! List'}
           </div>
           <h2 className="yellow">Selection</h2>
           <p className='mb-4'>{selection}</p>
