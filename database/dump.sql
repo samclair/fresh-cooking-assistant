@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `favoriteProduceItem`
+--
+
+DROP TABLE IF EXISTS `favoriteProduceItem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favoriteProduceItem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isComplete` tinyint(1) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoriteProduceItem`
+--
+
+LOCK TABLES `favoriteProduceItem` WRITE;
+/*!40000 ALTER TABLE `favoriteProduceItem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoriteProduceItem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `favoriteRecipes`
 --
 
@@ -29,7 +55,7 @@ CREATE TABLE `favoriteRecipes` (
   `name` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +64,7 @@ CREATE TABLE `favoriteRecipes` (
 
 LOCK TABLES `favoriteRecipes` WRITE;
 /*!40000 ALTER TABLE `favoriteRecipes` DISABLE KEYS */;
+INSERT INTO `favoriteRecipes` VALUES (1,2,1641,'After School Loaded Apple Slices','https://img.buzzfeed.com/thumbnailer-prod-us-east-1/1c047d8c4e264959855aacc2605cfa86/afterschoolsnacks-final.jpg');
 /*!40000 ALTER TABLE `favoriteRecipes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +159,7 @@ CREATE TABLE `users` (
   `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +168,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'OldManjenkins420','2019-12-05 19:55:59');
+INSERT INTO `users` VALUES (1,'OldManjenkins420','2019-12-05 19:55:59'),(2,'APoliteUserName','2019-12-05 19:56:39');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -154,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 15:19:39
+-- Dump completed on 2019-12-07 17:16:15
