@@ -88,10 +88,11 @@ function delete_all_list_items($link){
 function format_fresh_list_response($list_data){
   $body = [];
   foreach($list_data as $value){
-    $listItem = $value->name;
+    $listItem = $value['name'];
+    $redir_str = ingredient_is_in_database($listItem, $listItem);
     array_push($body,[
-      'details'=>$value->name,
-      'isInDatabase'=>ingredient_is_in_database($listItem,$listItem)
+      'name'=>$listItem,
+      'isInDatabase'=> $redir_str ? $redir_str['name'] : false
       ]);
   }
   return $body;
