@@ -13,6 +13,7 @@ class ProduceDetails extends React.Component {
     this.name = props.match.params.name;
     this.numOfRecipes = 5;
     this.saveProduceItem = this.saveProduceItem.bind(this);
+    this.deleteSavedProduceItem = this.deleteSavedProduceItem.bind(this);
   }
 
   saveProduceItem() {
