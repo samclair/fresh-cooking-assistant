@@ -1,23 +1,11 @@
-
 import React from 'react';
 import ListItem from './list-items';
-
-const dummyArray = [
-  {
-    name: 'Pzo Squash',
-    isInDatabase: false
-  },
-  {
-    name: 'Haney Melons',
-    isInDatabase: true
-  }
-];
 
 class FreshList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItems: dummyArray
+      listItems: []
     };
     this.removeAllProduce = this.removeAllProduce.bind(this);
     this.removeProduceItem = this.removeProduceItem.bind(this);
@@ -39,9 +27,7 @@ class FreshList extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: {
-        name: itemName
-      }
+      body: JSON.stringify({ name: itemName })
     };
     fetch('/api/fresh-list', req)
       .then(res => res.json())
