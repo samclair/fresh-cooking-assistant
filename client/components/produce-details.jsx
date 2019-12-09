@@ -94,8 +94,8 @@ class ProduceDetails extends React.Component {
       );
     }
     if (this.state.produceRecipes) {
-      recipeCarousel = this.state.produceRecipes.map((recipe, index) => {
-        return (<RecipeCard key={index} recipe={recipe}/>);
+      recipeCarousel = this.state.produceRecipes.map(recipe => {
+        return (<RecipeCard key={recipe.id} recipe={recipe}/>);
       });
     }
     return (
