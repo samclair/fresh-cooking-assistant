@@ -74,7 +74,7 @@ class RecipePage extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(measurements)
+      body: JSON.stringify({ name: measurements })
     };
     fetch('/api/fresh-list', reqs)
       .then(res => res.json())
