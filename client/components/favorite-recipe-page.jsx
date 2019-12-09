@@ -30,9 +30,9 @@ class FavoriteRecipes extends React.Component {
           </h1>
         </div>);
     }
-    const favoritedRecipes = this.state.favoriteRecipes.map(recipe => {
-      return (<RecipeCard key={recipe.id} recipe={recipe}/>);
-    });
+    const favoritedRecipes = this.state.favoriteRecipes.map(recipe => (
+      <RecipeCard key={recipe.id} recipe={recipe}/>
+    ));
     return (
       <div className="container">
         <h1 className="green font-rubik my-4 text-center">Favorite Recipes</h1>

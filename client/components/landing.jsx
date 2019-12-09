@@ -28,9 +28,9 @@ class Landing extends React.Component {
       .then(data => {
         const recipes = Array.from(data);
         const selectedRecipes = this.getRandomRecipes(recipes);
-        const recipeElems = selectedRecipes.map(recipe => {
-          return (<RecipeCard key={recipe.id} recipe={recipe}/>);
-        });
+        const recipeElems = selectedRecipes.map(recipe => (
+          <RecipeCard key={recipe.id} recipe={recipe}/>
+        ));
         this.setState({ recipeElems });
       });
   }

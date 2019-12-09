@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RecipeCard from './recipe-card';
 
 class SeasonalRecipePage extends React.Component {
   constructor(props) {
@@ -32,24 +32,12 @@ class SeasonalRecipePage extends React.Component {
       return <div>Seasonal Recipes</div>;
     } else {
       const recipeCards = this.state.seasonalRecipes.map(recipe => (
-        <div className='d-flex flex-column col-6' key={recipe.id}>
-          <Link to={`/recipes/${recipe.id}`}>
-            <img
-              className='featured-produce-image shadow-sm'
-              src={recipe.thumbnail}
-              alt={recipe.name}
-            />
-            <p><u>{recipe.name}</u></p>
-          </Link>
-        </div>
+        <RecipeCard key={recipe.id} recipe={recipe}/>
       ));
-
       return (
         <div className='container'>
           <h1 className='green mt-1'>Seasonal Recipes</h1>
-          <div className="row">
-            {recipeCards}
-          </div>
+          <div className="row">{recipeCards}</div>
         </div>
       );
     }
