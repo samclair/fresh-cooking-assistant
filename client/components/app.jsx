@@ -15,6 +15,7 @@ import {
   Route
 } from 'react-router-dom';
 import ProduceDetails from './produce-details';
+import EventsPage from './events-page';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/season/:name" component={SeasonalPage} />
             <Route exact path="/list" component={FreshList} />
+            <Route exact path='/events' component={EventsPage} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />

@@ -7,7 +7,7 @@ class NavMenu extends React.Component {
     super(props);
     this.state = {
       display: false,
-      menuOptions: ['', 'Login', 'Seasons', 'Recipes']
+      menuOptions: ['', 'Login', 'Seasons', 'Recipes', 'Events']
 
     };
     this.navElements = null;
@@ -28,6 +28,9 @@ class NavMenu extends React.Component {
         </li>
         <li className='my-2'>
           <Link className='h2' onClick={this.swapView} to='/seasons'>Seasons</Link>
+        </li>
+        <li className="my-2">
+          <Link className='h2' onClick={this.swapView} to='/events'>Events</Link>
         </li>
         <li className="my-2">
           <Accordion to="My Lists" close={this.swapView} subElems={this.userLists} />
