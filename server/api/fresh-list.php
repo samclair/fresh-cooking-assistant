@@ -18,7 +18,16 @@ if ($request['method'] === 'POST') {
   if(!isset($request['body']['name'])){
     throw new ApiError('One or more items needed to add',400);
   }
-  $response['body'] = add_list_item($link, $request['body']['name']);
+  $item = $request['body']['name'];
+  if(gettype($item)==='array'){
+    foreach ($item as $value){
+      add_list_item($link, $value);
+
+    }
+  } elseif(gettype($item) === 'string'){
+    add_list_item($link, $request['body']['name']);
+  }
+  $response['body'] = true;
   send($response);
 }
 
