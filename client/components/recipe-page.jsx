@@ -8,10 +8,12 @@ class RecipePage extends React.Component {
     this.state = {
       details: null,
       isFavorite: false,
-      isLoggedIn: true
+      isLoggedIn: true,
+      isProduceSaved: false
     };
     this.id = props.match.params.id;
     this.setFavorite = this.setFavorite.bind(this);
+    this.addAllItemsToList = this.addAllItemsToList.bind(this);
   }
 
   getDetails() {
@@ -63,11 +65,34 @@ class RecipePage extends React.Component {
       });
   }
 
+  addAllItemsToList() {
+    const measurements = this.state.details.ingredients.map(ingredient => {
+      return ingredient.measurement;
+    });
+    const reqs = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(measurements)
+    };
+    fetch('/api/fresh-list', reqs)
+      .then(res => res.json())
+      .then(this.setState({ isProduceSaved: true }));
+  }
+
   render() {
     if (!this.state.details) return null;
     if (!this.state.isLoggedIn) {
       return <Redirect to='/username'></Redirect>;
     }
+    const freshListBadge = this.state.isProduceSaved
+      ? <div className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
+        <h5 className='m-0'>{'Added!'}</h5>
+      </div>
+      : <div onClick={this.addAllItemsToList} className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
+        <h5 className='m-0'>{'Add Ingredients to Fresh! List!'}</h5>
+      </div>;
     const favoriteStar = this.state.isFavorite ? <i className="fas fa-star mx-2"></i> : <i className="far fa-star mx-2"></i>;
     const { image, name, servings, ingredients, instructions } = this.state.details;
     const style = { backgroundImage: `url(${image})` };
@@ -93,6 +118,7 @@ class RecipePage extends React.Component {
               );
             })}
           </ul>
+          {freshListBadge}
           <div className="yellow font-weight-bold">Directions</div>
           <ol>
             {instructions.map(line => {
