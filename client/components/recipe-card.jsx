@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function RecipeCard(props) {
   return (
-    <div className='d-inline-block col-6' key={props.recipe.id}>
+    <div className='d-inline-block col-6'>
       <Link to={`/recipes/${props.recipe.id}`}>
         <img
           className='featured-produce-image shadow-sm'
