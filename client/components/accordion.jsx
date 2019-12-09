@@ -11,8 +11,10 @@ class Accordion extends React.Component {
       let linkName = null;
       if (element === 'Seasonal') {
         linkName = '/recipes';
-      } else if (element === 'Favorites') {
+      } else if (element === 'Favorites' || element === 'Recipes') {
         linkName = '/recipes/favorites';
+      } else if (element === 'Fresh! List') {
+        linkName = '/list';
       } else {
         linkName = element;
       }
