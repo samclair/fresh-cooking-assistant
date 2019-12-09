@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RecipeCard from './recipe-card';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Landing extends React.Component {
       currentSeason: null,
       recipeElems: []
     };
-    this.numOfRecipes = 5;
+    this.numOfRecipes = 10;
   }
 
   getCurrentSeason() {
@@ -27,15 +28,9 @@ class Landing extends React.Component {
       .then(data => {
         const recipes = Array.from(data);
         const selectedRecipes = this.getRandomRecipes(recipes);
-        const recipeElems = selectedRecipes.map(recipe => {
-          return (
-            <Link key={recipe.id} to={`./recipes/${recipe.id}`} >
-              <div className='d-inline-block mx-1 col-6 h-100'>
-                <img className='featured-produce-image' src={`${recipe.thumbnail}`} alt={`${recipe.name}`} />
-              </div>
-            </Link>
-          );
-        });
+        const recipeElems = selectedRecipes.map(recipe => (
+          <RecipeCard key={recipe.id} recipe={recipe}/>
+        ));
         this.setState({ recipeElems });
       });
   }
@@ -62,16 +57,9 @@ class Landing extends React.Component {
         <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
           <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
         </Link>
-        <div className="container">
+        <div className="container mt-4">
           <h3 className="yellow text-left">featured recipes</h3>
-          <div className="seasonal-list">
-            {this.state.recipeElems}
-            {/* <Link to={'/recipes/1'} > <div className="seasonal-recipe mx-2 col-5 h-100 list1">Recipe1</div></Link>
-            <Link to={'/recipes/2'} > <div className="seasonal-recipe mx-2 col-5 h-100 list2">Recipe2</div></Link>
-            <Link to={'/recipes/3'} > <div className="seasonal-recipe mx-2 col-5 h-100 list3">Recipe3</div></Link>
-            <Link to={'/recipes/4'} > <div className="seasonal-recipe mx-2 col-5 h-100 list4">Recipe4</div></Link>
-            <Link to={'/recipes/5'} > <div className="seasonal-recipe mx-2 col-5 h-100 list5">Recipe5</div></Link> */}
-          </div>
+          {this.state.recipeElems}
         </div>
       </div>
     );

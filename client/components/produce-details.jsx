@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RecipeCard from './recipe-card';
 
 class ProduceDetails extends React.Component {
   constructor(props) {
@@ -94,14 +94,9 @@ class ProduceDetails extends React.Component {
       );
     }
     if (this.state.produceRecipes) {
-      recipeCarousel = this.state.produceRecipes.map(recipe => {
-        return (
-          <Link key={recipe.id} to={`/recipes/${recipe.id}`} >
-            <div className='d-inline-block mx-1 col-6 h-100'>
-              <img className='featured-produce-image' src={`${recipe.thumbnail}`} alt={`${recipe.name}`} />
-            </div>
-          </Link>);
-      });
+      recipeCarousel = this.state.produceRecipes.map(recipe => (
+        <RecipeCard key={recipe.id} recipe={recipe}/>
+      ));
     }
     return (
       <div>
@@ -123,9 +118,7 @@ class ProduceDetails extends React.Component {
           <h2 className="yellow">Nutrition</h2>
           <p className='mb-4'>{nutrition}</p>
           <h2 className="yellow">Recipes</h2>
-          <div className="seasonal-list mb-4">
-            {recipeCarousel}
-          </div>
+          <div className="seasonal-list mb-4">{recipeCarousel}</div>
         </div>
       </div>
     );
