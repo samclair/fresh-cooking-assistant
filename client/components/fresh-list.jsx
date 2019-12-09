@@ -1,5 +1,5 @@
 import React from 'react';
-import Ingredient from './ingredient';
+import ListItem from './list-items';
 
 class FreshList extends React.Component {
   constructor(props) {
@@ -12,37 +12,53 @@ class FreshList extends React.Component {
   }
 
   componentDidMount() {
-    // get list from backend
-    // this.getUserList();
+    this.getUserList();
   }
 
   getUserList() {
     fetch('/api/fresh-list')
       .then(res => res.json())
       .then(listItems => this.setState({ listItems }));
-    // do the thing
   }
 
-  removeProduceItem() {
-    // send delete request with string
+  removeProduceItem(itemName) {
+    const req = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: itemName })
+    };
+    fetch('/api/fresh-list', req)
+      .then(res => res.json())
+      .then(itemName => {
+        const listItems = this.state.listItems
+          .filter(item => item.name !== itemName);
+        this.setState({ listItems });
+      });
   }
 
   removeAllProduce(e) {
     e.preventDefault();
-    // send delete request with no body
+    const req = {
+      method: 'DELETE'
+    };
+    fetch('/api/fresh-list', req)
+      .then(this.setState({ listItems: [] }));
   }
 
   render() {
-
-    const items = this.state.listItems.map((item, index) => {
-
+    let items = this.state.listItems.map((item, index) => {
       return (
-        <div key={index}>
-          <i className='far fa-circle' />
-          <Ingredient measurement={item.measurement} isInDatabase={item.isInDatabase} />
-        </div>);
+        <li key={index}>
+          <ListItem name={item.name}
+            isInDatabase={item.isInDatabase}
+            onClick={this.removeProduceItem} />
+        </li>);
     });
-
+    if (!items.length) {
+      items = <h5 className="green text-center">{"You don't have any saved items"}</h5>;
+    }
     return (
       <div className="container">
         <h1 className="green font-rubik text-center my-4">Fresh List!</h1>
@@ -55,7 +71,6 @@ class FreshList extends React.Component {
           </form>
         </div>
       </div>);
-
   }
 }
 
