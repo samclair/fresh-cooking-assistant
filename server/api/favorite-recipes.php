@@ -16,7 +16,7 @@ if ($request['method'] === 'GET') {
     throw new ApiError("Missing field from request body", 400);
   }
   $response['body'] = [
-    'recipeId' => $request['body']['recipeId'],
+    'id' => $request['body']['recipeId'],
     'isFavorite' => add_favorite_recipe(
       $link,
       $request['body']['recipeId'],
@@ -30,7 +30,7 @@ if ($request['method'] === 'GET') {
     throw new ApiError("Recipe Id is required");
   }
   $response['body'] = [
-    'recipeId' => $request['body']['recipeId'],
+    'id' => $request['body']['recipeId'],
     'isFavorite' => unfavorite_recipe($link, $request['body']['recipeId'])
   ];
   send($response);
@@ -67,7 +67,7 @@ function unfavorite_recipe($link, $recipe_id){
 
 function get_all_favorites($link){
   $sql = "
-    SELECT `name`, `image`, `recipeId`
+    SELECT `name`, `image`, `recipeId` AS `id`
     FROM `favoriteRecipes`
     WHERE `favoriteRecipes`.`userId` = ?";
   $stmt = mysqli_prepare($link, $sql);

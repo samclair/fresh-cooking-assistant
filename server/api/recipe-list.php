@@ -12,7 +12,7 @@ if ($request['method'] === 'GET') {
     array_push($response['body'], [
       'id' => $recipe -> id,
       'name' => $recipe -> name,
-      'thumbnail' => $recipe -> thumbnail_url
+      'image' => $recipe -> thumbnail_url
     ]);
   }
   send($response);
