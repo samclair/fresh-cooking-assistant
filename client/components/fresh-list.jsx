@@ -57,11 +57,11 @@ class FreshList extends React.Component {
         </li>);
     });
     if (!items.length) {
-      items = <h5 className="green text-center">{"You don't have any saved items"}</h5>;
+      items = <h5 className="green text-center mr-4">{"You don't have any saved items"}</h5>;
     }
     return (
       <div className="container">
-        <h1 className="green font-rubik text-center my-4">Fresh List!</h1>
+        <h1 className="green font-rubik text-center my-4">Fresh! List</h1>
         <div className="d-flex flex-column">
           <ul>{items}</ul>
           <form className="align-self-center" onSubmit={this.removeAllProduce}>
