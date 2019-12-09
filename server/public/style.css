@@ -54,7 +54,6 @@ ul {
 }
 
 .seasonal-list {
-  height:150px;
   overflow-x:auto;
   white-space: nowrap;
 }

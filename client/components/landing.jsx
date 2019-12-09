@@ -64,14 +64,7 @@ class Landing extends React.Component {
         </Link>
         <div className="container">
           <h3 className="yellow text-left">featured recipes</h3>
-          <div className="seasonal-list">
-            {this.state.recipeElems}
-            {/* <Link to={'/recipes/1'} > <div className="seasonal-recipe mx-2 col-5 h-100 list1">Recipe1</div></Link>
-            <Link to={'/recipes/2'} > <div className="seasonal-recipe mx-2 col-5 h-100 list2">Recipe2</div></Link>
-            <Link to={'/recipes/3'} > <div className="seasonal-recipe mx-2 col-5 h-100 list3">Recipe3</div></Link>
-            <Link to={'/recipes/4'} > <div className="seasonal-recipe mx-2 col-5 h-100 list4">Recipe4</div></Link>
-            <Link to={'/recipes/5'} > <div className="seasonal-recipe mx-2 col-5 h-100 list5">Recipe5</div></Link> */}
-          </div>
+          <div className="seasonal-list">{this.state.recipeElems}</div>
         </div>
       </div>
     );
