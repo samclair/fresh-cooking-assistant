@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class SeasonalPage extends React.Component {
+class SeasonalProducePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,4 +83,4 @@ class SeasonalPage extends React.Component {
   }
 }
 
-export default SeasonalPage;
+export default SeasonalProducePage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Landing from './landing';
 import Seasons from './seasons';
-import SeasonalPage from './seasonal-page';
+import SeasonalProducePage from './seasonal-produce-page';
 import Username from './username-page';
 import NavMenu from './nav-menu';
 import RecipePage from './recipe-page';
@@ -31,7 +31,7 @@ class App extends React.Component {
         <div>
           <NavMenu />
           <Switch>
-            <Route exact path="/season/:name" component={SeasonalPage} />
+            <Route exact path="/season/:name" component={SeasonalProducePage} />
             <Route exact path="/list" component={FreshList} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
