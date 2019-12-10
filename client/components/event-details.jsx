@@ -34,13 +34,18 @@ class EventDetails extends React.Component {
   }
 
   render() {
-    if (!this.state.eventDetails) { return <h1>Event ID: {this.id}</h1>; }
+    if (!this.state.eventDetails) { return null; }
     const name = this.state.eventDetails.name;
     const openingHours = this.state.eventDetails.opening_hours;
     const formattedAddress = this.state.eventDetails.formatted_address;
-    const avalibilityStrings = openingHours.weekday_text.filter(dayString => {
-      return !dayString.includes('Closed');
-    });
+    let avalibilityStrings;
+    if (openingHours) {
+      avalibilityStrings = openingHours.weekday_text.filter(dayString => {
+        return !dayString.includes('Closed');
+      });
+    } else {
+      avalibilityStrings = ['Open Hours Not Available'];
+    }
     const avalibility = avalibilityStrings.map((day, index) => {
       return (<p key={index}>{day}</p>);
     }
