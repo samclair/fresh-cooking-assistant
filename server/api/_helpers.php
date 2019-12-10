@@ -31,11 +31,29 @@ function get_produce_list($link, $season_id) {
     WHERE `seasonId` = ?
     ";
   $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_bind_param($stmt, 'd', $season_id);
+  mysqli_stmt_bind_param($stmt, 's', $season_id);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   if (!mysqli_num_rows($result)) { $produce = []; }
   else { $produce = mysqli_fetch_all($result, MYSQLI_ASSOC); }
+  mysqli_stmt_close($stmt);
+  return $produce;
+}
+
+function get_all_produce($link)
+{
+  $sql = "
+    SELECT DISTINCT `id`, `name`, `produceImg`
+    FROM `produce`
+    ";
+  $stmt = mysqli_prepare($link, $sql);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if (!mysqli_num_rows($result)) {
+    $produce = [];
+  } else {
+    $produce = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  }
   mysqli_stmt_close($stmt);
   return $produce;
 }

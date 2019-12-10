@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RecipeCard from './recipe-card';
+import Badge from './badge';
 
 class ProduceDetails extends React.Component {
   constructor(props) {
@@ -86,27 +87,17 @@ class ProduceDetails extends React.Component {
     let isInSeasonBadge;
     let recipeCarousel;
     if (this.state.isInSeason) {
-      isInSeasonBadge = (
-        <div className="primary-label d-flex align-items-center font-rubik mb-4 p-2">
-          <i className="fas fa-lg fa-exclamation mx-2" />
-          <span className='h2 m-0'>In season now</span>
-        </div>
-      );
+      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation'/>);
     }
     if (this.state.produceRecipes) {
-      recipeCarousel = this.state.produceRecipes.map(recipe => {
-        return (
-          <Link key={recipe.id} to={`/recipes/${recipe.id}`} >
-            <div className='d-inline-block mx-1 col-6 h-100'>
-              <img className='featured-produce-image' src={`${recipe.thumbnail}`} alt={`${recipe.name}`} />
-            </div>
-          </Link>);
-      });
+      recipeCarousel = this.state.produceRecipes.map(recipe => (
+        <RecipeCard key={recipe.id} recipe={recipe}/>
+      ));
     }
     return (
       <div>
-        <div style={style} className="header d-flex align-items-end justify-content-center">
-          {isInSeasonBadge}
+        <div style={style} className="header d-flex justify-content-center">
+          <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
         <div className="container">
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
@@ -123,9 +114,7 @@ class ProduceDetails extends React.Component {
           <h2 className="yellow">Nutrition</h2>
           <p className='mb-4'>{nutrition}</p>
           <h2 className="yellow">Recipes</h2>
-          <div className="seasonal-list mb-4">
-            {recipeCarousel}
-          </div>
+          <div className="seasonal-list mb-4">{recipeCarousel}</div>
         </div>
       </div>
     );

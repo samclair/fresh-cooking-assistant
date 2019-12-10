@@ -11,8 +11,12 @@ class Accordion extends React.Component {
       let linkName = null;
       if (element === 'Seasonal') {
         linkName = '/recipes';
-      } else if (element === 'Favorites') {
+      } else if (element === 'Favorites' || element === 'Recipes') {
         linkName = '/recipes/favorites';
+      } else if (element === 'Fresh! List') {
+        linkName = '/list';
+      } else if (element === 'All Produce') {
+        linkName = '/produce';
       } else {
         linkName = element;
       }
@@ -37,7 +41,7 @@ class Accordion extends React.Component {
     if (this.state.expand) {
       return (
         <div onClick={this.expand}>
-          <h2>{this.camelCase(this.linkName)}</h2>
+          <h2><i className="mr-2 fas fa-sm fa-arrow-circle-up green" />{this.camelCase(this.linkName)}</h2>
           <ul>
             {this.subNavElems}
           </ul>
@@ -46,7 +50,7 @@ class Accordion extends React.Component {
     } else {
       return (
         <div onClick={this.expand}>
-          <h2>{this.camelCase(this.linkName)}</h2>
+          <h2><i className="mr-2 fas fa-sm fa-arrow-circle-down green" />{this.camelCase(this.linkName)}</h2>
         </div >);
     }
 

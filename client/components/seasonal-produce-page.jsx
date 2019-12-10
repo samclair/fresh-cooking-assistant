@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Badge from './badge';
 
-class SeasonalPage extends React.Component {
+class SeasonalProducePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,12 +42,7 @@ class SeasonalPage extends React.Component {
     let featuredElems;
     let isInSeasonBadge;
     if (this.state.isCurrentSeason) {
-      isInSeasonBadge = (
-        <div className="primary-label d-flex align-items-center font-rubik p-2">
-          <i className="fas fa-lg fa-exclamation mx-2" />
-          <span className='h2 m-0'>In season now</span>
-        </div>
-      );
+      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation'/>);
     }
     if (this.state.produceList.length) {
       produceElems = this.state.produceList.map(produce => (
@@ -83,4 +79,4 @@ class SeasonalPage extends React.Component {
   }
 }
 
-export default SeasonalPage;
+export default SeasonalProducePage;

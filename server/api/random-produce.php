@@ -4,10 +4,13 @@ include_once '_helpers.php';
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $season_name = $request['query']['seasonName'];
-  if (!isset($season_name)) { $season_id = 'ANY (SELECT `id` FROM `seasons`)'; }
-  else { $season_id = get_season_id($link, $request['query']['seasonName']); }
-  $produce_list = get_produce_list($link, $season_id);
+  if (!isset($request['query']['seasonName'])) {
+    $produce_list = get_all_produce($link);
+  }
+  else {
+    $season_id = get_season_id($link, $request['query']['seasonName']);
+    $produce_list = get_produce_list($link, $season_id);
+  }
   $random_list = [];
   $count = intval($request['query']['randCount']);
   if (!isset($count) || $count === 0) { $count = 1; }
