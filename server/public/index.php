@@ -4,6 +4,7 @@ require_once '../api/_lifecycle.php';
 switch ($request['path']) {
   case '/api/log-in':
   case '/api/seasons':
+  case '/api/maps-list':
   case '/api/fresh-list':
   case '/api/recipe-list':
   case '/api/health-check':
