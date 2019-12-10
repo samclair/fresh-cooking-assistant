@@ -27,11 +27,11 @@ class NavMenu extends React.Component {
         <li className='my-2'>
           <Link className='h2' onClick={this.swapView} to='/username'>Login</Link>
         </li>
-        <li className='my-2'>
-          <Accordion to="Produce" close={this.swapView} subElems={this.produceSubnav}/>
-        </li>
         <li className="my-2">
           <Link className='h2' onClick={this.swapView} to='/events'>Events</Link>
+        </li>
+        <li className='my-2'>
+          <Accordion to="Produce" close={this.swapView} subElems={this.produceSubnav} />
         </li>
         <li className="my-2">
           <Accordion to="My Lists" close={this.swapView} subElems={this.userLists} />

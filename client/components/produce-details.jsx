@@ -87,12 +87,13 @@ class ProduceDetails extends React.Component {
     let isInSeasonBadge;
     let recipeCarousel;
     if (this.state.isInSeason) {
-      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation'/>);
+      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation' />);
     }
-    if (this.state.produceRecipes) {
-      recipeCarousel = this.state.produceRecipes.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe}/>
-      ));
+    if (this.state.produceRecipes.length) {
+      recipeCarousel = this.state.produceRecipes.map(recipe => {
+        return < RecipeCard key={recipe.id} recipe={recipe} />;
+      }
+      );
     }
     return (
       <div>
