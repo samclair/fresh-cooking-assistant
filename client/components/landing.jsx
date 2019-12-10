@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './recipe-card';
+import Badge from './badge';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Landing extends React.Component {
         const recipes = Array.from(data);
         const selectedRecipes = this.getRandomRecipes(recipes);
         const recipeElems = selectedRecipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe}/>
+          <RecipeCard className='seasonal-recipe' key={recipe.id} recipe={recipe} />
         ));
         this.setState({ recipeElems });
       });
@@ -53,13 +54,22 @@ class Landing extends React.Component {
     if (!this.state.currentSeason) { return null; }
     return (
       <div className='text-right'>
-        <div className="header mb-2" style={style}/>
+        <div className="header mb-2" style={style} />
         <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
           <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
         </Link>
         <div className="container mt-4">
           <h3 className="yellow text-left">featured recipes</h3>
-          {this.state.recipeElems}
+          <div className="seasonal-list">
+            {this.state.recipeElems}
+          </div>
+          <h3 className="yellow text-left">featured markets</h3>
+          <div className="seasonal-list">
+            {this.events}
+          </div>
+          <Link to={'/events'}>
+            <Badge faClass="fas fa-carrot" message={'Find Local Markets!'} />
+          </Link>
         </div>
       </div>
     );
