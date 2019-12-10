@@ -18,10 +18,10 @@ class EventsPage extends React.Component {
   }
 
   getNearbyEvents(position) {
-    // const location = '' + position.coords.latitude + ',' + position.coords.longitude;
-    // fetch(`/api/maps-list?location=${location}`)
-    //   .then(res => res.json())
-    //   .then(events => this.setState({ events }));
+    const location = '' + position.coords.latitude + ',' + position.coords.longitude;
+    fetch(`/api/maps-list?location=${location}`)
+      .then(res => res.json())
+      .then(events => this.setState({ events }));
   }
 
   getLocationThenEvents() {

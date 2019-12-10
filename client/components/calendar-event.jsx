@@ -8,7 +8,7 @@ function CalendarEvent({ info, onClick, number }) {
         {number}
       </h5>
       <h6>{info.name}</h6>
-      <h6>{'Address'}</h6>
+      <h6>{info.address}</h6>
     </div>
   );
 }
