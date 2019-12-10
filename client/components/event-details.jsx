@@ -29,8 +29,8 @@ class EventDetails extends React.Component {
     const avalibilityStrings = openingHours.weekday_text.filter(dayString => {
       return !dayString.includes('Closed');
     });
-    const avalibilityString = avalibilityStrings.reduce((acc, day) => acc + day + ',', '');
-    fetch(`api/maps-calendar?text=${name}&details=FarmersMarket&location=${formattedAddress}&dates=${avalibilityString}`);
+    const firstAvalibility = avalibilityStrings[0];
+    fetch(`api/maps-calendar?text=${name}&details=FarmersMarket&location=${formattedAddress}&date=${firstAvalibility}`);
   }
 
   render() {
@@ -46,12 +46,15 @@ class EventDetails extends React.Component {
     }
     );
     return (
-      <div>
-        <h2 className="primary-label text-center">{name}</h2>
+      < div >
+        <h2 className="primary-label mb-0 text-center">{name}</h2>
+        <div className="header mt-0 d-flex farmers-market justify-content-center" />
         <div className="container">
-          <h3 onClick={this.addToCalendar} className="yellow my-4"><u>+ add to calendar</u></h3>
-          <h5><u><a href={`http://maps.google.com/?q=${name}`}>{formattedAddress}</a></u></h5>
-          <h5 className="my-4">{avalibility}</h5>
+          <h2 className="mt-3 green text-center">Address</h2>
+          <h5><u><a href={`http://maps.google.com/?q=${formattedAddress}`}>{formattedAddress}</a></u></h5>
+          <h2 className="mt-3 green text-center">Avalibility</h2>
+          <h4 onClick={this.addToCalendar} className="yellow"><u>+ add to calendar</u></h4>
+          <h5 className="my-2">{avalibility}</h5>
         </div >
       </div>);
   }
