@@ -9,7 +9,6 @@ class EventsPage extends React.Component {
       eventDetails: null,
       hasClicked: false
     };
-    this.getSingleEventInfo = this.getSingleEventInfo.bind(this);
     this.getNearbyEvents = this.getNearbyEvents.bind(this);
   }
 
@@ -30,7 +29,7 @@ class EventsPage extends React.Component {
 
   render() {
     const calendarEvents = this.state.events.map((event, index) => {
-      return <CalendarEvent onClick={this.getSingleEventInfo} number={index + 1} info={event} key={index} />;
+      return <CalendarEvent number={index + 1} info={event} key={index} />;
     });
     return (
       <div>
