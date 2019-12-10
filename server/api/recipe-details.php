@@ -25,12 +25,18 @@ function format_response_body($data){
     foreach ($section->components as $ingredient){
     $ingredient_singular = $ingredient->ingredient->display_singular;
     $ingredient_plural = $ingredient->ingredient->display_plural;
+    $measurement_string = '';
+    if($ingredient->raw_text === 'n/a'){
+      $measurement_string = format_measurement_string($ingredient, $ingredient_singular, $ingredient_plural);
+    } else {
+      $measurement_string = $ingredient->raw_text;
+    }
     array_push($ingredient_list, [
-      'measurement'=>$ingredient->raw_text,
+      'measurement'=>$measurement_string,
       'ingredient'=>$ingredient_singular,
       'isInDatabase' => ingredient_is_in_database($ingredient_singular, $ingredient_plural)
     ]);
-    array_push($all_ingredients, $ingredient->raw_text);
+    array_push($all_ingredients, $measurement_string);
       $newSection['ingredients']=$ingredient_list;
   }
   array_push($sections, $newSection);
@@ -86,4 +92,19 @@ function check_if_favorite_recipe($recipe_id) {
   $isFavorite = (mysqli_num_rows($result) > 0);
   mysqli_stmt_close($stmt);
   return $isFavorite;
+}
+
+function format_measurement_string($ingredient,$ingredient_singular, $ingredient_plural){
+  $measurement = $ingredient->measurements[0];
+  $ingredient_quantity = $measurement->quantity !== '0' ?
+    $measurement->quantity
+    : '';
+  $measurement_unit = $ingredient_quantity < 1 ?
+    $measurement->unit->display_singular :
+    $measurement->unit->display_plural;
+  $extra_comment = $ingredient->extra_comment;
+  $ingredient_name = $measurement_unit || $ingredient_quantity < 1 ?
+    $ingredient_singular
+    : $ingredient_plural;
+  return "$ingredient_quantity $measurement_unit $ingredient_name $extra_comment";
 }
