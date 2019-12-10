@@ -9,7 +9,8 @@ class RecipePage extends React.Component {
       details: null,
       isFavorite: false,
       isLoggedIn: true,
-      isProduceSaved: false
+      isProduceSaved: false,
+      ingredientList: []
     };
     this.id = props.match.params.id;
     this.setFavorite = this.setFavorite.bind(this);
@@ -19,8 +20,8 @@ class RecipePage extends React.Component {
   getDetails() {
     fetch(`/api/recipe-details?recipeId=${this.id}`)
       .then(res => res.json())
-      .then(({ details, isFavorite }) => {
-        this.setState({ details, isFavorite });
+      .then(({ details, isFavorite, allIngredients }) => {
+        this.setState({ details, isFavorite, allIngredients });
       })
       .catch(error => console.error(error.message));
   }
@@ -66,15 +67,12 @@ class RecipePage extends React.Component {
   }
 
   addAllItemsToList() {
-    const measurements = this.state.details.ingredients.map(ingredient => {
-      return ingredient.measurement;
-    });
     const reqs = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name: measurements })
+      body: JSON.stringify({ name: this.state.allIngredients })
     };
     fetch('/api/fresh-list', reqs)
       .then(res => res.json())
@@ -94,7 +92,7 @@ class RecipePage extends React.Component {
         <h5 className='m-0'>{'Add Ingredients to Fresh! List!'}</h5>
       </div>;
     const favoriteStar = this.state.isFavorite ? <i className="fas fa-star mx-2"></i> : <i className="far fa-star mx-2"></i>;
-    const { image, name, servings, ingredients, instructions } = this.state.details;
+    const { image, name, servings, sections, instructions } = this.state.details;
     const style = { backgroundImage: `url(${image})` };
     return (
       <div>
@@ -108,16 +106,23 @@ class RecipePage extends React.Component {
           <p className='green text-center font-rubik my-3'>{name}</p>
           <p className='text-center font-rubik mb-2'>{servings}</p>
           <p className="yellow font-weight-bold">Ingredients</p>
-          <ul className='ingredient-list'>
-            {ingredients.map((item, index) => {
-              return (
-                <Ingredient key={index}
-                  measurement={item.measurement}
-                  ingredient={item.ingredient}
-                  isInDatabase={item.isInDatabase} />
-              );
-            })}
-          </ul>
+          {sections.map((section, index) => {
+            return (
+              <div key= { index }>
+                <p className= 'text-center green mt-3 font-weight-bold'>{section.name ? section.name : null}</p>
+                <ul className='ingredient-list'>
+                  {section.ingredients.map((item, index) => {
+                    return (
+                      <Ingredient key={index}
+                        measurement={item.measurement}
+                        ingredient={item.ingredient}
+                        isInDatabase={item.isInDatabase} />
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
           {freshListBadge}
           <div className="yellow font-weight-bold">Directions</div>
           <ol>
