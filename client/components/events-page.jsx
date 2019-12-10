@@ -7,7 +7,9 @@ class EventsPage extends React.Component {
     this.state = {
       events: [],
       eventDetails: null,
-      hasClicked: false
+      hasClicked: false,
+      timeout: 30000
+
     };
     this.getNearbyEvents = this.getNearbyEvents.bind(this);
   }
@@ -20,7 +22,7 @@ class EventsPage extends React.Component {
   }
 
   getLocationThenEvents() {
-    navigator.geolocation.getCurrentPosition(this.getNearbyEvents);
+    navigator.geolocation.getCurrentPosition(this.getNearbyEvents, () => { }, { timeout: this.state.timeout });
   }
 
   componentDidMount() {
@@ -33,7 +35,6 @@ class EventsPage extends React.Component {
     });
     return (
       <div>
-        {/* <h6 className="text-center green">Map goes here</h6> */}
         <div className='container'>
           <h1 className="green text-center">{"Farmer's Markets"}</h1>
         </div>
