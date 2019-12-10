@@ -10,6 +10,7 @@ if ($request['method'] === "GET") {
   $response['body'] = [];
   foreach ($data -> results as $place) {
     array_push($response['body'], [
+      'placeId' => $place -> place_id,
       'name' => $place -> name,
       'address' => $place -> vicinity
     ]);
@@ -21,8 +22,7 @@ function get_farmers_market_list($maps_api_key, $location) {
   $ch = curl_init();
   $options = [
     CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-      ."?key=$maps_api_key&location=$location&rankby=distance&"
-      ."&name=farmers+market",
+      ."?key=$maps_api_key&location=$location&rankby=distance&name=farmers+market",
     CURLOPT_HTTPGET => true,
     CURLOPT_CONNECTTIMEOUT => 10,
     CURLOPT_TIMEOUT => 10,

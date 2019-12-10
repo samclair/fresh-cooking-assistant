@@ -7,6 +7,7 @@ switch ($request['path']) {
   case '/api/maps-list':
   case '/api/fresh-list':
   case '/api/recipe-list':
+  case '/api/maps-details':
   case '/api/health-check':
   case '/api/random-produce':
   case '/api/recipe-details':
