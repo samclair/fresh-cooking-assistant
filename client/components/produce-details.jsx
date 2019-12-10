@@ -59,6 +59,9 @@ class ProduceDetails extends React.Component {
   }
 
   getRandomRecipes(recipeList) {
+    if (recipeList.length < this.numOfRecipes) {
+      this.numOfRecipes = recipeList.length;
+    }
     const selectedRecipes = [];
     for (let i = 0; i < this.numOfRecipes; i++) {
       const randomIndex = Math.floor(Math.random() * recipeList.length);
@@ -94,6 +97,8 @@ class ProduceDetails extends React.Component {
         return < RecipeCard key={recipe.id} recipe={recipe} />;
       }
       );
+    } else {
+      recipeCarousel = <div>No Recipes Available</div>;
     }
     return (
       <div>
