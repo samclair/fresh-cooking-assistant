@@ -15,6 +15,7 @@ import {
   Route
 } from 'react-router-dom';
 import ProduceDetails from './produce-details';
+import AllProducePage from './all-produce-page';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route exact path="/season/:name" component={SeasonalPage} />
             <Route exact path="/list" component={FreshList} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
+            <Route exact path="/produce" component={AllProducePage} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />
             <Route exact path="/recipes" component={SeasonalRecipePage} />
