@@ -21,8 +21,7 @@ function get_farmers_market_list($maps_api_key, $location) {
   $ch = curl_init();
   $options = [
     CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-      ."?key=$maps_api_key&location=$location&rankby=distance&"
-      ."&name=farmers+market",
+      ."?key=$maps_api_key&location=$location&rankby=distance&name=farmers+market",
     CURLOPT_HTTPGET => true,
     CURLOPT_CONNECTTIMEOUT => 10,
     CURLOPT_TIMEOUT => 10,
