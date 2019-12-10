@@ -14,5 +14,4 @@ function CalendarEvent({ info, number }) {
     </div>
   );
 }
-
 export default CalendarEvent;

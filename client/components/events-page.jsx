@@ -9,7 +9,6 @@ class EventsPage extends React.Component {
       eventDetails: null,
       hasClicked: false,
       timeout: 30000
-
     };
     this.getNearbyEvents = this.getNearbyEvents.bind(this);
   }
