@@ -1,8 +1,9 @@
 import React from 'react';
 
-function CalendarEvent({ info }) {
+function CalendarEvent({ info, onClick }) {
+  const click = () => { onClick(info.name); };
   return (
-    <div className='col-5 mx-1 border rounded-sm border-green'>
+    <div onClick={click} className='col-5 mx-1 border rounded-sm border-green'>
       <h5 className="primary-label text-center">
         {info.date.toUpperCase()}
       </h5>
