@@ -10,6 +10,7 @@ if ($request['method'] === "GET") {
   $response['body'] = [];
   foreach ($data -> results as $place) {
     array_push($response['body'], [
+      'placeId' => $place -> place_id,
       'name' => $place -> name,
       'address' => $place -> vicinity
     ]);
