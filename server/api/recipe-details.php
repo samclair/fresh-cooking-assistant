@@ -14,12 +14,13 @@ if($request['method']==='GET'){
 
 function format_response_body($data){
   $instruction_list = [];
+  $all_ingredients = [];
   foreach ($data->instructions as $instruction){
       array_push($instruction_list,$instruction->display_text);
     };
   $sections = [];
   foreach ($data->sections as $section){
-    $newSection = ["section"=> $section->name];
+    $newSection = ["name"=> $section->name];
     $ingredient_list = [];
     foreach ($section->components as $ingredient){
     $ingredient_singular = $ingredient->ingredient->display_singular;
@@ -29,6 +30,7 @@ function format_response_body($data){
       'ingredient'=>$ingredient_singular,
       'isInDatabase' => ingredient_is_in_database($ingredient_singular, $ingredient_plural)
     ]);
+    array_push($all_ingredients, $ingredient->raw_text);
       $newSection['ingredients']=$ingredient_list;
   }
   array_push($sections, $newSection);
@@ -40,8 +42,9 @@ function format_response_body($data){
       'name' => $data->name,
       'servings' => $data->yields,
       'sections' => $sections,
-      'instructions' => $instruction_list,
+      'instructions' => $instruction_list
     ],
+    'allIngredients' => $all_ingredients,
     'isFavorite' => check_if_favorite_recipe($data -> id)
   ];
   return $response;
