@@ -15,6 +15,7 @@ import {
   Route
 } from 'react-router-dom';
 import ProduceDetails from './produce-details';
+import EventsPage from './events-page';
 import AllProducePage from './all-produce-page';
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/season/:name" component={SeasonalProducePage} />
             <Route exact path="/list" component={FreshList} />
+            <Route exact path='/events' component={EventsPage} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
             <Route exact path="/produce" component={AllProducePage} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />

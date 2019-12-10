@@ -47,6 +47,13 @@ ul {
   object-fit: cover;
 }
 
+.border-green{
+  border-color: #13A75F !important;
+}
+.border-green:hover{
+  border-color: #FAA916 !important;
+}
+
 .header {
   background-position: center;
   background-size: cover;
@@ -56,6 +63,10 @@ ul {
 .seasonal-list {
   overflow-x:auto;
   white-space: nowrap;
+}
+
+.events-list{
+  height: 275px;
 }
 
 .seasonal-list::-webkit-scrollbar {
