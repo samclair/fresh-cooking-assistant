@@ -4,9 +4,9 @@ require_once '_api-keys.php';
 
 if ($request['method'] === 'GET') {
   $place_id = $request['query']['placeId'];
-  if (!isset($place_id)) { throw new ApiError('Location ID required', 400); }
-  $results = get_location_details($maps_api_key, $place_id);
-  $response['body'] = $results -> result;
+  if (!isset($place_id)) { throw new ApiError('Place ID required', 400); }
+  $data = get_location_details($maps_api_key, $place_id);
+  $response['body'] = $data -> result;
   send($response);
 }
 
@@ -25,5 +25,6 @@ function get_location_details($maps_api_key, $place_id) {
   $data = curl_exec($ch);
   $error = curl_error($ch);
   curl_close($ch);
+  if (!isset($data -> result)) { throw new ApiError('Place not found', 404); }
   return $error ? $error : json_decode($data);
 }
