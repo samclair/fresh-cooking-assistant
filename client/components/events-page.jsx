@@ -17,15 +17,20 @@ class EventsPage extends React.Component {
     this.getSingleEventInfo = this.getSingleEventInfo.bind(this);
   }
 
-  getNearbyEvents() {
-    fetch('/api/maps')
+  getNearbyEvents(position) {
+    const location = '' + position.coords.latitude + position.coords.longitude;
+    fetch(`/api/maps-list?location=${location}`)
       .then(res => res.json())
       .then(events => this.setState({ events }));
   }
 
+  getLocationThenEvents() {
+    navigator.geolocation.getCurrentPosition(this.getNearbyEvents);
+  }
+
   getSingleEventInfo(eventName) {
     const reqs = {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -33,7 +38,7 @@ class EventsPage extends React.Component {
         name: eventName
       })
     };
-    fetch('/api/maps', reqs)
+    fetch('/api/maps-details', reqs)
       .then(res => res.json())
       // .then(eventDetails => this.setState({ eventDetails }))
       .catch(err => console.error(err))
@@ -41,7 +46,7 @@ class EventsPage extends React.Component {
   }
 
   componentDidMount() {
-    // this.getNearbyEvents();
+    // getLocationThenEvents();
   }
 
   render() {
