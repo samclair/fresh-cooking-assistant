@@ -18,10 +18,10 @@ class EventsPage extends React.Component {
   }
 
   getNearbyEvents(position) {
-    const location = '' + position.coords.latitude + ',' + position.coords.longitude;
-    fetch(`/api/maps-list?location=${location}`)
-      .then(res => res.json())
-      .then(events => this.setState({ events }));
+    // const location = '' + position.coords.latitude + ',' + position.coords.longitude;
+    // fetch(`/api/maps-list?location=${location}`)
+    //   .then(res => res.json())
+    //   .then(events => this.setState({ events }));
   }
 
   getLocationThenEvents() {
@@ -29,16 +29,7 @@ class EventsPage extends React.Component {
   }
 
   getSingleEventInfo(eventName) {
-    const reqs = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: eventName
-      })
-    };
-    fetch('/api/maps-details', reqs)
+    fetch(`/api/maps-details?name=${eventName}`)
       .then(res => res.json())
       // .then(eventDetails => this.setState({ eventDetails }))
       .catch(err => console.error(err))
@@ -46,12 +37,12 @@ class EventsPage extends React.Component {
   }
 
   componentDidMount() {
-    // getLocationThenEvents();
+    this.getLocationThenEvents();
   }
 
   render() {
     const calendarEvents = this.state.events.map((event, index) => {
-      return <CalendarEvent onClick={this.getSingleEventInfo} info={event} key={index} />;
+      return <CalendarEvent onClick={this.getSingleEventInfo} number={index + 1} info={event} key={index} />;
     });
     const eventDetails = this.state.eventDetails ? <EventDetails info={this.state.eventDetails} /> : null;
     return (
@@ -60,7 +51,7 @@ class EventsPage extends React.Component {
         <div className='container'>
           <h1 className="green">{"Farmer's Markets"}</h1>
         </div>
-        <div className="events-list no-gutters d-flex">
+        <div className="events-list d-flex justify-content-center row no-gutters">
           {calendarEvents}
         </div>
         {eventDetails}

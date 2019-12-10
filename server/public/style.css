@@ -66,8 +66,7 @@ ul {
 }
 
 .events-list{
-  overflow-x:auto;
-  height: 150px;
+  height: 275px;
 }
 
 .seasonal-list::-webkit-scrollbar {

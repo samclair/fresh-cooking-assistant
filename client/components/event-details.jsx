@@ -1,7 +1,7 @@
 import React from 'react';
 
 function EventDetails({ info }) {
-  const day = info.opening_hours.periods[0].open.day;
+  const day = info.opening_hours.periods[0].open.day; // ewww
   let weekday = '';
   switch (day) {
     case 0:
