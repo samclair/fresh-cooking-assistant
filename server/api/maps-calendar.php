@@ -1,20 +1,21 @@
 <?php
 
 if ($request['method'] === 'GET') {
-  $expected_params = ['text', 'details', 'location', 'dates'];
+  $expected_params = ['text', 'location', 'dates'];
   foreach ($expected_params as $param) {
     if (!isset($request['query'][$param])) { throw new ApiError("$param required", 400); }
   }
   $text = $request['query']['text'];
-  $details = $request['query']['details'];
   $location = $request['query']['location'];
-  $dates = $request['query']['date'];
-  $calendar_link = create_calendar_link($text, $details, $location, $dates);
+  $dates = $request['query']['dates'];
+  $calendar_link = create_calendar_link($text, $location, $dates);
   $response['body'] = $calendar_link;
   send($response);
 }
 
-function create_calendar_link($text, $details, $location, $dates) {
+function create_calendar_link($text, $location, $dates) {
+  $text = urlencode($text);
+  $details = urlencode("Farmer's Market");
   $location = urlencode($location);
   $dates = format_dates($dates);
   $link ='https://www.google.com/calendar/render?action=TEMPLATE'
