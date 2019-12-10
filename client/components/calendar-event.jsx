@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function CalendarEvent({ info, number }) {
   return (
     <div className='col-5 mx-1 my-1 border rounded-sm border-green'>
-      <Link to={`/events/${info.id}`}>
+      <Link to={`/events/${info.placeId}`}>
         <h5 className="primary-label text-center">
           {number}
         </h5>
