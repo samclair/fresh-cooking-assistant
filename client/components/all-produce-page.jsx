@@ -14,7 +14,7 @@ class AllProducePage extends React.Component {
   getAllProduce() {
     fetch('/api/produce-in-season')
       .then(results => results.json())
-      .then(produceList => this.setState({ produceList }, this.getFeaturedProduce()))
+      .then(produceList => this.setState({ produceList: produceList.produceList }, this.getFeaturedProduce()))
       .catch(error => console.error(error.message));
   }
 
@@ -56,7 +56,7 @@ class AllProducePage extends React.Component {
       <div>
         <div className='header d-flex justify-content-center' style={style}></div>
         <div className="container">
-          <h1 className='green text-center font-rubik my-3'>{this.name} Produce</h1>
+          <h1 className='green text-center font-rubik my-3'>{this.name} All Produce</h1>
           <div className="row">{featuredElems}</div>
           <hr className='primary-label' />
         </div>

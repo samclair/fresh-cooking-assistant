@@ -18,20 +18,3 @@ if ($request['method'] === 'GET') {
   }
   send($response);
 }
-
-function get_all_produce($link){
-  $sql = "
-    SELECT DISTINCT `id`, `name`, `produceImg`
-    FROM `produce`
-    ";
-  $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  if (!mysqli_num_rows($result)) {
-    $produce = [];
-  } else {
-    $produce = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  }
-  mysqli_stmt_close($stmt);
-  return $produce;
-}
