@@ -69,6 +69,10 @@ ul {
   height: 275px;
 }
 
+.farmers-market{
+  background-image: url('./assets/images/farmers-market.jpg')
+}
+
 .seasonal-list::-webkit-scrollbar {
   display: none;
 }
