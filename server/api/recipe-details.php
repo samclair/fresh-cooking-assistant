@@ -17,8 +17,11 @@ function format_response_body($data){
   foreach ($data->instructions as $instruction){
       array_push($instruction_list,$instruction->display_text);
     };
-  $ingredient_list = [];
-  foreach ($data->sections[0]->components as $ingredient){
+  $sections = [];
+  foreach ($data->sections as $section){
+    $newSection = ["section"=> $section->name];
+    $ingredient_list = [];
+    foreach ($section->components as $ingredient){
     $ingredient_singular = $ingredient->ingredient->display_singular;
     $ingredient_plural = $ingredient->ingredient->display_plural;
     array_push($ingredient_list, [
@@ -26,14 +29,17 @@ function format_response_body($data){
       'ingredient'=>$ingredient_singular,
       'isInDatabase' => ingredient_is_in_database($ingredient_singular, $ingredient_plural)
     ]);
+      $newSection['ingredients']=$ingredient_list;
   }
+  array_push($sections, $newSection);
+}
   $response = [
     'details' => [
       'id' => $data->id,
       'image' => $data->thumbnail_url,
       'name' => $data->name,
       'servings' => $data->yields,
-      'ingredients' => $ingredient_list,
+      'sections' => $sections,
       'instructions' => $instruction_list,
     ],
     'isFavorite' => check_if_favorite_recipe($data -> id)
