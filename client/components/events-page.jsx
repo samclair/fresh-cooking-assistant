@@ -2,19 +2,15 @@ import React from 'react';
 import CalendarEvent from './calendar-event.jsx';
 import EventDetails from './event-details.jsx';
 
-const events = [{ date: 'October 25', name: "Laguna Hill's Farmer's Market", day: 'Friday', time: '9AM-1PM' },
-  { date: 'October 25', name: "Laguna Hill's Farmer's Market", day: 'Friday', time: '9AM-1PM' },
-  { date: 'October 25', name: "Laguna Hill's Farmer's Market", day: 'Friday', time: '9AM-1PM' },
-  { date: 'October 25', name: "Laguna Hill's Farmer's Market", day: 'Friday', time: '9AM-1PM' }];
-
 class EventsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: events,
+      events: [],
       eventDetails: null
     };
     this.getSingleEventInfo = this.getSingleEventInfo.bind(this);
+    this.getNearbyEvents = this.getNearbyEvents.bind(this);
   }
 
   getNearbyEvents(position) {
@@ -47,9 +43,9 @@ class EventsPage extends React.Component {
     const eventDetails = this.state.eventDetails ? <EventDetails info={this.state.eventDetails} /> : null;
     return (
       <div>
-        <h6 className="text-center green">Map goes here</h6>
+        {/* <h6 className="text-center green">Map goes here</h6> */}
         <div className='container'>
-          <h1 className="green">{"Farmer's Markets"}</h1>
+          <h1 className="green text-center">{"Farmer's Markets"}</h1>
         </div>
         <div className="events-list d-flex justify-content-center row no-gutters">
           {calendarEvents}
