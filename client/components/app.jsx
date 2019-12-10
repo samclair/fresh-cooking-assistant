@@ -1,7 +1,7 @@
 import React from 'react';
 import Landing from './landing';
 import Seasons from './seasons';
-import SeasonalPage from './seasonal-page';
+import SeasonalProducePage from './seasonal-produce-page';
 import Username from './username-page';
 import NavMenu from './nav-menu';
 import RecipePage from './recipe-page';
@@ -16,6 +16,7 @@ import {
 } from 'react-router-dom';
 import ProduceDetails from './produce-details';
 import EventsPage from './events-page';
+import AllProducePage from './all-produce-page';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,10 +33,11 @@ class App extends React.Component {
         <div>
           <NavMenu />
           <Switch>
-            <Route exact path="/season/:name" component={SeasonalPage} />
+            <Route exact path="/season/:name" component={SeasonalProducePage} />
             <Route exact path="/list" component={FreshList} />
             <Route exact path='/events' component={EventsPage} />
             <Route exact path="/produce/:name" component={ProduceDetails} />
+            <Route exact path="/produce" component={AllProducePage} />
             <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
             <Route exact path="/recipes/:id" component={RecipePage} />
             <Route exact path="/recipes" component={SeasonalRecipePage} />
