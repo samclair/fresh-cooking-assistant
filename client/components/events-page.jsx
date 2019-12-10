@@ -1,13 +1,13 @@
 import React from 'react';
 import CalendarEvent from './calendar-event.jsx';
-import EventDetails from './event-details.jsx';
 
 class EventsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [],
-      eventDetails: null
+      eventDetails: null,
+      hasClicked: false
     };
     this.getSingleEventInfo = this.getSingleEventInfo.bind(this);
     this.getNearbyEvents = this.getNearbyEvents.bind(this);
@@ -24,14 +24,6 @@ class EventsPage extends React.Component {
     navigator.geolocation.getCurrentPosition(this.getNearbyEvents);
   }
 
-  getSingleEventInfo(eventName) {
-    fetch(`/api/maps-details?name=${eventName}`)
-      .then(res => res.json())
-      // .then(eventDetails => this.setState({ eventDetails }))
-      .catch(err => console.error(err))
-    ;
-  }
-
   componentDidMount() {
     this.getLocationThenEvents();
   }
@@ -40,7 +32,6 @@ class EventsPage extends React.Component {
     const calendarEvents = this.state.events.map((event, index) => {
       return <CalendarEvent onClick={this.getSingleEventInfo} number={index + 1} info={event} key={index} />;
     });
-    const eventDetails = this.state.eventDetails ? <EventDetails info={this.state.eventDetails} /> : null;
     return (
       <div>
         {/* <h6 className="text-center green">Map goes here</h6> */}
@@ -50,7 +41,6 @@ class EventsPage extends React.Component {
         <div className="events-list d-flex justify-content-center row no-gutters">
           {calendarEvents}
         </div>
-        {eventDetails}
       </div>
     );
   }

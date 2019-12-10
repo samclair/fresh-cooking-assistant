@@ -1,37 +1,35 @@
 import React from 'react';
 
-function EventDetails({ info }) {
-  const day = info.opening_hours.periods[0].open.day; // ewww
-  let weekday = '';
-  switch (day) {
-    case 0:
-      weekday = 'Sunday';
-      break;
-    case 1:
-      weekday = 'Monday';
-      break;
-    case 2:
-      weekday = 'Tuesday';
-      break;
-    case 3:
-      weekday = 'Wednesday';
-      break;
-    case 4:
-      weekday = 'Thursday';
-      break;
-    case 5:
-      weekday = 'Friday';
-      break;
-    case 6:
-      weekday = 'Saturday';
+class EventDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.match.params.id,
+      eventDetails: null
+    };
   }
 
-  return <div>
-    <h2 className="green">{info.name}</h2>
-    <h3 className="yellow"><u>+ add to calendar</u></h3>
-    <h5><u>{weekday}</u></h5>
-    <h5>{info.formattedAddress}</h5>
-  </div>;
+  componentDidMount() {
+    this.getSingleEventInfo();
+  }
+
+  getSingleEventInfo() {
+    fetch(`/api/maps-details?id=${this.state.id}`)
+      .then(res => res.json())
+      // .then(eventDetails => this.setState({ eventDetails }))
+      .catch(err => console.error(err))
+    ;
+  }
+
+  render() {
+    const { name, weekday, address } = this.state.eventDetails;
+    return <div>
+      <h2 className="green">{name}</h2>
+      <h3 className="yellow"><u>+ add to calendar</u></h3>
+      <h5><u>{weekday}</u></h5>
+      <h5>{address}</h5>
+    </div>;
+  }
 }
 
 export default EventDetails;
