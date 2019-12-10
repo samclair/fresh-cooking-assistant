@@ -5,7 +5,8 @@ require_once '_api-keys.php';
 if ($request['method'] === 'GET') {
   $place_id = $request['query']['placeId'];
   if (!isset($place_id)) { throw new ApiError('Location ID required', 400); }
-  $response['body'] = get_location_details($maps_api_key, $place_id);
+  $results = get_location_details($maps_api_key, $place_id);
+  $response['body'] = $results -> result;
   send($response);
 }
 
@@ -13,7 +14,8 @@ function get_location_details($maps_api_key, $place_id) {
   $ch = curl_init();
   $options = [
     CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json'
-      ."?key=$maps_api_key&place_id=$place_id",
+      ."?key=$maps_api_key&place_id=$place_id"
+      .'&fields=formatted_address,name,opening_hours/weekday_text,website',
     CURLOPT_HTTPGET => true,
     CURLOPT_CONNECTTIMEOUT => 10,
     CURLOPT_TIMEOUT => 10,
