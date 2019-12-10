@@ -28,19 +28,18 @@ class SeasonalRecipePage extends React.Component {
   }
 
   render() {
-    if (!this.state.seasonalRecipes.length) {
-      return <div>Seasonal Recipes</div>;
-    } else {
-      const recipeCards = this.state.seasonalRecipes.map(recipe => (
+    let recipeCards;
+    if (this.state.seasonalRecipes.length) {
+      recipeCards = this.state.seasonalRecipes.map(recipe => (
         <RecipeCard key={recipe.id} recipe={recipe}/>
       ));
-      return (
-        <div className='container'>
-          <h1 className='green mt-1'>Seasonal Recipes</h1>
-          <div className="row">{recipeCards}</div>
-        </div>
-      );
     }
+    return (
+      <div className='container'>
+        <h1 className='green mt-1'>Seasonal Recipes</h1>
+        <div className="row">{recipeCards}</div>
+      </div>
+    );
   }
 }
 
