@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './recipe-card';
+import LoadingSpinner from './loading-spinner';
 import Badge from './badge';
 
 class Landing extends React.Component {
@@ -8,12 +9,14 @@ class Landing extends React.Component {
     super(props);
     this.state = {
       currentSeason: null,
-      recipeElems: []
+      recipeElems: [],
+      isLoading: true
     };
     this.numOfRecipes = 8;
   }
 
   getCurrentSeason() {
+    this.setState({ isLoading: true });
     fetch('/api/seasons')
       .then(res => res.json())
       .then(data => {
@@ -29,10 +32,7 @@ class Landing extends React.Component {
       .then(data => {
         const recipes = Array.from(data);
         const selectedRecipes = this.getRandomRecipes(recipes);
-        const recipeElems = selectedRecipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ));
-        this.setState({ recipeElems });
+        this.setState({ recipeElems: selectedRecipes, isLoading: false });
       });
   }
 
@@ -52,22 +52,26 @@ class Landing extends React.Component {
   render() {
     const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
     if (!this.state.currentSeason) { return null; }
+    let displayedRecipes = <LoadingSpinner/>;
+    if (!this.state.isLoading) {
+      displayedRecipes = this.state.recipeElems.map(recipe => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ));
+    }
     return (
       <div className='text-right'>
         <div className="header mb-3" style={style} />
         <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
           <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
         </Link>
-        <div className='container mt-3'>
+        <div className='container my-4'>
           <Link to={'/events'}>
             <Badge faClass="fas fa-carrot" message={'Find Local Markets!'} />
           </Link>
         </div>
         <div className="container mt-2">
           <h3 className="yellow text-left">featured recipes</h3>
-          <div>
-            {this.state.recipeElems}
-          </div>
+          {displayedRecipes}
         </div>
       </div>
     );
