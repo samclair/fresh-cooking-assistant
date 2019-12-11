@@ -50,14 +50,31 @@ ul {
 .border-green{
   border-color: #13A75F !important;
 }
+
 .border-green:hover{
   border-color: #FAA916 !important;
+}
+
+.button-effect:hover {
+  filter: brightness(1.15);
+}
+
+.button-effect:active {
+  filter: brightness(0.9)
 }
 
 .header {
   background-position: center;
   background-size: cover;
   height:250px;
+}
+
+.hover-expand {
+  transition: all 0.1s linear;
+}
+
+.hover-expand:hover {
+  transform: scale(1.01);
 }
 
 .seasonal-list {

@@ -67,9 +67,11 @@ class Landing extends React.Component {
           </Link>
         </div>
         <div className='container my-4'>
-          <Link to='/events'>
-            <Badge faClass="fas fa-carrot" message='Find Local Markets!'/>
-          </Link>
+          <div className="button-effect">
+            <Link to='/events' className='text-decoration-none'>
+              <Badge faClass="fas fa-carrot" message='Find Local Markets!'/>
+            </Link>
+          </div>
           <h2 className="yellow my-4 d-none d-md-block">Featured Seasonal Recipes</h2>
           <h4 className="yellow my-4 d-md-none text-center">Featured Seasonal Recipes</h4>
           {displayedRecipes}
