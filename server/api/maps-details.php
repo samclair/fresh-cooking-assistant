@@ -22,9 +22,9 @@ function get_location_details($maps_api_key, $place_id) {
     CURLOPT_RETURNTRANSFER => true
   ];
   curl_setopt_array($ch,$options);
-  $data = curl_exec($ch);
+  $data = json_decode(curl_exec($ch));
   $error = curl_error($ch);
   curl_close($ch);
-  if (!isset($data -> result)) { throw new ApiError('Place not found', 404); }
-  return $error ? $error : json_decode($data);
+  if (!$data -> result) { throw new ApiError('Place not found', 404); }
+  return $error ? $error : $data;
 }
