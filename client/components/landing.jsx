@@ -12,7 +12,7 @@ class Landing extends React.Component {
       recipeElems: [],
       isLoading: true
     };
-    this.numOfRecipes = 8;
+    this.numOfRecipes = 10;
   }
 
   getCurrentSeason() {
@@ -38,6 +38,9 @@ class Landing extends React.Component {
 
   getRandomRecipes(recipeList) {
     const selectedRecipes = [];
+    if (this.numOfRecipes > recipeList.length) {
+      this.numOfRecipes = recipeList.length;
+    }
     for (let i = 0; i < this.numOfRecipes; i++) {
       const randomIndex = Math.floor(Math.random() * recipeList.length);
       selectedRecipes.push(recipeList.splice(randomIndex, 1)[0]);
@@ -50,30 +53,33 @@ class Landing extends React.Component {
   }
 
   render() {
-    const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
     if (!this.state.currentSeason) { return null; }
+    const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
     let displayedRecipes = <LoadingSpinner/>;
     if (!this.state.isLoading) {
       displayedRecipes = this.state.recipeElems.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+        <RecipeCard key={recipe.id} recipe={recipe}/>
       ));
     }
     return (
-      <div className='text-right'>
-        <div className="header mb-3" style={style} />
-        <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
-          <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
-        </Link>
-        <div className='container my-4'>
-          <Link to={'/events'}>
-            <Badge faClass="fas fa-carrot" message={'Find Local Markets!'} />
+      <>
+        <div className="header mb-3" style={style} title='Find fresh, in season produce.'/>
+        <div className="text-right">
+          <Link className='font-rubik h2 mx-3' to={`season/${this.state.currentSeason}`}>
+            {this.state.currentSeason.toLowerCase()} produce {'>'}
           </Link>
         </div>
-        <div className="container mt-2">
-          <h3 className="yellow text-left">featured recipes</h3>
+        <div className='container my-4'>
+          <div className="button-effect">
+            <Link to='/events' className='text-decoration-none'>
+              <Badge faClass="fas fa-carrot" message='Find Local Markets!'/>
+            </Link>
+          </div>
+          <h2 className="yellow my-4 d-none d-md-block">Featured Seasonal Recipes</h2>
+          <h4 className="yellow my-4 d-md-none text-center">Featured Seasonal Recipes</h4>
           {displayedRecipes}
         </div>
-      </div>
+      </>
     );
   }
 }
