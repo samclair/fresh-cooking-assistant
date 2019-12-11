@@ -1,18 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './recipe-card';
+import LoadingSpinner from './loading-spinner';
 
 class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentSeason: null,
-      recipeElems: []
+      recipeElems: [],
+      isLoading: true
     };
     this.numOfRecipes = 10;
   }
 
   getCurrentSeason() {
+    this.setState({ isLoading: true });
     fetch('/api/seasons')
       .then(res => res.json())
       .then(data => {
@@ -28,10 +31,7 @@ class Landing extends React.Component {
       .then(data => {
         const recipes = Array.from(data);
         const selectedRecipes = this.getRandomRecipes(recipes);
-        const recipeElems = selectedRecipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe}/>
-        ));
-        this.setState({ recipeElems });
+        this.setState({ recipeElems: selectedRecipes, isLoading: false });
       });
   }
 
@@ -51,6 +51,12 @@ class Landing extends React.Component {
   render() {
     const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
     if (!this.state.currentSeason) { return null; }
+    let displayedRecipes = <LoadingSpinner/>;
+    if (!this.state.isLoading) {
+      displayedRecipes = this.state.recipeElems.map(recipe => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ));
+    }
     return (
       <div className='text-right'>
         <div className="header mb-2" style={style}/>
@@ -59,7 +65,7 @@ class Landing extends React.Component {
         </Link>
         <div className="container mt-4">
           <h3 className="yellow text-left">featured recipes</h3>
-          {this.state.recipeElems}
+          {displayedRecipes}
         </div>
       </div>
     );
