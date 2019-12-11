@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './recipe-card';
 import LoadingSpinner from './loading-spinner';
+import Badge from './badge';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Landing extends React.Component {
       recipeElems: [],
       isLoading: true
     };
-    this.numOfRecipes = 10;
+    this.numOfRecipes = 8;
   }
 
   getCurrentSeason() {
@@ -59,11 +60,16 @@ class Landing extends React.Component {
     }
     return (
       <div className='text-right'>
-        <div className="header mb-2" style={style}/>
+        <div className="header mb-3" style={style} />
         <Link className='green font-rubik h2 mx-2' to={`season/${this.state.currentSeason}`}>
           <u>{this.state.currentSeason.toLowerCase()} produce {'>'}</u>
         </Link>
-        <div className="container mt-4">
+        <div className='container my-4'>
+          <Link to={'/events'}>
+            <Badge faClass="fas fa-carrot" message={'Find Local Markets!'} />
+          </Link>
+        </div>
+        <div className="container mt-2">
           <h3 className="yellow text-left">featured recipes</h3>
           {displayedRecipes}
         </div>
