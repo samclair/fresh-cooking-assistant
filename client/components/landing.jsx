@@ -38,6 +38,9 @@ class Landing extends React.Component {
 
   getRandomRecipes(recipeList) {
     const selectedRecipes = [];
+    if (this.numOfRecipes > recipeList.length) {
+      this.numOfRecipes = recipeList.length;
+    }
     for (let i = 0; i < this.numOfRecipes; i++) {
       const randomIndex = Math.floor(Math.random() * recipeList.length);
       selectedRecipes.push(recipeList.splice(randomIndex, 1)[0]);
