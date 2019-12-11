@@ -75,7 +75,7 @@ class EventDetails extends React.Component {
         <div className="container">
           <h2 className="mt-3 green text-center">Address</h2>
           <h5><u><a href={`http://maps.google.com/?q=${formattedAddress}`}>{formattedAddress}</a></u></h5>
-          <h2 className="mt-3 green text-center">Avalibility</h2>
+          <h2 className="mt-3 green text-center">Availability</h2>
           <div className="yellow">
             <a className="h4" href={this.state.redirectURI}>+add to calendar</a>
           </div>
