@@ -56,45 +56,55 @@ class Username extends React.Component {
   }
 
   render() {
-    let errorMessage = null;
+    let errorMessage = 'Error';
+    let errorClass = 'invisible';
     if (!this.state.isInDataBase && this.state.isError) {
-      errorMessage = <h5 className="text-danger font-weight-bold text-center">{"That username doesn't exist"}</h5>;
+      errorClass = 'visible';
+      errorMessage = "That username doesn't exist";
     }
     if (this.state.isInDataBase && this.state.isError) {
-      errorMessage = <h5 className="text-danger font-weight-bold text-center">{'That username already exists'}</h5>;
+      errorClass = 'visible';
+      errorMessage = 'That username already exists';
     }
     if (this.state.isSignedIn && !this.state.isError) return <Redirect to='/' />;
-    const style = {
-      backgroundColor: '#13A75F', height: '100vh'
-    };
-
     return (
-      <div className="container pt-4 position-fixed" style={style} >
-        <div className="pl-4 my-4">
-          <h1 className='font-rubik white font-weight-bold'>FRESH!</h1>
-          <h3 className='white'>your</h3>
-          <h3 className='white'>cooking</h3>
-          <h3 className='white'>assistant</h3>
-        </div>
-        <form onSubmit={this.getUser}>
-          <div className="form-group d-flex flex-column align-items-center mb-0">
+      <div className='log-in primary-label'>
+        <div className="container d-flex flex-column p-4">
+          <div className="mx-4">
+            <h1 className='font-rubik white font-weight-bold mt-4'>FRESH!</h1>
+            <h3 className='white'>your</h3>
+            <h3 className='white'>cooking</h3>
+            <h3 className='white'>assistant</h3>
+          </div>
+          <form className='row m-4'>
             <input type="text"
-              className="form-control w-75 mt-3"
+              className="form-control col-12 col-md-8 offset-md-2"
               placeholder='Username'
               name="userName"
               onChange={this.fieldChange}
               value={this.state.userName} />
-            <button className='badge badge-warning white font-weight-bold shadow w-75 mt-2'>Sign In</button>
-          </div>
-        </form>
-        <form onSubmit={this.createUser}>
-          <div className="form-group d-flex flex-column align-items-center mt-2">
-            <button className='badge badge-info white font-weight-bold shadow w-75 lightcoral'>Create an Account</button>
-          </div>
-        </form>
-        <h6 className='text-center white'>Enter a unique username to save recipes</h6>
-        {errorMessage}
-      </div >
+            <button
+              className='badge bg-orange white font-weight-bold col-12 col-md-4 offset-md-2 my-2'
+              onClick={this.getUser}
+            >
+            Sign In
+            </button>
+            <button
+              className='badge lightcoral white font-weight-bold col-12 col-md-4 my-md-2'
+              onClick={this.createUser}
+            >
+            Create an Account
+            </button>
+          </form>
+          <h5 className={`${errorClass} text-danger font-weight-bold text-center m-4`}>
+            {errorMessage}
+          </h5>
+          <h6 className='text-justify white mx-4'>
+          Enter a unique username to save recipes and add produce and other ingredients to your Fresh! List.
+          If you have already created a username, click Sign In!
+          </h6>
+        </div>
+      </div>
     );
   }
 }
