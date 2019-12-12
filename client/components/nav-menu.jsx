@@ -11,7 +11,7 @@ class NavMenu extends React.Component {
         { text: 'Home', link: '/' },
         { text: 'Login', link: '/username' },
         { text: 'Events', link: '/events' },
-        { text: 'Seasonal Produce', link: '/Seasons' },
+        { text: 'Seasonal Produce', link: '/seasons' },
         { text: 'All Produce', link: '/produce' },
         { text: 'Seasonal Recipes', link: '/recipes' },
         { text: 'Favorite Recipes', link: '/recipes/favorites' },
@@ -20,9 +20,6 @@ class NavMenu extends React.Component {
 
     };
     this.navElements = null;
-    this.recipesSubnav = ['Seasonal', 'Favorites'];
-    this.userLists = ['Recipes', 'Fresh! List'];
-    this.produceSubnav = ['Seasons', 'All Produce'];
     this.swapView = this.swapView.bind(this);
 
   }
