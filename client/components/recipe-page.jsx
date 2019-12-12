@@ -1,6 +1,6 @@
 import React from 'react';
 import Ingredient from './ingredient';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from './loading-spinner';
 
 class RecipePage extends React.Component {
@@ -17,15 +17,25 @@ class RecipePage extends React.Component {
     this.id = props.match.params.id;
     this.setFavorite = this.setFavorite.bind(this);
     this.addAllItemsToList = this.addAllItemsToList.bind(this);
+    this.renderRedirectUser = this.renderRedirectUser.bind(this);
   }
 
   getDetails() {
     fetch(`/api/recipe-details?recipeId=${this.id}`)
       .then(res => res.json())
-      .then(({ details, isFavorite, allIngredients }) => {
-        this.setState({ details, isFavorite, allIngredients, isLoading: false });
+      .then(({ details, isFavorite, allIngredients, isLoggedIn }) => {
+        if (!isLoggedIn) {
+          this.setState({ details, isFavorite, allIngredients, isLoading: false, isLoggedIn: true });
+          this.renderRedirectUser();
+        } else {
+          this.setState({ details, isFavorite, allIngredients, isLoading: false });
+        }
       })
       .catch(error => console.error(error.message));
+  }
+
+  renderRedirectUser() {
+    this.setState({ isLoggedIn: false, isLoading: false });
   }
 
   componentDidMount() {
@@ -83,37 +93,55 @@ class RecipePage extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     } else if (!this.state.details) return null;
-    if (!this.state.isLoggedIn) {
-      return <Redirect to='/username'></Redirect>;
-    }
-    const freshListBadge = this.state.isProduceSaved
-      ? <div className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
-        <h5 className='m-0'>{'Added!'}</h5>
-      </div>
-      : <div onClick={this.addAllItemsToList} className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
-        <h5 className='m-0'>{'Add Ingredients to Fresh! List!'}</h5>
-      </div>;
-    const favoriteStar = this.state.isFavorite ? <i className="fas fa-star mx-2"></i> : <i className="far fa-star mx-2"></i>;
     const { image, name, servings, sections, instructions } = this.state.details;
+    let freshListBadge;
+    let favoriteBadge;
     const style = { backgroundImage: `url(${image})` };
-    return (
-      <div>
+    const favoriteStar = this.state.isFavorite ? <i className="fas fa-star mx-2"></i> : <i className="far fa-star mx-2"></i>;
+    if (!this.state.isLoggedIn) {
+      freshListBadge =
+        <div
+          className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
+          <Link to='/username'>Sign In to Save</Link>
+        </div>;
+      favoriteBadge =
         <div style={style} className="header d-flex align-items-end justify-content-center">
-          <div onClick={this.setFavorite} className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
-            {favoriteStar}
-            <span className='h2 m-0'>Favorite</span>
+          <div className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
+            <div
+              className="primary-label font-rubik text-center h2 px-4">
+              <Link to='/username'>Sign In to Save</Link>
+            </div>
           </div>
+        </div>;
+    } else {
+      freshListBadge = this.state.isProduceSaved
+        ? <div className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
+          <h5 className='m-0'>{'Added!'}</h5>
         </div>
+        : <div onClick={this.addAllItemsToList} className="primary-label justify-content-center d-flex align-items-center font-rubik mb-2 p-2">
+          <h5 className='m-0'>{'Add Ingredients to Fresh! List!'}</h5>
+        </div>;
+      favoriteBadge = <div style={style} className="header d-flex align-items-end justify-content-center">
+        <div onClick={this.setFavorite} className="primary-label d-flex align-items-center font-rubik mb-2 p-2">
+          {favoriteStar}
+          <span className='h2 m-0'>Favorite</span>
+        </div>
+      </div>;
+    }
+
+    return (
+      < div >
+        {favoriteBadge}
         <div className="container">
           <p className='green text-center font-rubik my-3'>{name}</p>
           <p className='text-center font-rubik mb-2'>{servings}</p>
           <p className="yellow font-weight-bold">Ingredients</p>
           {sections.map((section, index) => {
             return (
-              <div key= { index }>
-                <p className= 'text-center green mt-3 font-weight-bold'>{section.name ? section.name : null}</p>
+              <div key={index}>
+                <p className='text-center green mt-3 font-weight-bold'>{section.name ? section.name : null}</p>
                 <ul className='ingredient-list'>
                   {section.ingredients.map((item, index) => {
                     return (

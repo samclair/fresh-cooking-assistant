@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Redirect } from 'react-router-dom';
 
 class Username extends React.Component {
   constructor(props) {
