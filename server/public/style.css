@@ -82,6 +82,10 @@ ul {
   white-space: nowrap;
 }
 
+.log-in {
+  min-height: calc(100vh - 55px);
+}
+
 .events-list{
   height: 275px;
 }
@@ -113,6 +117,10 @@ ul {
 
 .lightcoral{
   background-color: lightcoral;
+}
+
+.bg-orange {
+  background-color: #FAA916;
 }
 
 .green {
