@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 class Username extends React.Component {
   constructor(props) {
@@ -13,6 +13,11 @@ class Username extends React.Component {
     this.fieldChange = this.fieldChange.bind(this);
     this.getUser = this.getUser.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.redirectUser = this.redirectUser.bind(this);
+  }
+
+  redirectUser() {
+    this.props.history.goBack();
   }
 
   getUser(e) {
@@ -66,7 +71,7 @@ class Username extends React.Component {
       errorClass = 'visible';
       errorMessage = 'That username already exists';
     }
-    if (this.state.isSignedIn && !this.state.isError) return <Redirect to='/' />;
+    if (this.state.isSignedIn && !this.state.isError) { this.redirectUser(); }
     return (
       <div className='log-in primary-label'>
         <div className="container d-flex flex-column p-4">
@@ -87,21 +92,21 @@ class Username extends React.Component {
               className='badge bg-orange white font-weight-bold col-12 col-md-4 offset-md-2 my-2'
               onClick={this.getUser}
             >
-            Sign In
+              Sign In
             </button>
             <button
               className='badge lightcoral white font-weight-bold col-12 col-md-4 my-md-2'
               onClick={this.createUser}
             >
-            Create an Account
+              Create an Account
             </button>
           </form>
           <h5 className={`${errorClass} text-danger font-weight-bold text-center m-4`}>
             {errorMessage}
           </h5>
           <h6 className='text-justify white mx-4'>
-          Enter a unique username to save recipes and add produce and other ingredients to your Fresh! List.
-          If you have already created a username, click Sign In!
+            Enter a unique username to save recipes and add produce and other ingredients to your Fresh! List.
+            If you have already created a username, click Sign In!
           </h6>
         </div>
       </div>
