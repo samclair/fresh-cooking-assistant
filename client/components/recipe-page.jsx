@@ -1,6 +1,7 @@
 import React from 'react';
 import Ingredient from './ingredient';
 import { Redirect } from 'react-router-dom';
+import LoadingSpinner from './loading-spinner';
 
 class RecipePage extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class RecipePage extends React.Component {
       isFavorite: false,
       isLoggedIn: true,
       isProduceSaved: false,
-      ingredientList: []
+      ingredientList: [],
+      isLoading: true
     };
     this.id = props.match.params.id;
     this.setFavorite = this.setFavorite.bind(this);
@@ -21,7 +23,7 @@ class RecipePage extends React.Component {
     fetch(`/api/recipe-details?recipeId=${this.id}`)
       .then(res => res.json())
       .then(({ details, isFavorite, allIngredients }) => {
-        this.setState({ details, isFavorite, allIngredients });
+        this.setState({ details, isFavorite, allIngredients, isLoading: false });
       })
       .catch(error => console.error(error.message));
   }
@@ -80,7 +82,9 @@ class RecipePage extends React.Component {
   }
 
   render() {
-    if (!this.state.details) return null;
+    if (this.state.isLoading) {
+      return <LoadingSpinner/>;
+    } else if (!this.state.details) return null;
     if (!this.state.isLoggedIn) {
       return <Redirect to='/username'></Redirect>;
     }
