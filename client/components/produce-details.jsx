@@ -1,6 +1,7 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import Badge from './badge';
+import { Link } from 'react-router-dom';
 
 class ProduceDetails extends React.Component {
   constructor(props) {
@@ -9,12 +10,14 @@ class ProduceDetails extends React.Component {
       details: {},
       isInSeason: false,
       produceRecipes: [],
-      isSaved: false
+      isSaved: false,
+      isLoggedIn: true
     };
     this.name = props.match.params.name;
     this.numOfRecipes = 5;
     this.saveProduceItem = this.saveProduceItem.bind(this);
     this.deleteSavedProduceItem = this.deleteSavedProduceItem.bind(this);
+    this.renderRedirectUser = this.renderRedirectUser.bind(this);
   }
 
   saveProduceItem() {
@@ -24,6 +27,10 @@ class ProduceDetails extends React.Component {
       body: JSON.stringify({ name: this.name })
     }).then(response => response.json())
       .then(() => this.setState({ isSaved: true }));
+  }
+
+  renderRedirectUser() {
+    this.setState({ isLoggedIn: false });
   }
 
   deleteSavedProduceItem() {
@@ -53,9 +60,14 @@ class ProduceDetails extends React.Component {
     fetch('/api/fresh-list')
       .then(res => res.json())
       .then(savedList => {
-        const isSaved = savedList.find(({ name }) => name === itemName);
-        this.setState({ isSaved });
-      });
+        if (savedList.error) {
+          this.renderRedirectUser();
+        } else {
+          const isSaved = savedList.find(({ name }) => name === itemName);
+          this.setState({ isSaved });
+        }
+      })
+      .catch(err => console.error(err));
   }
 
   getRandomRecipes(recipeList) {
@@ -100,6 +112,19 @@ class ProduceDetails extends React.Component {
     } else {
       recipeCarousel = <div>No Recipes Available</div>;
     }
+    let FreshListBadge;
+    if (!this.state.isLoggedIn) {
+      FreshListBadge = <div
+        className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
+        <Link to='/username'>Sign In to Save</Link>
+      </div>;
+    } else {
+      FreshListBadge = <div
+        className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
+        onClick={!this.state.isSaved ? this.saveProduceItem : this.deleteSavedProduceItem}
+      > {this.state.isSaved ? 'Saved!' : 'Add to Fresh! List'}
+      </div>;
+    }
     return (
       <div>
         <div style={style} className="header d-flex justify-content-center">
@@ -107,12 +132,7 @@ class ProduceDetails extends React.Component {
         </div>
         <div className="container">
           <h1 className="green text-center my-4">{this.titleCaseName(this.name)}</h1>
-          <div
-            className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
-            onClick={!this.state.isSaved ? this.saveProduceItem : this.deleteSavedProduceItem}
-          >
-            {this.state.isSaved ? 'Saved!' : 'Add to Fresh! List'}
-          </div>
+          {FreshListBadge}
           <h2 className="yellow">Selection</h2>
           <p className='mb-4'>{selection}</p>
           <h2 className="yellow">Storage</h2>
