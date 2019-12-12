@@ -1,18 +1,20 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
+import LoadingSpinner from './loading-spinner';
 
 class FavoriteRecipes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favoriteRecipes: []
+      favoriteRecipes: [],
+      isLoading: true
     };
   }
 
   getFavoriteRecipes() {
     fetch('/api/favorite-recipes')
       .then(res => res.json())
-      .then(favoriteRecipes => this.setState({ favoriteRecipes }))
+      .then(favoriteRecipes => this.setState({ favoriteRecipes, isLoading: false }))
       .catch(err => console.error(err))
     ;
   }
@@ -22,7 +24,10 @@ class FavoriteRecipes extends React.Component {
   }
 
   render() {
-    if (!this.state.favoriteRecipes.length) {
+    let favoritedRecipes = null;
+    if (this.state.isLoading) {
+      favoritedRecipes = <LoadingSpinner/>;
+    } else if (!this.state.favoriteRecipes.length) {
       return (
         <div className="container">
           <h1 className="green font-rubik my-4 text-center">
@@ -30,7 +35,7 @@ class FavoriteRecipes extends React.Component {
           </h1>
         </div>);
     }
-    const favoritedRecipes = this.state.favoriteRecipes.map(recipe => (
+    favoritedRecipes = this.state.favoriteRecipes.map(recipe => (
       <RecipeCard key={recipe.id} recipe={recipe}/>
     ));
     return (
