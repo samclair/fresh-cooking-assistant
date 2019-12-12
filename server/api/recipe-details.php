@@ -51,6 +51,7 @@ function format_response_body($data){
       'instructions' => $instruction_list
     ],
     'allIngredients' => $all_ingredients,
+    'isLoggedIn' => isset($_SESSION['user_id']),
     'isFavorite' => check_if_favorite_recipe($data -> id)
   ];
   return $response;

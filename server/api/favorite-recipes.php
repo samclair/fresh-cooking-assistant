@@ -37,9 +37,6 @@ if ($request['method'] === 'GET') {
 }
 
 function add_favorite_recipe($link, $recipe_id, $name, $image){
-  if(!isset($_SESSION['user_id'])){
-    return false;
-  }
   $sql = "
     INSERT INTO
     `favoriteRecipes`
