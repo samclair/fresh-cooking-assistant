@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Accordion from './accordion';
+import NavMenuItem from './nav-menu-item';
 
 class NavMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       display: false,
-      menuOptions: ['', 'Login', 'Seasons', 'Recipes', 'Events']
+      menuOptions: [
+        { text: 'Home', link: '/' },
+        { text: 'Login', link: '/username' },
+        { text: 'Events', link: '/events' },
+        { text: 'Seasonal Produce', link: '/Seasons' },
+        { text: 'All Produce', link: '/produce' },
+        { text: 'Seasonal Recipes', link: '/recipes' },
+        { text: 'Favorite Recipes', link: '/recipes/favorites' },
+        { text: 'Fresh! List', link: '/list' }
+      ]
 
     };
     this.navElements = null;
@@ -19,26 +28,12 @@ class NavMenu extends React.Component {
   }
 
   makeNavElements() {
+    const menuItems = this.state.menuOptions.map((element, index) => {
+      return <NavMenuItem key={index} to={element.link} onClick={this.swapView} text={element.text} />;
+    });
     this.navElements = (
       <ul>
-        <li className='my-2'>
-          <Link className='h2' onClick={this.swapView} to=''>Home</Link>
-        </li>
-        <li className='my-2'>
-          <Link className='h2' onClick={this.swapView} to='/username'>Login</Link>
-        </li>
-        <li className="my-2">
-          <Link className='h2' onClick={this.swapView} to='/events'>Events</Link>
-        </li>
-        <li className='my-2'>
-          <Accordion to="Produce" close={this.swapView} subElems={this.produceSubnav} />
-        </li>
-        <li className="my-2">
-          <Accordion to="My Lists" close={this.swapView} subElems={this.userLists} />
-        </li>
-        <li className='my-2'>
-          <Accordion to='Recipes' close={this.swapView} subElems={this.recipesSubnav} />
-        </li>
+        {menuItems}
       </ul>
     );
   }
