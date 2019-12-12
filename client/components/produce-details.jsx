@@ -12,7 +12,7 @@ class ProduceDetails extends React.Component {
       isInSeason: false,
       produceRecipes: [],
       isSaved: false,
-      isLoggedIn: true
+      isLoggedIn: true,
       isLoading: true
     };
     this.name = props.match.params.name;
