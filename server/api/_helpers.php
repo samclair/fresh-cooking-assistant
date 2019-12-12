@@ -11,7 +11,7 @@ function get_current_season($link) {
     FROM `seasons`
   ";
   $result = mysqli_query($link, $sql);
-  if (!mysqli_num_rows($result)) { throw new ApiError('Season data not found', 502); }
+  if (!mysqli_num_rows($result)) { throw new ApiError('Season data not found', 404); }
   $seasons = mysqli_fetch_all($result, MYSQLI_ASSOC);
   foreach ($seasons as $season) {
     $start_date = strtotime($season['startDate']);
