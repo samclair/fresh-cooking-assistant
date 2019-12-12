@@ -112,5 +112,4 @@ class Username extends React.Component {
     );
   }
 }
-
 export default Username;

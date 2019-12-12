@@ -42,7 +42,7 @@ class SeasonalProducePage extends React.Component {
     let featuredElems;
     let isInSeasonBadge;
     if (this.state.isCurrentSeason) {
-      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation'/>);
+      isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation' />);
     }
     if (this.state.produceList.length) {
       produceElems = this.state.produceList.map(produce => (
@@ -78,5 +78,4 @@ class SeasonalProducePage extends React.Component {
     );
   }
 }
-
 export default SeasonalProducePage;

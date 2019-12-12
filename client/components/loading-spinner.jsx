@@ -9,5 +9,4 @@ function LoadingSpinner(props) {
     </div>
   );
 }
-
 export default LoadingSpinner;

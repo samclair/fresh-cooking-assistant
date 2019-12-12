@@ -14,5 +14,4 @@ function Ingredient({ measurement, isInDatabase }) {
       <p>{measurement}</p>
     </li>);
 }
-
 export default Ingredient;

@@ -166,5 +166,4 @@ class RecipePage extends React.Component {
       </div >);
   }
 }
-
 export default RecipePage;

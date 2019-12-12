@@ -96,5 +96,4 @@ class FreshList extends React.Component {
       </div>);
   }
 }
-
 export default FreshList;
