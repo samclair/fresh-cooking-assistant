@@ -1,11 +1,13 @@
 import React from 'react';
 import ListItem from './list-items';
+import { Link } from 'react-router-dom';
 
 class FreshList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItems: []
+      listItems: [],
+      isLoggedIn: true
     };
     this.removeAllProduce = this.removeAllProduce.bind(this);
     this.removeProduceItem = this.removeProduceItem.bind(this);
@@ -15,10 +17,20 @@ class FreshList extends React.Component {
     this.getUserList();
   }
 
+  renderRedirectUser() {
+    this.setState({ isLoggedIn: false });
+  }
+
   getUserList() {
     fetch('/api/fresh-list')
       .then(res => res.json())
-      .then(listItems => this.setState({ listItems }));
+      .then(listItems => {
+        if (listItems.error) {
+          this.renderRedirectUser();
+        } else {
+          this.setState({ listItems });
+        }
+      });
   }
 
   removeProduceItem(itemName) {
@@ -48,6 +60,17 @@ class FreshList extends React.Component {
   }
 
   render() {
+    if (!this.state.isLoggedIn) {
+      return (
+        <div className="container">
+          <h1 className="green font-rubik text-center my-4">Fresh! List</h1>
+          <div
+            className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
+            <Link to='/username'>Sign In Have A Fresh! List</Link>
+          </div>
+        </div>
+      );
+    }
     let items = this.state.listItems.map((item, index) => {
       return (
         <li key={index}>
