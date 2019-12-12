@@ -5,10 +5,6 @@ require_once '_api-keys.php';
 
 $link = get_db_link();
 
-if (!isset($_SESSION['user_id'])) {
-  throw new ApiError('User is not logged in.', 400);
-}
-
 if ($request['method'] === 'GET') {
   $response['body'] = get_all_favorites($link);
   send($response);
