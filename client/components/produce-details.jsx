@@ -2,6 +2,7 @@ import React from 'react';
 import RecipeCard from './recipe-card';
 import Badge from './badge';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './loading-spinner';
 
 class ProduceDetails extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ProduceDetails extends React.Component {
       produceRecipes: [],
       isSaved: false,
       isLoggedIn: true
+      isLoading: true
     };
     this.name = props.match.params.name;
     this.numOfRecipes = 5;
@@ -52,7 +54,10 @@ class ProduceDetails extends React.Component {
   getProduceRecipes(name) {
     fetch(`/api/recipe-list?tags=${name}`)
       .then(result => result.json())
-      .then(produceRecipes => this.setState({ produceRecipes: this.getRandomRecipes(produceRecipes) }))
+      .then(produceRecipes => this.setState({
+        produceRecipes: this.getRandomRecipes(produceRecipes),
+        isLoading: false
+      }))
       .catch(error => console.error(error.message));
   }
 
@@ -104,7 +109,9 @@ class ProduceDetails extends React.Component {
     if (this.state.isInSeason) {
       isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation' />);
     }
-    if (this.state.produceRecipes.length) {
+    if (this.state.isLoading) {
+      recipeCarousel = <LoadingSpinner/>;
+    } else if (this.state.produceRecipes.length) {
       recipeCarousel = this.state.produceRecipes.map(recipe => {
         return < RecipeCard key={recipe.id} recipe={recipe} />;
       }
