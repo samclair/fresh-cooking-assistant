@@ -55,7 +55,7 @@ class EventDetails extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     } else if (!this.state.eventDetails) { return null; }
     const name = this.state.eventDetails.name;
     const openingHours = this.state.eventDetails.opening_hours;
@@ -81,7 +81,7 @@ class EventDetails extends React.Component {
           <h5><u><a href={`http://maps.google.com/?q=${formattedAddress}`}>{formattedAddress}</a></u></h5>
           <h2 className="mt-3 green text-center">Availability</h2>
           <div className="yellow">
-            <a className="h4" href={this.state.redirectURI}>+add to calendar</a>
+            <a className="h4" rel='noopener noreferrer' target='_blank' href={this.state.redirectURI}>+add to calendar</a>
           </div>
           <h5 className="my-2">{avalibility}</h5>
         </div >
