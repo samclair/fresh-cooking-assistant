@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSpinner from './loading-spinner';
 
 class EventDetails extends React.Component {
   constructor(props) {
@@ -6,7 +7,8 @@ class EventDetails extends React.Component {
     this.state = {
       id: props.match.params.id,
       eventDetails: null,
-      redirectURI: null
+      redirectURI: null,
+      isLoading: true
     };
     this.addToCalendar = this.addToCalendar.bind(this);
   }
@@ -33,7 +35,7 @@ class EventDetails extends React.Component {
     fetch(`/api/maps-details?placeId=${this.state.id}`)
       .then(res => res.json())
       .then(eventDetails => {
-        this.setState({ eventDetails });
+        this.setState({ eventDetails, isLoading: false });
         this.getMapsURL();
       })
       .catch(err => console.error(err))
@@ -52,7 +54,9 @@ class EventDetails extends React.Component {
   }
 
   render() {
-    if (!this.state.eventDetails) { return null; }
+    if (this.state.isLoading) {
+      return <LoadingSpinner/>;
+    } else if (!this.state.eventDetails) { return null; }
     const name = this.state.eventDetails.name;
     const openingHours = this.state.eventDetails.opening_hours;
     const formattedAddress = this.state.eventDetails.formatted_address;
@@ -69,7 +73,7 @@ class EventDetails extends React.Component {
     }
     );
     return (
-      < div >
+      <>
         <h2 className="primary-label mb-0 text-center">{name}</h2>
         <div className="header mt-0 d-flex farmers-market justify-content-center" />
         <div className="container">
@@ -81,7 +85,7 @@ class EventDetails extends React.Component {
           </div>
           <h5 className="my-2">{avalibility}</h5>
         </div >
-      </div>);
+      </>);
   }
 }
 

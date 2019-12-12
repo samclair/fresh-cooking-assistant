@@ -31,22 +31,25 @@ class EventsPage extends React.Component {
   }
 
   render() {
-    let calendarEvents = null;
     if (this.state.isLoading) {
-      calendarEvents = <LoadingSpinner/>;
+      return (
+        <>
+          <h1 className="green text-center">{"Farmer's Markets"}</h1>
+          <LoadingSpinner/>
+        </>);
     }
-    calendarEvents = this.state.events.map((event, index) => {
+    const calendarEvents = this.state.events.map((event, index) => {
       return <CalendarEvent number={index + 1} info={event} key={index} />;
     });
     return (
-      <div>
+      <>
         <div className='container'>
           <h1 className="green text-center">{"Farmer's Markets"}</h1>
         </div>
         <div className="events-list d-flex justify-content-center row no-gutters">
           {calendarEvents}
         </div>
-      </div>
+      </>
     );
   }
 }
