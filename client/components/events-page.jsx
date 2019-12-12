@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarEvent from './calendar-event.jsx';
+import LoadingSpinner from './loading-spinner';
 
 class EventsPage extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class EventsPage extends React.Component {
       events: [],
       eventDetails: null,
       hasClicked: false,
-      timeout: 30000
+      timeout: 30000,
+      isLoading: true
     };
     this.getNearbyEvents = this.getNearbyEvents.bind(this);
   }
@@ -17,7 +19,7 @@ class EventsPage extends React.Component {
     const location = '' + position.coords.latitude + ',' + position.coords.longitude;
     fetch(`/api/maps-list?location=${location}`)
       .then(res => res.json())
-      .then(events => this.setState({ events }));
+      .then(events => this.setState({ events, isLoading: false }));
   }
 
   getLocationThenEvents() {
@@ -29,7 +31,11 @@ class EventsPage extends React.Component {
   }
 
   render() {
-    const calendarEvents = this.state.events.map((event, index) => {
+    let calendarEvents = null;
+    if (this.state.isLoading) {
+      calendarEvents = <LoadingSpinner/>;
+    }
+    calendarEvents = this.state.events.map((event, index) => {
       return <CalendarEvent number={index + 1} info={event} key={index} />;
     });
     return (
