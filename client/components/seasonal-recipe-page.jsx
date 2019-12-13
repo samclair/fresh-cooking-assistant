@@ -33,17 +33,17 @@ class SeasonalRecipePage extends React.Component {
     const style = { backgroundImage: 'url(/assets/images/seasonal-recipe-header.jpg)' };
     let recipeCards;
     if (this.state.isLoading) {
-      recipeCards = <LoadingSpinner/>;
+      recipeCards = <LoadingSpinner />;
     } else if (this.state.seasonalRecipes.length) {
       recipeCards = this.state.seasonalRecipes.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe}/>
+        <RecipeCard key={recipe.id} recipe={recipe} />
       ));
     } else {
       recipeCards = <div>No Recipes Available</div>;
     }
     return (
       <>
-        <div className="header mb-3" style={style} title='Find fresh, in season produce.'/>
+        <div className="header mb-3" style={style} title='Find fresh, in season produce.' />
         <div className='container'>
           <h1 className="yellow my-4 d-none d-md-block">Seasonal Recipe Ideas</h1>
           <h3 className="yellow my-4 d-md-none text-center">Seasonal Recipe Ideas</h3>
@@ -53,5 +53,4 @@ class SeasonalRecipePage extends React.Component {
     );
   }
 }
-
 export default SeasonalRecipePage;

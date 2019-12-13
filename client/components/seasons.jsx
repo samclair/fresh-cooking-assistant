@@ -37,16 +37,15 @@ class Seasons extends React.Component {
       </li>
     ));
     return (
-      <div>
+      <>
         <div className="header d-flex justify-content-center" style={style}>
           <div className='align-self-end mb-4 col-11'>
-            <Badge message='Fruits and veggies cost less when they are in season!'/>
+            <Badge message='Fruits and veggies cost less when they are in season!' />
           </div>
         </div>
         <ul className='seasons-list text-center mt-3 p-0'>{seasons}</ul>
-      </div>
+      </>
     );
   }
 }
-
 export default Seasons;

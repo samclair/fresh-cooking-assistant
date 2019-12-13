@@ -15,5 +15,4 @@ function RecipeCard(props) {
     </div>
   );
 }
-
 export default RecipeCard;

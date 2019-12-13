@@ -15,37 +15,26 @@ import EventsPage from './events-page';
 import AllProducePage from './all-produce-page';
 import EventDetails from './event-details';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: null,
-      isTesting: true
-    };
-  }
-
-  render() {
-    return (
-      <Router>
-        <NavMenu />
-        <Switch>
-          <Route exact path="/season/:name" component={SeasonalProducePage} />
-          <Route exact path="/list" component={FreshList} />
-          <Route exact path='/events' component={EventsPage} />
-          <Route exact path='/events/:id' component={EventDetails} />
-          <Route exact path="/produce/:name" component={ProduceDetails} />
-          <Route exact path="/produce" component={AllProducePage} />
-          <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
-          <Route exact path="/recipes/:id" component={RecipePage} />
-          <Route exact path="/recipes" component={SeasonalRecipePage} />
-          <Route exact path="/username" component={Username} />
-          <Route exact path="/seasons" component={Seasons} />
-          <Route exact path="/" component={Landing} />
-          <Route path='/*' component={FourOhFour} />
-        </Switch>
-      </Router >
-    );
-  }
+function App(props) {
+  return (
+    <Router>
+      <NavMenu />
+      <Switch>
+        <Route exact path="/season/:name" component={SeasonalProducePage} />
+        <Route exact path="/list" component={FreshList} />
+        <Route exact path='/events' component={EventsPage} />
+        <Route exact path='/events/:id' component={EventDetails} />
+        <Route exact path="/produce/:name" component={ProduceDetails} />
+        <Route exact path="/produce" component={AllProducePage} />
+        <Route exact path='/recipes/favorites' component={FavoriteRecipes} />
+        <Route exact path="/recipes/:id" component={RecipePage} />
+        <Route exact path="/recipes" component={SeasonalRecipePage} />
+        <Route exact path="/username" component={Username} />
+        <Route exact path="/seasons" component={Seasons} />
+        <Route exact path="/" component={Landing} />
+        <Route path='/*' component={FourOhFour} />
+      </Switch>
+    </Router >
+  );
 }
-
 export default App;

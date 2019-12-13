@@ -53,7 +53,7 @@ class AllProducePage extends React.Component {
       ));
     }
     return (
-      <div>
+      <>
         <div className='header d-flex justify-content-center' style={style}></div>
         <div className="container">
           <h1 className='green text-center font-rubik my-3'>{this.name} All Produce</h1>
@@ -61,7 +61,7 @@ class AllProducePage extends React.Component {
           <hr className='primary-label' />
         </div>
         <ul>{produceElems}</ul>
-      </div>
+      </>
     );
   }
 }

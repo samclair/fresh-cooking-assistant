@@ -12,5 +12,4 @@ function ListItem({ name, isInDatabase, onClick }) {
     </div>
   );
 }
-
 export default ListItem;

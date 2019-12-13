@@ -55,15 +55,15 @@ class Landing extends React.Component {
   render() {
     if (!this.state.currentSeason) { return null; }
     const style = { backgroundImage: 'url(/assets/images/landing-header.jpg)' };
-    let displayedRecipes = <LoadingSpinner/>;
+    let displayedRecipes = <LoadingSpinner />;
     if (!this.state.isLoading) {
       displayedRecipes = this.state.recipeElems.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe}/>
+        <RecipeCard key={recipe.id} recipe={recipe} />
       ));
     }
     return (
       <>
-        <div className="header mb-3" style={style} title='Find fresh, in season produce.'/>
+        <div className="header mb-3" style={style} title='Find fresh, in season produce.' />
         <div className="text-right">
           <Link className='font-rubik h2 mx-3' to={`season/${this.state.currentSeason}`}>
             {this.state.currentSeason.toLowerCase()} produce {'>'}
@@ -72,7 +72,7 @@ class Landing extends React.Component {
         <div className='container my-4'>
           <div className="button-effect">
             <Link to='/events' className='text-decoration-none'>
-              <Badge faClass="fas fa-carrot" message='Find Local Markets!'/>
+              <Badge faClass="fas fa-carrot" message='Find Local Markets!' />
             </Link>
           </div>
           <h2 className="yellow my-4 d-none d-md-block">Featured Seasonal Recipes</h2>
@@ -83,5 +83,4 @@ class Landing extends React.Component {
     );
   }
 }
-
 export default Landing;
