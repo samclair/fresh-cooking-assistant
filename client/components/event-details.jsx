@@ -16,7 +16,7 @@ class EventDetails extends React.Component {
     this.getSingleEventInfo();
   }
 
-  getMapsURL() {
+  getCalendarURL() {
     const name = this.state.eventDetails.name;
     const openingHours = this.state.eventDetails.opening_hours;
     const formattedAddress = this.state.eventDetails.formatted_address;
@@ -35,7 +35,7 @@ class EventDetails extends React.Component {
       .then(res => res.json())
       .then(eventDetails => {
         this.setState({ eventDetails, isLoading: false });
-        this.getMapsURL();
+        this.getCalendarURL();
       })
       .catch(err => console.error(err))
     ;
