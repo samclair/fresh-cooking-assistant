@@ -64,7 +64,7 @@ class SeasonalProducePage extends React.Component {
       ));
     }
     return (
-      <div>
+      <>
         <div className='header d-flex justify-content-center' style={style}>
           <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
@@ -74,7 +74,7 @@ class SeasonalProducePage extends React.Component {
           <hr className='primary-label' />
         </div>
         <ul>{produceElems}</ul>
-      </div>
+      </>
     );
   }
 }

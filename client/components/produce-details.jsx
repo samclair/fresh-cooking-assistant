@@ -110,7 +110,7 @@ class ProduceDetails extends React.Component {
       isInSeasonBadge = (<Badge message='In season now' faClass='fas fa-lg fa-exclamation' />);
     }
     if (this.state.isLoading) {
-      recipeCarousel = <LoadingSpinner/>;
+      recipeCarousel = <LoadingSpinner />;
     } else if (this.state.produceRecipes.length) {
       recipeCarousel = this.state.produceRecipes.map(recipe => {
         return < RecipeCard key={recipe.id} recipe={recipe} />;
@@ -133,7 +133,7 @@ class ProduceDetails extends React.Component {
       </div>;
     }
     return (
-      <div>
+      <>
         <div style={style} className="header d-flex justify-content-center">
           <div className='align-self-end mb-4'>{isInSeasonBadge}</div>
         </div>
@@ -149,7 +149,7 @@ class ProduceDetails extends React.Component {
           <h2 className="yellow">Recipes</h2>
           <div className="seasonal-list mb-4">{recipeCarousel}</div>
         </div>
-      </div>
+      </>
     );
   }
 }

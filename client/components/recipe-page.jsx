@@ -132,7 +132,7 @@ class RecipePage extends React.Component {
     }
 
     return (
-      < div >
+      <>
         {favoriteBadge}
         <div className="container">
           <p className='green text-center font-rubik my-3'>{name}</p>
@@ -163,7 +163,7 @@ class RecipePage extends React.Component {
             })}
           </ol>
         </div>
-      </div >);
+      </>);
   }
 }
 export default RecipePage;
