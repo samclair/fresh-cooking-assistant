@@ -29,6 +29,7 @@ function get_produce_list($link, $season_id) {
     JOIN `produceSeasons`
       ON `produce`.`id` = `produceSeasons`.`produceId`
     WHERE `seasonId` = ?
+    ORDER BY `name`
     ";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 's', $season_id);
@@ -45,6 +46,7 @@ function get_all_produce($link)
   $sql = "
     SELECT DISTINCT `id`, `name`, `produceImg`
     FROM `produce`
+    ORDER BY `name`
     ";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_execute($stmt);
