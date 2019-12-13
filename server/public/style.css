@@ -29,10 +29,11 @@ ul {
 .menu-overlay {
   z-index: 3;
   position: fixed;
-  width: 65%;
+  width: fit-content;
   height: 100%;
   top: 0;
-  margin-left: 35%;
+  right: 0;
+  padding-right: 50px;
   background-color: white;
 }
 
