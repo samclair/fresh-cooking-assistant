@@ -78,7 +78,7 @@ class EventDetails extends React.Component {
         <div className="header mt-0 d-flex farmers-market justify-content-center" />
         <div className="container">
           <h2 className="mt-3 green text-center">Address</h2>
-          <h5><u><a href={`http://maps.google.com/?q=${formattedAddress}`}>{formattedAddress}</a></u></h5>
+          <h5><u><a rel='noopener noreferrer' target='_blank' href={`http://maps.google.com/?q=${formattedAddress}`}>{formattedAddress}</a></u></h5>
           <h2 className="mt-3 green text-center">Availability</h2>
           <div className="yellow">
             <a className="h4" rel='noopener noreferrer' target='_blank' href={this.state.redirectURI}>+add to calendar</a>
