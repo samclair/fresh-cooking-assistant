@@ -32,11 +32,11 @@ Try the application live at [fresh.vg](https://fresh.vg)
 
 #### Desktop / Laptop / Ipad
 
-![assets/images/desktop-preview.png](assets/images/desktop-preview.png)
+![desktop-preview](https://user-images.githubusercontent.com/36774670/70952187-5bd2c680-201a-11ea-8f11-281a2d0bc7f5.png)
 
 #### Mobile
 
-![assets/images/mobile-preview.png](assets/images/mobile-preview.png)
+![mobile-preview](https://user-images.githubusercontent.com/36774670/70952188-5bd2c680-201a-11ea-98aa-9de95c2a57df.png)
 
 ## Development
 
