@@ -12,6 +12,10 @@ if ($request['method'] === 'GET') {
   $response['body'] = [];
   foreach ($results->results as $recipe) {
     if ($recipe) {
+      $recipe_type = $recipe->canonical_id;
+      if (strpos($recipe_type, 'recipe') === false) {
+        continue;
+      }
       array_push($response['body'], [
         'id' => $recipe->id,
         'name' => $recipe->name,

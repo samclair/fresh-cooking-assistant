@@ -10,7 +10,6 @@ class EventDetails extends React.Component {
       redirectURI: null,
       isLoading: true
     };
-    this.addToCalendar = this.addToCalendar.bind(this);
   }
 
   componentDidMount() {
@@ -40,17 +39,6 @@ class EventDetails extends React.Component {
       })
       .catch(err => console.error(err))
     ;
-  }
-
-  addToCalendar() {
-    const name = this.state.eventDetails.name;
-    const openingHours = this.state.eventDetails.opening_hours;
-    const formattedAddress = this.state.eventDetails.formatted_address;
-    const avalibilityStrings = openingHours.weekday_text.filter(dayString => {
-      return !dayString.includes('Closed');
-    });
-    const firstAvalibility = avalibilityStrings[0];
-    fetch(`api/maps-calendar?text=${name}&details=FarmersMarket&location=${formattedAddress}&date=${firstAvalibility}`);
   }
 
   render() {
