@@ -56,7 +56,7 @@ Try the application live at [fresh.vg](https://fresh.vg)
   ```
 
 1. Install all dependencies with NPM.
-  
+ 
   ```shell
   npm install
   ```
