@@ -26,7 +26,7 @@ Try the application live at [fresh.vg](https://fresh.vg)
 - Users can delete items from their Fresh! list as needed
 - Users can view farmer's markets near their current location
 - Users can create a calendar event to remember to go to a farmer's market
-- Users can be directed to a farmer's market through google maps
+- Users can be directed to a farmer's market through Google Maps
 
 ## Preview
 
@@ -56,10 +56,10 @@ Try the application live at [fresh.vg](https://fresh.vg)
   ```
 
 1. Install all dependencies with NPM.
-  
-   ```shell
-   npm install
-   ```
+ 
+  ```shell
+  npm install
+  ```
    
 1. Import the database
 
