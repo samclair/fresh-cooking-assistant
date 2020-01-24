@@ -50,24 +50,49 @@ Try the application live at [fresh.vg](https://fresh.vg)
 
 1. Clone the repository
 
-  ```shell
-  git clone https://github.com/kitten-bites/fresh-cooking-assistant
-  cd fresh-cooking-assistant
-  ```
+    ```shell
+    git clone https://github.com/kitten-bites/fresh-cooking-assistant
+    cd fresh-cooking-assistant
+    ```
 
 1. Install all dependencies with NPM.
  
-  ```shell
-  npm install
-  ```
-   
+    ```shell
+    npm install
+    ```
+
+1. Create a MySQL database
+
+    + Login to MySQL (defaults are root)
+    ```shell
+    mysql -u<username> -p<password>
+     ```
+    + Create a new database, remember the name you use
+    ```shell
+    CREATE DATABASE <name>;
+     ```
+
+1. Create required credential files under the */server/api* folder
+
+     + Create a *_config.php* file following the format of *_config.example.php*
+      ```shell
+         'user' => 'username'
+         'pass' => 'password'
+         'host' => 'localhost'
+         'database' => dbname
+      ```
+      + Create a *_api-keys.php* file
+      + Get a Google Maps API key [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+      + Get a Tasty! API key [here](https://rapidapi.com/apidojo/api/tasty)
+      + Fill in the fields as in *_api-keys.example.php*
+
 1. Import the database
 
-  ```shell
-  npm run db:import
-  ```
+    ```shell
+    npm run db:import
+    ```
 
 1. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser
-  ```shell
-  npm run dev
-  ```
+    ```shell
+    npm run dev
+    ```
