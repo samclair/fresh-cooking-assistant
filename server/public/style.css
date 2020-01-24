@@ -48,6 +48,10 @@ ul {
   cursor: pointer;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 .featured-produce-image {
   height:150px;
   width: 100%;

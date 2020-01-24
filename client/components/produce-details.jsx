@@ -122,12 +122,12 @@ class ProduceDetails extends React.Component {
     let FreshListBadge;
     if (!this.state.isLoggedIn) {
       FreshListBadge = <div
-        className="primary-label font-rubik text-center h2 px-4 py-2 my-4">
+        className="primary-label font-rubik text-center h2 px-4 py-2 my-4 pointer">
         <Link to='/username'>Sign In to Save</Link>
       </div>;
     } else {
       FreshListBadge = <div
-        className="primary-label font-rubik text-center h2 px-4 py-2 my-4"
+        className="primary-label font-rubik text-center h2 px-4 py-2 my-4 pointer"
         onClick={!this.state.isSaved ? this.saveProduceItem : this.deleteSavedProduceItem}
       > {this.state.isSaved ? 'Saved!' : 'Add to Fresh! List'}
       </div>;

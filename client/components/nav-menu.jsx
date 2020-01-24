@@ -53,7 +53,7 @@ class NavMenu extends React.Component {
         <div className='page-overlay' onClick={this.swapView} />
         <div className="menu-overlay">
           <div className='d-flex align-items-center border-bottom py-2 mb-2'>
-            <i onClick={this.swapView} className='fas fa-arrow-circle-left fa-2x green mx-2' />
+            <i onClick={this.swapView} className='fas fa-arrow-circle-left fa-2x green mx-2 pointer' />
             <span className='green font-rubik h2 m-0'>MENU</span>
           </div>
           {this.navElements}
@@ -66,7 +66,7 @@ class NavMenu extends React.Component {
           <span className="navbar-brand title">
             <Link to="/" className='h2 white' style={{ fontSize: '22px' }}>FRESH!</Link>
           </span>
-          <i onClick={this.swapView} className="fas fa-bars fa-lg" />
+          <i onClick={this.swapView} className="fas fa-bars fa-lg pointer" />
         </nav>
       </div>
     );
