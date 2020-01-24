@@ -82,9 +82,9 @@ Try the application live at [fresh.vg](https://fresh.vg)
          'database' => dbname
       ```
       + Create a *_api-keys.php* file
-      + Get a Google Maps API key [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
-      + Get a Tasty! API key [here](https://rapidapi.com/apidojo/api/tasty)
-      + Fill in the fields as in *_api-keys.example.php*
+          + Get a Google Maps API key [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+          + Get a Tasty! API key [here](https://rapidapi.com/apidojo/api/tasty)
+          + Fill in the fields as in *_api-keys.example.php*
 
 1. Import the database
 
