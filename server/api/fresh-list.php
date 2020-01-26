@@ -100,8 +100,8 @@ function format_fresh_list_response($list_data){
     $listItem = $value['name'];
     $redir_str = ingredient_is_in_database($listItem, $listItem);
     array_push($body,[
-      'name'=>$listItem,
-      'isInDatabase'=> $redir_str ? $redir_str['name'] : false
+      'path'=>$redir_str['name'],
+      'measurement'=> $listItem
       ]);
   }
   return $body;

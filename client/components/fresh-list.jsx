@@ -74,8 +74,8 @@ class FreshList extends React.Component {
     let items = this.state.listItems.map((item, index) => {
       return (
         <li key={index}>
-          <ListItem name={item.name}
-            isInDatabase={item.isInDatabase}
+          <ListItem path={item.path}
+            measurement={item.measurement}
             onClick={this.removeProduceItem} />
         </li>);
     });
