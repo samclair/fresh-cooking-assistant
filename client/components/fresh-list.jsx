@@ -45,7 +45,7 @@ class FreshList extends React.Component {
       .then(res => res.json())
       .then(itemName => {
         const listItems = this.state.listItems
-          .filter(item => item.name !== itemName);
+          .filter(item => item.measurement !== itemName);
         this.setState({ listItems });
       });
   }
